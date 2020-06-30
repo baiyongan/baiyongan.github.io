@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-bya.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-bya.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-bya.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bya.cool","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":360,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="命令小结awk其名称得自于它的创始人 Alfred Aho 、Peter Weinberger 和 Brian Kernighan 姓氏的首个字母。实际上 AWK 拥有自己的语言： AWK 程序设计语言 ， 三位创建者已将它正式定义为“样式扫描和处理语言”。它允许您创建简短的程序，这些程序读取输入文件、为数据排序、处理数据、对输入执行计算以及生成报表，还有很多其他的功能。 作为一个强大的文本分析工">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 运维实战系列——文本处理三剑客之一 awk">
+<meta property="og:url" content="http://bya.cool/2020/05/30/Series-Linux-command-awk/index.html">
+<meta property="og:site_name" content="BYA&#39;s Blog">
+<meta property="og:description" content="命令小结awk其名称得自于它的创始人 Alfred Aho 、Peter Weinberger 和 Brian Kernighan 姓氏的首个字母。实际上 AWK 拥有自己的语言： AWK 程序设计语言 ， 三位创建者已将它正式定义为“样式扫描和处理语言”。它允许您创建简短的程序，这些程序读取输入文件、为数据排序、处理数据、对输入执行计算以及生成报表，还有很多其他的功能。 作为一个强大的文本分析工">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://bya.cool/images/awk.png">
+<meta property="article:published_time" content="2020-05-30T06:30:02.000Z">
+<meta property="article:modified_time" content="2020-06-30T12:59:33.940Z">
+<meta property="article:author" content="小白大侠">
+<meta property="article:tag" content="运维">
+<meta property="article:tag" content="命令">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://bya.cool/images/awk.png">
+
+<link rel="canonical" href="http://bya.cool/2020/05/30/Series-Linux-command-awk/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux 运维实战系列——文本处理三剑客之一 awk | BYA's Blog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?50ee4c4119ca03830c1b5bde8308daae";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">BYA's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">轻风碎月 静夜凝思</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-外链">
+
+    <a href="/links/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>外链</a>
+
+  </li>
+        <li class="menu-item menu-item-计划">
+
+    <a href="/plans/" rel="section"><i class="fa fa-tasks fa-fw"></i>计划</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fish fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/baiyongan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bya.cool/2020/05/30/Series-Linux-command-awk/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="小白大侠">
+      <meta itemprop="description" content="轻风碎月 静夜凝思">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BYA's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux 运维实战系列——文本处理三剑客之一 awk
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-30 14:30:02" itemprop="dateCreated datePublished" datetime="2020-05-30T14:30:02+08:00">2020-05-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-30 20:59:33" itemprop="dateModified" datetime="2020-06-30T20:59:33+08:00">2020-06-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/Fundation/" itemprop="url" rel="index"><span itemprop="name">Fundation</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/30/Series-Linux-command-awk/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/30/Series-Linux-command-awk/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="命令小结"><a href="#命令小结" class="headerlink" title="命令小结"></a>命令小结</h1><p>awk其名称得自于它的创始人 Alfred Aho 、Peter Weinberger 和 Brian Kernighan 姓氏的首个字母。实际上 AWK 拥有自己的语言： AWK 程序设计语言 ， 三位创建者已将它正式定义为“样式扫描和处理语言”。它允许您创建简短的程序，这些程序读取输入文件、为数据排序、处理数据、对输入执行计算以及生成报表，还有很多其他的功能。</p>
+<p>作为一个强大的文本分析工具，相对于grep的查找，sed的编辑，awk在其对数据分析并生成报告时，显得尤为强大。<strong>简单来说awk就是把文件逐行的读入，以空格为默认分隔符将每行切片，切开的部分再进行各种分析处理。</strong>数据可以来自标准输入、外部文件，或者其他命令的输出。awk 同时支持正则表达式和用户自定义函数。</p>
+<p><strong>awk是行处理器</strong>: 相比较屏幕处理的优点，在处理庞大文件时不会出现内存溢出或是处理缓慢的问题，通常用来格式化文本信息(ctrl+c/v的，未考证😳)。</p>
+<a id="more"></a>
+
+<h1 id="实战经验"><a href="#实战经验" class="headerlink" title="实战经验"></a>实战经验</h1><h2 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h2><h3 id="指定输出列"><a href="#指定输出列" class="headerlink" title="指定输出列"></a>指定输出列</h3><p>awk 处理文件是以记录为单位的，它会一条记录一条记录地遍历文件并进行处理。$0 代表的是一条记录，也就是student.txt 文件中的一整行内容。$1, 和 $3 代表的是第一、三列。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya awk_test]$ cat student.txt </span><br><span class="line">xiaoqiang	05/99	henan		98	96	97</span><br><span class="line">xiaohong	06/99	shandong	98	99	100	</span><br><span class="line">xiaofang	02/99	guangdong	82	90	89</span><br><span class="line">xiaogang	07/99	beijing		88	86	87</span><br><span class="line">xiaohua		05/99	anhui		90	91	93</span><br><span class="line">[baiyongan@bya awk_test]$ awk '&#123;print $0&#125;' student.txt </span><br><span class="line">xiaoqiang	05/99	henan		98	96	97</span><br><span class="line">xiaohong	06/99	shandong	98	99	100	</span><br><span class="line">xiaofang	02/99	guangdong	82	90	89</span><br><span class="line">xiaogang	07/99	beijing		88	86	87</span><br><span class="line">xiaohua		05/99	anhui		90	91	93</span><br><span class="line">[baiyongan@bya awk_test]$ awk '&#123;print $1, $3&#125;' student.txt</span><br><span class="line">xiaoqiang henan</span><br><span class="line">xiaohong shandong</span><br><span class="line">xiaofang guangdong</span><br><span class="line">xiaogang beijing</span><br><span class="line">xiaohua anhui</span><br><span class="line">[baiyongan@bya awk_test]$</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="修饰表头和表尾"><a href="#修饰表头和表尾" class="headerlink" title="修饰表头和表尾"></a>修饰表头和表尾</h3><p>两个关键字：</p>
+<p>BEGIN：在awk对文件处理之前首先被执行</p>
+<p>END：表示在awk对所有文件处理完后才被执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya awk_test]$ awk 'BEGIN &#123;print "Name    province\n----------------------------"&#125; &#123;print $1, $3&#125; END &#123;print "----------------------------"&#125;' student.txt</span><br><span class="line">Name    province</span><br><span class="line">----------------------------</span><br><span class="line">xiaoqiang henan</span><br><span class="line">xiaohong shandong</span><br><span class="line">xiaofang guangdong</span><br><span class="line">xiaogang beijing</span><br><span class="line">xiaohua anhui</span><br><span class="line">----------------------------</span><br><span class="line">[baiyongan@bya awk_test]$</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="统计功能"><a href="#统计功能" class="headerlink" title="统计功能"></a>统计功能</h3><p>如下：可以用 $4 + $5 + $6 来实现总分的计算</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya awk_test]$ cat student.txt </span><br><span class="line">xiaoqiang	05/99	henan		98	96	97</span><br><span class="line">xiaohong	06/99	shandong	98	99	100	</span><br><span class="line">xiaofang	02/99	guangdong	82	90	89</span><br><span class="line">xiaogang	07/99	beijing		88	86	87</span><br><span class="line">xiaohua		05/99	anhui		90	91	93</span><br><span class="line">[baiyongan@bya awk_test]$ awk 'BEGIN &#123;print "Name    province\n----------------------------"&#125; &#123;print $1, $3, $4+$5+$6&#125; END &#123;print "---------------------------------"&#125;' student.txt</span><br><span class="line">Name    province</span><br><span class="line">----------------------------</span><br><span class="line">xiaoqiang henan 291</span><br><span class="line">xiaohong shandong 297</span><br><span class="line">xiaofang guangdong 261</span><br><span class="line">xiaogang beijing 261</span><br><span class="line">xiaohua anhui 274</span><br><span class="line">---------------------------------</span><br><span class="line">[baiyongan@bya awk_test]$</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="筛选功能"><a href="#筛选功能" class="headerlink" title="筛选功能"></a>筛选功能</h3><p>可以使用类似 $3 ~ /beijing/ 的语法筛选出来来自beijing的学生的信息。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya awk_test]$ awk 'BEGIN &#123;print "Name    province\n----------------------------"&#125; $3 ~ /beijing/ &#123;print $1, $3, $4+$5+$6&#125; END &#123;print "---------------------------------"&#125;' student.txt</span><br><span class="line">Name    province</span><br><span class="line">----------------------------</span><br><span class="line">xiaogang beijing 261</span><br><span class="line">---------------------------------</span><br><span class="line">[baiyongan@bya awk_test]$</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="语法格式"><a href="#语法格式" class="headerlink" title="语法格式"></a>语法格式</h3><blockquote>
+<p><strong>简版：awk ‘Pattern {Action}’ filename</strong> </p>
+</blockquote>
+<p>其中：</p>
+<ul>
+<li><p>Pattern 用来指定判断条件，比如上面例子中的 $3 ~ /beijing/</p>
+</li>
+<li><p>{} 中包含的是 awk 的动作，也就是 awk 对记录的操作，比如 $4+$5+$6 或者 print</p>
+</li>
+</ul>
+<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><ul>
+<li>第一步，awk 读取一条记录（文件中的一行内容）作为输入，并将这条记录赋值给内部变量 $0</li>
+<li>第二步，记录被分隔符分割成多个字段，每一个字段都存储到指定编号的变量中，从 $1 开始。(awk 的内部变量 FS 用来指定字段的分隔符。默认情况下，为空格，包含制表符和空格符，也可以用 - F 来人为指定分隔符 )</li>
+<li>第三步，对每一条记录，按 Pattern 进行匹配，匹配成功，则执行对应 Action，匹配失败，则不执行Action。<ul>
+<li>Pattern 和 Action都可选，但是<strong>必须提供其中一个</strong>。没有指定 Pattern，则对所有的输入行都执行 Action 操作。如果没有指定 Action，则会输出匹配行的内容。</li>
+<li>如果Action 被指定为 {}， 则表示不做任何动作，也不会输出匹配行的内容。</li>
+</ul>
+</li>
+<li>第四步，重复进行上面的 1-3 步直到文件结束。</li>
+</ul>
+<h3 id="更完整的格式与工作流程"><a href="#更完整的格式与工作流程" class="headerlink" title="更完整的格式与工作流程"></a>更完整的格式与工作流程</h3><blockquote>
+<p><strong>详版：awk ‘BEGIN{ commands } Pattern { commands } END{ commands }’</strong></p>
+</blockquote>
+<p><img src="/images/awk.png" alt="awk"></p>
+<ul>
+<li>通过关键字 BEGIN 执行 BEGIN 块的内容，即 BEGIN 后花括号 {} 的内容。</li>
+<li>完成 BEGIN 块的执行，开始执行body块。</li>
+<li>读入有  换行符分割的记录。</li>
+<li>将记录按指定的域分隔符划分域，填充域，$0 则表示所有域(即一行内容)，$1 表示第一个域，$n 表示第 n 个域。</li>
+<li>依次执行各 BODY 块，pattern 部分匹配该行内容成功后，才会执行 awk-commands 的内容。</li>
+<li>循环读取并执行各行直到文件结束，完成body块执行。</li>
+<li>开始 END 块执行，END 块可以输出最终结果。</li>
+</ul>
+<h3 id="awk-脚本编写"><a href="#awk-脚本编写" class="headerlink" title="awk 脚本编写"></a>awk 脚本编写</h3><p>如果需要在Action的部分里写打断的逻辑，建议将器写道一个独立的脚本文件中。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya awk_test]$ cat student.awk </span><br><span class="line">BEGIN &#123;print "Name  province  total\n-------------------------"&#125;</span><br><span class="line">&#123;print $1, $3, $4+$5+$6&#125;</span><br><span class="line">END &#123;print "-------------------------"&#125;</span><br><span class="line">[baiyongan@bya awk_test]$ cat -n student.awk </span><br><span class="line">     1	BEGIN &#123;print "Name  province  total\n-------------------------"&#125;</span><br><span class="line">     2	&#123;print $1, $3, $4+$5+$6&#125;</span><br><span class="line">     3	END &#123;print "-------------------------"&#125;</span><br><span class="line">[baiyongan@bya awk_test]$ awk -f student.awk student.txt </span><br><span class="line">Name  province  total</span><br><span class="line">-------------------------</span><br><span class="line">xiaoqiang henan 291</span><br><span class="line">xiaohong shandong 297</span><br><span class="line">xiaofang guangdong 261</span><br><span class="line">xiaogang beijing 261</span><br><span class="line">xiaohua anhui 274</span><br><span class="line">-------------------------</span><br><span class="line">[baiyongan@bya awk_test]$</span><br></pre></td></tr></table></figure>
+
+<p>如果要让awk脚本执行得“更像样子”：可以在awk脚本开头加上如下一句话。#! /bin/awk -f</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya awk_test]$ sed -i '1i\#! /bin/awk -f' student.awk </span><br><span class="line">[baiyongan@bya awk_test]$ cat student.awk </span><br><span class="line"><span class="meta">#</span><span class="bash">! /bin/awk -f</span></span><br><span class="line">BEGIN &#123;print "Name  province  total\n-------------------------"&#125;</span><br><span class="line">&#123;print $1, $3, $4+$5+$6&#125;</span><br><span class="line">END &#123;print "-------------------------"&#125;</span><br><span class="line">[baiyongan@bya awk_test]$ chmod u+x student.awk </span><br><span class="line">[baiyongan@bya awk_test]$ ./student.awk student.txt </span><br><span class="line">Name  province  total</span><br><span class="line">-------------------------</span><br><span class="line">xiaoqiang henan 291</span><br><span class="line">xiaohong shandong 297</span><br><span class="line">xiaofang guangdong 261</span><br><span class="line">xiaogang beijing 261</span><br><span class="line">xiaohua anhui 274</span><br><span class="line">-------------------------</span><br><span class="line">[baiyongan@bya awk_test]$</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="多行操作"><a href="#多行操作" class="headerlink" title="多行操作"></a>多行操作</h2><h3 id="显示奇数行"><a href="#显示奇数行" class="headerlink" title="显示奇数行"></a>显示奇数行</h3><p>NR 表示行数，如下案例，当行数为偶数时，不输出，当行数为奇数时，输出。</p>
+<blockquote>
+<p><strong>NR          The total number of input records seen so far.</strong></p>
+<p><strong>next</strong>      Stop processing the current input record.  The next input record is read<br>                and  processing  starts  over with the first pattern in the AWK program.<br>                If the end of the input data is reached, the END block(s), if  any,  are<br>                executed.</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya awk_test]$ cat -n input.txt </span><br><span class="line">     1	one</span><br><span class="line">     2	two</span><br><span class="line">     3	three</span><br><span class="line">     4	four</span><br><span class="line">     5	five</span><br><span class="line">     6	six</span><br><span class="line">     7	seven</span><br><span class="line">     8	eight</span><br><span class="line">     9	nine</span><br><span class="line">    10	ten</span><br><span class="line">[baiyongan@bya awk_test]$ awk 'NR%2==0 &#123;next&#125; &#123;print NR, $0&#125;' input.txt </span><br><span class="line">1 one</span><br><span class="line">3 three</span><br><span class="line">5 five</span><br><span class="line">7 seven</span><br><span class="line">9 nine</span><br><span class="line">[baiyongan@bya awk_test]$</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="固定行数合并"><a href="#固定行数合并" class="headerlink" title="固定行数合并"></a>固定行数合并</h3><p>如果将文件中的每三行数据合并为一行，如何操作呢？ </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya awk_test]$ cat -n input.txt </span><br><span class="line">     1	one</span><br><span class="line">     2	two</span><br><span class="line">     3	three</span><br><span class="line">     4	four</span><br><span class="line">     5	five</span><br><span class="line">     6	six</span><br><span class="line">     7	seven</span><br><span class="line">     8	eight</span><br><span class="line">     9	nine</span><br><span class="line">    10	ten</span><br><span class="line">[baiyongan@bya awk_test]$ awk 'NR%3!=0 &#123;T=(T" "$0); next&#125; &#123;print T, $0; T=""&#125;' input.txt </span><br><span class="line"> one two three</span><br><span class="line"> four five six</span><br><span class="line"> seven eight nine</span><br><span class="line">[baiyongan@bya awk_test]$</span><br></pre></td></tr></table></figure>
+
+<p>解释：</p>
+<p><strong>第一部分：NR%3!=0 {T=(T” “$0); next}</strong></p>
+<p><strong>第二部分：{print T, $0; T=””}</strong></p>
+<p>T=(T” “$0) 表示将字符型的变量T，空格和变量 $0，三者的值进行连接，然后再赋值给变量T。也就是说，awk 语句每读取一行都会把这行的内容追加到变量T中。</p>
+<p>next 的作用很关键，表示不再执行第二部分的语句，而是直接进行下一行的处理，这样就保证awk把每三行一组的内容都存储到了变量T中。</p>
+<p>{print T, $0; T=””} 表示输出变量T和$0的内容，并把变量T的内容清空。</p>
+<p>注意：最后一行的数据ten没有输出出来，其实时最后一行没有达到 “3个一组”的条件。如果需要，可以再最后增加END操作，进行收尾</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya awk_test]$ awk 'NR%3!=0 &#123;T=(T" "$0); next&#125; &#123;print T, $0; T=""&#125; END &#123;print T&#125;' input.txt </span><br><span class="line"> one two three</span><br><span class="line"> four five six</span><br><span class="line"> seven eight nine</span><br><span class="line"> ten</span><br><span class="line">[baiyongan@bya awk_test]$</span><br></pre></td></tr></table></figure>
+
+<h3 id="不定行数合并"><a href="#不定行数合并" class="headerlink" title="不定行数合并"></a>不定行数合并</h3><p>有时候的分组合并场景，并不都是固定行数的合并，不定行数应该怎么办呢？如下，对于不同时间，可以用worktime来分组：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya awk_test]$ awk 'BEGIN &#123;T=""&#125; /worktime/ &#123;print T; T=$0; next&#125; &#123;T=T""$0&#125; END &#123;print T&#125;' input_time.txt </span><br><span class="line"></span><br><span class="line">xiaoming worktime is898788908978</span><br><span class="line">xiaoqiang worktime is90989790</span><br><span class="line">xiaohong worktime is909293</span><br><span class="line">[baiyongan@bya awk_test]$</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="合并所有的行"><a href="#合并所有的行" class="headerlink" title="合并所有的行"></a>合并所有的行</h3><p>合并一个文件的所有行，经常碰到，linux中实现这类操作的方法很多，可以用sed 直接删除文件中的换行符，当然，也可以用awk来实现。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya awk_test]$ cat input.txt </span><br><span class="line">one</span><br><span class="line">two</span><br><span class="line">three</span><br><span class="line">four</span><br><span class="line">five</span><br><span class="line">six</span><br><span class="line">seven</span><br><span class="line">eight</span><br><span class="line">nine</span><br><span class="line">ten</span><br><span class="line">[baiyongan@bya awk_test]$ awk '&#123;T=T" "$0&#125; END &#123;print T&#125;' input.txt </span><br><span class="line"> one two three four five six seven eight nine ten</span><br><span class="line">[baiyongan@bya awk_test]$</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="多文件操作"><a href="#多文件操作" class="headerlink" title="多文件操作"></a>多文件操作</h2><h3 id="多文件输出"><a href="#多文件输出" class="headerlink" title="多文件输出"></a>多文件输出</h3><p>Q：如何将两个文件一起输出呢？</p>
+<p>A：直接再命令尾部加上文件名即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya awk_test]$ awk '&#123;print $0&#125;' input.txt input_time.txt </span><br><span class="line">one</span><br><span class="line">two</span><br><span class="line">three</span><br><span class="line">four</span><br><span class="line">five</span><br><span class="line">six</span><br><span class="line">seven</span><br><span class="line">eight</span><br><span class="line">nine</span><br><span class="line">ten</span><br><span class="line">xiaoming worktime is</span><br><span class="line">89</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">90</span><br><span class="line">89</span><br><span class="line">78</span><br><span class="line">xiaoqiang worktime is</span><br><span class="line">90</span><br><span class="line">98</span><br><span class="line">97</span><br><span class="line">90</span><br><span class="line">xiaohong worktime is</span><br><span class="line">90</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">[baiyongan@bya awk_test]$</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="两手抓两个文件"><a href="#两手抓两个文件" class="headerlink" title="两手抓两个文件"></a>两手抓两个文件</h3><p>Q：如果要输出 input.txt 文件中的第一行数据，input_time.txt 的第八行数据以及它们的文件名，应该怎么实现呢？</p>
+<p>A：如下所示</p>
+<ul>
+<li><p>NR 表示已读记录数，无论有几个文件，每读一条记录，值会增加 1；</p>
+</li>
+<li><p>FNR 表示当前文件的已读记录数，操作当前文件时，每读一条记录，值会增加 1。但当更换文件后，该变量会重新从零开始。</p>
+</li>
+<li><p>当 NR==FNR时，表示awk正在处理第一个输入文件。当 NR&gt;FNR时，表示正在处理第二个输入文件。</p>
+</li>
+<li><p>FILENAME表示当前处理文件的文件名。</p>
+</li>
+</ul>
+<blockquote>
+<p>NR          The total number of input records seen so far.</p>
+<p>FNR         The input record number in the current input file.</p>
+<p>FILENAME    The name of the current input file.  If no files  are  specified  on  the  command<br>                       line,  the  value  of  FILENAME is “-”.  However, FILENAME is undefined inside the<br>                        BEGIN block (unless set by getline).</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya awk_test]$ awk '&#123;print $0&#125;' input.txt input_time.txt </span><br><span class="line">one</span><br><span class="line">two</span><br><span class="line">three</span><br><span class="line">four</span><br><span class="line">five</span><br><span class="line">six</span><br><span class="line">seven</span><br><span class="line">eight</span><br><span class="line">nine</span><br><span class="line">ten</span><br><span class="line">xiaoming worktime is</span><br><span class="line">89</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">90</span><br><span class="line">89</span><br><span class="line">78</span><br><span class="line">xiaoqiang worktime is</span><br><span class="line">90</span><br><span class="line">98</span><br><span class="line">97</span><br><span class="line">90</span><br><span class="line">xiaohong worktime is</span><br><span class="line">90</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">[baiyongan@bya awk_test]$ awk 'NR==FNR&amp;&amp;FNR==1 &#123;print FILENAME, $0&#125; NR&gt;FNR&amp;&amp;FNR==8 &#123;print FILENAME, $0&#125;' input.txt input_time.txt </span><br><span class="line">input.txt one</span><br><span class="line">input_time.txt xiaoqiang worktime is</span><br><span class="line">[baiyongan@bya awk_test]$</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="多只手抓多个文件"><a href="#多只手抓多个文件" class="headerlink" title="多只手抓多个文件"></a>多只手抓多个文件</h3><p>Q：如何区分多个文件呢？</p>
+<p>A：针对多个文件，awk里有个专门的环境变量  ARGIND ，用来指定当前正在处理的文件的编号</p>
+<blockquote>
+<p>ARGIND      The index in ARGV of the current file being processed.</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya awk_test]$ cat input.txt input_time.txt input_3.txt </span><br><span class="line">one</span><br><span class="line">two</span><br><span class="line">three</span><br><span class="line">four</span><br><span class="line">five</span><br><span class="line">six</span><br><span class="line">seven</span><br><span class="line">eight</span><br><span class="line">nine</span><br><span class="line">ten</span><br><span class="line">xiaoming worktime is</span><br><span class="line">89</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">90</span><br><span class="line">89</span><br><span class="line">78</span><br><span class="line">xiaoqiang worktime is</span><br><span class="line">90</span><br><span class="line">98</span><br><span class="line">97</span><br><span class="line">90</span><br><span class="line">xiaohong worktime is</span><br><span class="line">90</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">file3 line1</span><br><span class="line">file3 line2</span><br><span class="line">file3 line3</span><br><span class="line">file3 line4</span><br><span class="line">[baiyongan@bya awk_test]$ awk 'ARGIND==1&amp;&amp;FNR==1 &#123;print $0&#125; ARGIND==2&amp;&amp;FNR==2 &#123;print $0&#125; ARGIND==3&amp;&amp;FNR==3 &#123;print $0&#125;' input.txt input_time.txt input_3.txt </span><br><span class="line">one</span><br><span class="line">89</span><br><span class="line">file3 line3</span><br><span class="line">[baiyongan@bya awk_test]$</span><br></pre></td></tr></table></figure>
+
+<p>除了上述的方法，还可以在文件名上下手，例如：</p>
+<ul>
+<li>FILENAME</li>
+<li>ARGV：命令行参数的数组，同C语言的main（int argc， char **argv）</li>
+</ul>
+<blockquote>
+<p>ARGV    Array of command line arguments.  The array is indexed from 0 to ARGC - 1.  Dynam‐<br>                 ically changing the contents of ARGV can control the files used for data.</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya awk_test]$ </span><br><span class="line">[baiyongan@bya awk_test]$ awk 'FILENAME==ARGV[1]&amp;&amp;FNR==1 &#123;print $0&#125; FILENAME==ARGV[2]&amp;&amp;FNR==2 &#123;print $0&#125; FILENAME==ARGV[3]&amp;&amp;FNR==3 &#123;print $0&#125;' input.txt input_time.txt input_3.txt </span><br><span class="line">one</span><br><span class="line">89</span><br><span class="line">file3 line3</span><br><span class="line">[baiyongan@bya awk_test]$</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="合并两个文件"><a href="#合并两个文件" class="headerlink" title="合并两个文件"></a>合并两个文件</h3><p>Q: /etc/passwd 中的第二个域是用 x 来代替的，表示账户对应的密码，/etc/shadow 文件中第二个域，则存储着具体的密码信息，如何用密码来替换掉 x 呢？</p>
+<p>A：</p>
+<p>第一部分：BEGIN {OFS=FS=”:”}</p>
+<p>第二部分：NR==FNR {a[$1]=$2}</p>
+<p>第三部分：NR&gt;FNR {$2=a[$1]; print}</p>
+<ul>
+<li>第一部分，设定OFS（输出字段分隔符） 和 FS（字段分隔符） 都为 “:”。</li>
+<li>第二部分，NR==FNR {a[$1]=$2}。其中NR==FNR 表示awk输入的第一个文件。{a[$1]=$2}执行，则awk会把文件的第二个字段，存放到下标为$1（文件的第一个字段的值）的数组a中。</li>
+<li>第三部分，NR&gt;FNR {$2=a[$1]; print}。其中，NR&gt;FNR表示awk输入的第二个文件。桑awk在处理第二个文件时， {$2=a[$1]; print}，awk会把下标为$1（文件的第一个字段的值）的数组a 中取出内容赋值给 $2 (文件的第一个字段)，最后输出替换后的文件内容。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@bya awk_test]# cat /etc/shadow | head -n 5</span><br><span class="line">root:$6$BzPXls0eBogVmwQz$iCAbjP1CE4ANU35SWcdzo.//3Fm5Bg/MnzKyWEF1rPLTtuMxFwqH2lwbZyCsNAkbAtCQnIUG9MwV98fJ/WOu1.::0:99999:7:::</span><br><span class="line">bin:*:17110:0:99999:7:::</span><br><span class="line">daemon:*:17110:0:99999:7:::</span><br><span class="line">adm:*:17110:0:99999:7:::</span><br><span class="line">lp:*:17110:0:99999:7:::</span><br><span class="line">[root@bya awk_test]# </span><br><span class="line">[root@bya awk_test]# cat /etc/passwd | head -n 5</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">adm:x:3:4:adm:/var/adm:/sbin/nologin</span><br><span class="line">lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin</span><br><span class="line">[root@bya awk_test]# </span><br><span class="line">[root@bya awk_test]# awk 'BEGIN &#123;OFS=FS=":"&#125; NR==FNR &#123;a[$1]=$2&#125; NR&gt;FNR &#123;$2=a[$1]; print&#125;' /etc/shadow /etc/passwd | head -n 5</span><br><span class="line">root:$6$BzPXls0eBogVmwQz$iCAbjP1CE4ANU35SWcdzo.//3Fm5Bg/MnzKyWEF1rPLTtuMxFwqH2lwbZyCsNAkbAtCQnIUG9MwV98fJ/WOu1.:0:0:root:/root:/bin/bash</span><br><span class="line">bin:*:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">daemon:*:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">adm:*:3:4:adm:/var/adm:/sbin/nologin</span><br><span class="line">lp:*:4:7:lp:/var/spool/lpd:/sbin/nologin</span><br><span class="line">[root@bya awk_test]#</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="合并两文件并求和"><a href="#合并两文件并求和" class="headerlink" title="合并两文件并求和"></a>合并两文件并求和</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@bya awk_test]# cat 1.txt </span><br><span class="line">92 33 44</span><br><span class="line">20 30 45</span><br><span class="line">[root@bya awk_test]# cat 2.txt </span><br><span class="line">23 45 56</span><br><span class="line">35 56 89</span><br><span class="line">[root@bya awk_test]# awk '&#123;for(i=1;i&lt;=NF;i++) a[i]=$i; getline &lt;"1.txt"; for(i=1;i&lt;=NF;i++) printf a[i]+$i" "; printf "\n"&#125;' 2.txt </span><br><span class="line">115 78 100 </span><br><span class="line">55 86 134</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="外部调用"><a href="#外部调用" class="headerlink" title="外部调用"></a>外部调用</h2><p>实现awk 外部调用的两种方式：</p>
+<ul>
+<li>通过getline 引用外部数据；</li>
+<li>通过 system 调用 shell的命令。</li>
+</ul>
+<h3 id="getline操作文件的困惑"><a href="#getline操作文件的困惑" class="headerlink" title="getline操作文件的困惑"></a>getline操作文件的困惑</h3><blockquote>
+<p>   <strong>getline               Set $0 from next input record; set NF, NR, FNR.</strong></p>
+<p>   getline &lt;file         Set $0 from next record of file; set NF.</p>
+<p>   getline var           Set var from next input record; set NR, FNR.</p>
+<p>   getline var &lt;file     Set var from next record of file.</p>
+<p>   command | getline [var]<br>                         Run command piping the output either into $0 or var, as above.</p>
+<p>   command |&amp; getline [var]<br>                         Run command as a co-process piping the output either into $0 or var, as above.  Co-processes are a gawk extension.  (command can also be a socket.  See the  subsection  Special<br>                         File Names, below.)</p>
+</blockquote>
+<p><strong>当只有 getline时，getline是针对当前打开的文件操作，表示读取当前行的下一行数据，并把读取到的数据赋值给$0，同时更新 NF，NR，FNR。</strong></p>
+<p>因此，</p>
+<p><strong>‘{print; getline}’</strong> 输出奇数行</p>
+<p><strong>‘{getline; print}’</strong> 输出偶数行</p>
+<p><strong>‘{print; getline; print}’</strong>  输出全部行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@bya awk_test]# cat -n test | awk '&#123;print&#125;'</span><br><span class="line">     1	a</span><br><span class="line">     2	b</span><br><span class="line">     3	c</span><br><span class="line">     4	d</span><br><span class="line">[root@bya awk_test]# cat -n test | awk '&#123;getline; print&#125;'</span><br><span class="line">     2	b</span><br><span class="line">     4	d</span><br><span class="line">[root@bya awk_test]# cat -n test | awk '&#123;print; getline&#125;'</span><br><span class="line">     1	a</span><br><span class="line">     3	c</span><br><span class="line">[root@bya awk_test]# cat -n test | awk '&#123;print; getline; print&#125;' </span><br><span class="line">     1	a</span><br><span class="line">     2	b</span><br><span class="line">     3	c</span><br><span class="line">     4	d</span><br><span class="line">[root@bya awk_test]#</span><br></pre></td></tr></table></figure>
+
+<p>在getline之后，添加变量 b，则有：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@bya awk_test]# cat -n test </span><br><span class="line">     1	a</span><br><span class="line">     2	b</span><br><span class="line">     3	c</span><br><span class="line">     4	d</span><br><span class="line">[root@bya awk_test]# cat -n test | awk '&#123;print; getline b; print&#125;'</span><br><span class="line">     1	a</span><br><span class="line">     1	a</span><br><span class="line">     3	c</span><br><span class="line">     3	c</span><br><span class="line">[root@bya awk_test]#</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>getline 后面跟着变量b，表示获取到的数据不会赋值给$0,而会给变量b；</li>
+<li>两个print 用来输出 $0,$0的数据没有改变，则输出了重复的字母。</li>
+</ul>
+<p>如下，已经不需要解释，就可以正确解读了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@bya awk_test]# cat -n test | awk '&#123;print; getline b; print; print b&#125;'</span><br><span class="line">     1	a</span><br><span class="line">     1	a</span><br><span class="line">     2	b</span><br><span class="line">     3	c</span><br><span class="line">     3	c</span><br><span class="line">     4	d</span><br><span class="line">[root@bya awk_test]#</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="getline操作文件的返回值"><a href="#getline操作文件的返回值" class="headerlink" title="getline操作文件的返回值"></a>getline操作文件的返回值</h3><p>先看如下案例，while语句表示，当文件test输出一行，文件 1.txt 的内容就要重新输出一遍，但为什么只有第一行是这样的，而其他行，1.txt的内容完全没有输出呢？</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@bya awk_test]# cat 1.txt </span><br><span class="line">92 33 44</span><br><span class="line">20 30 45</span><br><span class="line">[root@bya awk_test]# cat test </span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line">c</span><br><span class="line">d</span><br><span class="line">[root@bya awk_test]# awk '&#123;print $0; while((getline &lt; "1.txt") &gt; 0) print $0&#125;' test</span><br><span class="line">a</span><br><span class="line">92 33 44</span><br><span class="line">20 30 45</span><br><span class="line">b</span><br><span class="line">c</span><br><span class="line">d</span><br><span class="line">[root@bya awk_test]#</span><br></pre></td></tr></table></figure>
+
+<p>其实，getline的返回值：</p>
+<ul>
+<li>1：表示正常读取一行数据。</li>
+<li>0：表示到了文件末尾。</li>
+<li>-1：表示读取遇到错误。</li>
+</ul>
+<p><strong>p.s.</strong>  getline重定向文件时，后面必须跟字符串类型。因此，文件1.txt一定要加上双引号！</p>
+<h3 id="用system-调用-shell"><a href="#用system-调用-shell" class="headerlink" title="用system 调用 shell"></a>用system 调用 shell</h3><p>awk可以直接通过system()调用shell，但是有两点要注意：</p>
+<ul>
+<li>awk 无法直接将脚本中的数据直接输出给shell命令；</li>
+<li>shell 命令的执行结果也无法直接输入到awk脚本中。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@bya awk_test]# awk 'BEGIN &#123; system("ls -l")&#125;'</span><br><span class="line">total 28</span><br><span class="line">-rw-r--r-- 1 root      root       18 May 30 21:22 1.txt</span><br><span class="line">-rw-r--r-- 1 root      root       18 May 30 21:22 2.txt</span><br><span class="line">-rw-rw-r-- 1 baiyongan baiyongan  48 May 30 20:46 input_3.txt</span><br><span class="line">-rw-rw-r-- 1 baiyongan baiyongan 103 May 30 19:17 input_time.txt</span><br><span class="line">-rw-rw-r-- 1 baiyongan baiyongan  49 May 30 16:42 input.txt</span><br><span class="line">-rwxrw-r-- 1 baiyongan baiyongan 145 May 30 15:48 student.awk</span><br><span class="line">-rw-rw-r-- 1 baiyongan baiyongan 165 May 30 14:43 student.txt</span><br><span class="line">[root@bya awk_test]#</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><p>其实，将awk 与其他命令结合起来，才能体现出awk的强大之处。例如结合下面的网络相关的命令</p>
+<ul>
+<li><strong>ifconfig</strong></li>
+<li><strong>netstat</strong></li>
+<li><strong>tcpdump</strong></li>
+<li><strong>/proc/net/dev</strong></li>
+</ul>
+<h3 id="显示本机的IP"><a href="#显示本机的IP" class="headerlink" title="显示本机的IP"></a>显示本机的IP</h3><h3 id="统计网卡的流量"><a href="#统计网卡的流量" class="headerlink" title="统计网卡的流量"></a>统计网卡的流量</h3><h3 id="查看TCP连接状态"><a href="#查看TCP连接状态" class="headerlink" title="查看TCP连接状态"></a>查看TCP连接状态</h3><h3 id="查找请求数排名前五的IP地址"><a href="#查找请求数排名前五的IP地址" class="headerlink" title="查找请求数排名前五的IP地址"></a>查找请求数排名前五的IP地址</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@bya awk_test]# netstat -anlp | grep 80 | grep tcp | awk '&#123;print $5&#125;' | awk -F : '&#123;print $1&#125;' | sort | uniq -c |sort -nr | head -n 5</span><br></pre></td></tr></table></figure>
+
+<h3 id="用tcpdump嗅探80端口的访问"><a href="#用tcpdump嗅探80端口的访问" class="headerlink" title="用tcpdump嗅探80端口的访问"></a>用tcpdump嗅探80端口的访问</h3><p>tcpdump 是 Linux工程师非常常用的流量分析工具。</p>
+<h3 id="锁定-time-wait-连接较多的源IP"><a href="#锁定-time-wait-连接较多的源IP" class="headerlink" title="锁定 time_wait 连接较多的源IP"></a>锁定 time_wait 连接较多的源IP</h3><h3 id="根据端口列进程"><a href="#根据端口列进程" class="headerlink" title="根据端口列进程"></a>根据端口列进程</h3><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>黑体的部分掌握即可应付80%的场景</p>
+<p><strong>awk的功能</strong></p>
+<p><strong>命令格式 + 工作原理 + 执行过程</strong></p>
+<p><strong>常用选项</strong></p>
+<p><strong>内置变量</strong></p>
+<p>运算</p>
+<p><strong>高级输入输出功能</strong></p>
+<p><strong>循环结构</strong></p>
+<p>数组</p>
+<p>内置函数</p>
+<p>字符串函数</p>
+<p>时间函数</p>
+<p>其他一般函数</p>
+<h1 id="拓展阅读"><a href="#拓展阅读" class="headerlink" title="拓展阅读"></a>拓展阅读</h1><p><a href="https://www.cnblogs.com/quincyhu/p/5884390.html" target="_blank" rel="noopener"><strong>shell编程之awk命令详解</strong></a></p>
+<p><a href="http://www.zsythink.net/archives/tag/awk/" target="_blank" rel="noopener"><strong>awk从放弃到入门</strong></a></p>
+<p><a href="https://www.gnu.org/software/gawk/manual/gawk.html" target="_blank" rel="noopener"><strong>The GNU Awk User’s Guide</strong></a></p>
+
+    </div>
+
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="小白大侠 小薇君管理网站维护费">
+        <p>小薇君管理网站维护费</p>
+      </div>
+      <div style="display: inline-block;">
+        <img src="/images/ask-money.png" alt="小白大侠 不定期更新 微信端长按识别哦">
+        <p>不定期更新 微信端长按识别哦</p>
+      </div>
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="小白大侠 大侄子收取炸鸡可乐钱">
+        <p>大侄子收取炸鸡可乐钱</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>小白大侠
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://bya.cool/2020/05/30/Series-Linux-command-awk/" title="Linux 运维实战系列——文本处理三剑客之一 awk">http://bya.cool/2020/05/30/Series-Linux-command-awk/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag"><i class="fa fa-tag"></i> 运维</a>
+              <a href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag"><i class="fa fa-tag"></i> 命令</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/01/Series-linux-theme-file-operation/" rel="prev" title="命令速查系列——文件基本操作">
+      <i class="fa fa-chevron-left"></i> 命令速查系列——文件基本操作
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/27/Series-Linux-command-sed/" rel="next" title="Linux 运维实战系列——文本处理三剑客之一 sed">
+      Linux 运维实战系列——文本处理三剑客之一 sed <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#命令小结"><span class="nav-number">1.</span> <span class="nav-text">命令小结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实战经验"><span class="nav-number">2.</span> <span class="nav-text">实战经验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#入门"><span class="nav-number">2.1.</span> <span class="nav-text">入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指定输出列"><span class="nav-number">2.1.1.</span> <span class="nav-text">指定输出列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修饰表头和表尾"><span class="nav-number">2.1.2.</span> <span class="nav-text">修饰表头和表尾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统计功能"><span class="nav-number">2.1.3.</span> <span class="nav-text">统计功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#筛选功能"><span class="nav-number">2.1.4.</span> <span class="nav-text">筛选功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法格式"><span class="nav-number">2.1.5.</span> <span class="nav-text">语法格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工作原理"><span class="nav-number">2.1.6.</span> <span class="nav-text">工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更完整的格式与工作流程"><span class="nav-number">2.1.7.</span> <span class="nav-text">更完整的格式与工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#awk-脚本编写"><span class="nav-number">2.1.8.</span> <span class="nav-text">awk 脚本编写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多行操作"><span class="nav-number">2.2.</span> <span class="nav-text">多行操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#显示奇数行"><span class="nav-number">2.2.1.</span> <span class="nav-text">显示奇数行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#固定行数合并"><span class="nav-number">2.2.2.</span> <span class="nav-text">固定行数合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不定行数合并"><span class="nav-number">2.2.3.</span> <span class="nav-text">不定行数合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合并所有的行"><span class="nav-number">2.2.4.</span> <span class="nav-text">合并所有的行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多文件操作"><span class="nav-number">2.3.</span> <span class="nav-text">多文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多文件输出"><span class="nav-number">2.3.1.</span> <span class="nav-text">多文件输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两手抓两个文件"><span class="nav-number">2.3.2.</span> <span class="nav-text">两手抓两个文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多只手抓多个文件"><span class="nav-number">2.3.3.</span> <span class="nav-text">多只手抓多个文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合并两个文件"><span class="nav-number">2.3.4.</span> <span class="nav-text">合并两个文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合并两文件并求和"><span class="nav-number">2.3.5.</span> <span class="nav-text">合并两文件并求和</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外部调用"><span class="nav-number">2.4.</span> <span class="nav-text">外部调用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#getline操作文件的困惑"><span class="nav-number">2.4.1.</span> <span class="nav-text">getline操作文件的困惑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getline操作文件的返回值"><span class="nav-number">2.4.2.</span> <span class="nav-text">getline操作文件的返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用system-调用-shell"><span class="nav-number">2.4.3.</span> <span class="nav-text">用system 调用 shell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实战"><span class="nav-number">2.5.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#显示本机的IP"><span class="nav-number">2.5.1.</span> <span class="nav-text">显示本机的IP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统计网卡的流量"><span class="nav-number">2.5.2.</span> <span class="nav-text">统计网卡的流量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看TCP连接状态"><span class="nav-number">2.5.3.</span> <span class="nav-text">查看TCP连接状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查找请求数排名前五的IP地址"><span class="nav-number">2.5.4.</span> <span class="nav-text">查找请求数排名前五的IP地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用tcpdump嗅探80端口的访问"><span class="nav-number">2.5.5.</span> <span class="nav-text">用tcpdump嗅探80端口的访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁定-time-wait-连接较多的源IP"><span class="nav-number">2.5.6.</span> <span class="nav-text">锁定 time_wait 连接较多的源IP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据端口列进程"><span class="nav-number">2.5.7.</span> <span class="nav-text">根据端口列进程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充"><span class="nav-number">2.6.</span> <span class="nav-text">补充</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拓展阅读"><span class="nav-number">3.</span> <span class="nav-text">拓展阅读</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小白大侠"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">小白大侠</p>
+  <div class="site-description" itemprop="description">轻风碎月 静夜凝思</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/baiyongan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;baiyongan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/7be33dc73f81" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;7be33dc73f81" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bya@mail.ustc.edu.com" title="E-Mail → mailto:bya@mail.ustc.edu.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      独学而无友 则孤陋而寡闻
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.book110.com/" title="http:&#x2F;&#x2F;www.book110.com" rel="noopener" target="_blank">荐书堂</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://leetcode-cn.com/" title="https:&#x2F;&#x2F;leetcode-cn.com" rel="noopener" target="_blank">LeetCode-cn</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cspiration.com/leetcodeClassification#1" title="https:&#x2F;&#x2F;cspiration.com&#x2F;leetcodeClassification#1" rel="noopener" target="_blank">LeetCode</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn" rel="noopener" target="_blank">CoolShell</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://zhangwenli.com/blog/" title="http:&#x2F;&#x2F;zhangwenli.com&#x2F;blog&#x2F;" rel="noopener" target="_blank">羡辙</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wdxtub.com/" title="https:&#x2F;&#x2F;wdxtub.com" rel="noopener" target="_blank">小土刀</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cxyxiaowu.com/" title="https:&#x2F;&#x2F;www.cxyxiaowu.com" rel="noopener" target="_blank">程序员小吴(算法)</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://python-web-guide.readthedocs.io/" title="https:&#x2F;&#x2F;python-web-guide.readthedocs.io&#x2F;" rel="noopener" target="_blank">python-web-guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://python.iswbm.com/en/latest/" title="http:&#x2F;&#x2F;python.iswbm.com&#x2F;en&#x2F;latest&#x2F;" rel="noopener" target="_blank">python-编程时光</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://redstonewill.com/" title="https:&#x2F;&#x2F;redstonewill.com" rel="noopener" target="_blank">红色石头</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+<div class="beian-meng">
+<a href="https://icp.gov.moe" target="_blank">萌 ICP备 </a>
+<a href="https://icp.gov.moe/?keyword=20209207" target="_blank"> 20209207号</a>
+</div>
+
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-crown"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小白大侠</span>
+  <span class="post-meta-divider">|</span>
+    <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+    </div>
+
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'WjBhD9l9A6J5mrWl9wkgQxFu-gzGzoHsz',
+      appKey     : '1FL3ULSfrjaAYYiisMlYysHk',
+      placeholder: "你好呀，陌生人，有什么话想说嘛？",
+      avatar     : 'robohash',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+<!-- 页面点击特效 -->
+<script type="text/javascript" src="/js/click.js"></script>
