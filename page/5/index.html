@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-bya.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-bya.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-bya.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bya.cool","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":360,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="轻风碎月 静夜凝思">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BYA&#39;s Blog">
+<meta property="og:url" content="http://bya.cool/page/5/index.html">
+<meta property="og:site_name" content="BYA&#39;s Blog">
+<meta property="og:description" content="轻风碎月 静夜凝思">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="小白大侠">
+<meta property="article:tag" content="golang">
+<meta property="article:tag" content=" leetcode">
+<meta property="article:tag" content=" linux">
+<meta property="article:tag" content=" bash">
+<meta property="article:tag" content=" git">
+<meta property="article:tag" content=" python">
+<meta property="article:tag" content=" docker">
+<meta property="article:tag" content=" machine learning">
+<meta property="article:tag" content=" data science">
+<meta property="article:tag" content=" AI">
+<meta property="article:tag" content=" web">
+<meta property="article:tag" content=" js">
+<meta property="article:tag" content=" javascripts">
+<meta property="article:tag" content=" echarts">
+<meta property="article:tag" content=" ATimeLogger">
+<meta property="article:tag" content=" 可视化">
+<meta property="article:tag" content=" 博客">
+<meta property="article:tag" content=" 读书">
+<meta property="article:tag" content=" movie">
+<meta property="article:tag" content=" 时间管理">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://bya.cool/page/5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>BYA's Blog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?50ee4c4119ca03830c1b5bde8308daae";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">BYA's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">轻风碎月 静夜凝思</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-外链">
+
+    <a href="/links/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>外链</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/baiyongan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+
+.glyphicon-chevron-left:before{
+    content: "《"
+}
+.glyphicon-chevron-right:before{
+    content: "》"
+}
+
+@media (max-width: 767px){
+    .rights{
+        display: none;
+    }
+    .carousel{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .slide{
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+}
+
+.carousel{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.carousel-inner {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+.carousel-inner > .item {
+  display: none;
+  position: relative;
+  -webkit-transition: 0.6s ease-in-out left;
+  -o-transition: 0.6s ease-in-out left;
+  transition: 0.6s ease-in-out left;
+}
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  line-height: 1;
+}
+@media all and (transform-3d), (-webkit-transform-3d) {
+  .carousel-inner > .item {
+    -webkit-transition: -webkit-transform 0.6s ease-in-out;
+    -moz-transition: -moz-transform 0.6s ease-in-out;
+    -o-transition: -o-transform 0.6s ease-in-out;
+    transition: transform 0.6s ease-in-out;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    -moz-perspective: 1000px;
+    perspective: 1000px;
+  }
+  .carousel-inner > .item.next,
+  .carousel-inner > .item.active.right {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    left: 0;
+  }
+  .carousel-inner > .item.prev,
+  .carousel-inner > .item.active.left {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+    left: 0;
+  }
+  .carousel-inner > .item.next.left,
+  .carousel-inner > .item.prev.right,
+  .carousel-inner > .item.active {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    left: 0;
+  }
+}
+.carousel-inner > .active,
+.carousel-inner > .next,
+.carousel-inner > .prev {
+  display: block;
+}
+.carousel-inner > .active {
+  left: 0;
+}
+.carousel-inner > .next,
+.carousel-inner > .prev {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.carousel-inner > .next {
+  left: 100%;
+}
+.carousel-inner > .prev {
+  left: -100%;
+}
+.carousel-inner > .next.left,
+.carousel-inner > .prev.right {
+  left: 0;
+}
+.carousel-inner > .active.left {
+  left: -100%;
+}
+.carousel-inner > .active.right {
+  left: 100%;
+}
+.carousel-control {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 15%;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0);
+}
+.carousel-control.left {
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+}
+.carousel-control.right {
+  left: auto;
+  right: 0;
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+}
+.carousel-control:hover,
+.carousel-control:focus {
+  outline: 0;
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+}
+.carousel-control .icon-prev,
+.carousel-control .icon-next,
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .glyphicon-chevron-right {
+  position: absolute;
+  top: 50%;
+  margin-top: -10px;
+  z-index: 5;
+  display: inline-block;
+}
+.carousel-control .icon-prev,
+.carousel-control .glyphicon-chevron-left {
+  left: 50%;
+  margin-left: -10px;
+}
+.carousel-control .icon-next,
+.carousel-control .glyphicon-chevron-right {
+  right: 50%;
+  margin-right: -10px;
+}
+.carousel-control .icon-prev,
+.carousel-control .icon-next {
+  width: 20px;
+  height: 20px;
+  line-height: 1;
+  font-family: serif;
+}
+.carousel-control .icon-prev:before {
+  content: '\2039';
+}
+.carousel-control .icon-next:before {
+  content: '\203a';
+}
+.carousel-indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  z-index: 15;
+  width: 60%;
+  margin-left: -30%;
+  padding-left: 0;
+  list-style: none;
+  text-align: center;
+}
+.carousel-indicators li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 1px;
+  text-indent: -999px;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #000 \9;
+  background-color: rgba(0, 0, 0, 0);
+}
+.carousel-indicators .active {
+  margin: 0;
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+}
+.carousel-caption {
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  bottom: 20px;
+  z-index: 10;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+.carousel-caption .btn {
+  text-shadow: none;
+}
+@media screen and (min-width: 768px) {
+  .carousel-control .glyphicon-chevron-left,
+  .carousel-control .glyphicon-chevron-right,
+  .carousel-control .icon-prev,
+  .carousel-control .icon-next {
+    width: 30px;
+    height: 30px;
+    margin-top: -10px;
+    font-size: 30px;
+  }
+  .carousel-control .glyphicon-chevron-left,
+  .carousel-control .icon-prev {
+    margin-left: -10px;
+  }
+  .carousel-control .glyphicon-chevron-right,
+  .carousel-control .icon-next {
+    margin-right: -10px;
+  }
+  .carousel-caption {
+    left: 20%;
+    right: 20%;
+    padding-bottom: 30px;
+  }
+  .carousel-indicators {
+    bottom: 20px;
+  }
+}
+</style>
+<div width="100%" height="320px" style="border: 0px; overflow: hidden; border-radius: 10px;" scrolling="no">
+            
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3500" >
+        <!-- 轮播（Carousel）指标 -->
+        <ol class="carousel-indicators">
+        
+        
+
+            <li data-target="#myCarousel" data-slide-to="0"></li>
+            
+
+        
+
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            
+
+        
+
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            
+
+        
+        </ol>
+        <!-- 轮播（Carousel）项目 -->
+        <div class="carousel-inner" style="height: 480px; border-radius: 10px; width: 100%;">
+
+        
+         
+        
+            
+                <a class="item active" href="/tags/%E9%98%85%E8%AF%BB/" target="_blank" style="height: 100%;">
+                    <img src="http://bya.cool/images/read.jpg"   style="width: 100%; height: 100%" >
+                </a>
+                
+                
+
+        
+        
+            
+                    <a class="item" href="/tags/%E5%91%BD%E4%BB%A4/" target="_blank" style="height: 100%;">
+                        <img src="http://bya.cool/images/linux.jpg"  style="width: 100%; height: 100%;" >
+                    </a>
+            
+
+        
+        
+            
+                    <a class="item" href="http://bya.cool/2020/04/27/Intermediate-Python-Book-keypoints-summary-list" target="_blank" style="height: 100%;">
+                        <img src="http://bya.cool/images/python.jpg"  style="width: 100%; height: 100%;" >
+                    </a>
+            
+
+        
+
+     
+        </div>
+        <!-- 轮播（Carousel）导航 -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+           
+        </a>
+    </div> 
+</div>
+
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bya.cool/2019/08/27/Resource-Python-interview-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="小白大侠">
+      <meta itemprop="description" content="轻风碎月 静夜凝思">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BYA's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/27/Resource-Python-interview-1/" class="post-title-link" itemprop="url">Python 面试题搜集(Python 基础——高级：较全面)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-27 00:06:07" itemprop="dateCreated datePublished" datetime="2019-08-27T00:06:07+08:00">2019-08-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Resource/" itemprop="url" rel="index"><span itemprop="name">Resource</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Resource/interview/" itemprop="url" rel="index"><span itemprop="name">interview</span></a>
+                </span>
+            </span>
+
+          
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <!-- TOC -->
+
+<ul>
+<li><p><a href="#python基础">Python基础</a></p>
+<ul>
+<li><p><a href="#文件操作">文件操作</a></p>
+<ul>
+<li><a href="#1有一个jsonline格式的文件filetxt大小约为10k">1.有一个jsonline格式的文件file.txt大小约为10K</a></li>
+<li><a href="#2补充缺失的代码">2.补充缺失的代码</a></li>
+</ul>
+</li>
+<li><p><a href="#模块与包">模块与包</a></p>
+<ul>
+<li><a href="#3输入日期-判断这一天是这一年的第几天">3.输入日期， 判断这一天是这一年的第几天？</a></li>
+<li><a href="#4打乱一个排好序的list对象alist">4.打乱一个排好序的list对象alist？</a></li>
+</ul>
+</li>
+<li><p><a href="#数据类型">数据类型</a></p>
+<ul>
+<li><a href="#5现有字典-d-a24g52i12k33请按value值进行排序">5.现有字典 d= {‘a’:24,’g’:52,’i’:12,’k’:33}请按value值进行排序?</a></li>
+<li><a href="#6字典推导式">6.字典推导式</a></li>
+<li><a href="#7请反转字符串-astr">7.请反转字符串 “aStr”?</a></li>
+<li><a href="#8将字符串-k1-k12k23k34处理成字典-k1k12">8.将字符串 “k:1 |k1:2|k2:3|k3:4”，处理成字典 {k:1,k1:2,…}</a></li>
+<li><a href="#9请按alist中元素的age由大到小排序">9.请按alist中元素的age由大到小排序</a></li>
+<li><a href="#10下面代码的输出结果将是什么">10.下面代码的输出结果将是什么？</a></li>
+<li><a href="#11写一个列表生成式产生一个公差为11的等差数列">11.写一个列表生成式，产生一个公差为11的等差数列</a></li>
+<li><a href="#12给定两个列表怎么找出他们相同的元素和不同的元素">12.给定两个列表，怎么找出他们相同的元素和不同的元素？</a></li>
+<li><a href="#13请写出一段python代码实现删除list里面的重复元素">13.请写出一段python代码实现删除list里面的重复元素？</a></li>
+<li><a href="#14给定两个list-ab-请用找出ab中相同与不同的元素">14.给定两个list A，B ,请用找出A，B中相同与不同的元素</a></li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/27/Resource-Python-interview-1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bya.cool/2019/07/14/Fundation-Python-PyCharm-Keyboard-Shortcuts/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="小白大侠">
+      <meta itemprop="description" content="轻风碎月 静夜凝思">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BYA's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/14/Fundation-Python-PyCharm-Keyboard-Shortcuts/" class="post-title-link" itemprop="url">PyCharm 快捷键</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-14 22:30:10" itemprop="dateCreated datePublished" datetime="2019-07-14T22:30:10+08:00">2019-07-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/Fundation/" itemprop="url" rel="index"><span itemprop="name">Fundation</span></a>
+                </span>
+            </span>
+
+          
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="1、编辑（Editing）"><a href="#1、编辑（Editing）" class="headerlink" title="1、编辑（Editing）"></a>1、编辑（Editing）</h3><p>Ctrl + Space 基本的代码完成（类、方法、属性）</p>
+<p>Ctrl + Alt + Space 快速导入任意类</p>
+<p>Ctrl + Shift + Enter 语句完成</p>
+<p><strong>Ctrl + P 参数信息（在方法中调用参数）</strong></p>
+<p><strong>Ctrl + Q 快速查看文档</strong></p>
+<p>F1 Web帮助文档主页</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/07/14/Fundation-Python-PyCharm-Keyboard-Shortcuts/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bya.cool/2019/03/28/Intermediate-Linux-command-personal-experience-and-suggestions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="小白大侠">
+      <meta itemprop="description" content="轻风碎月 静夜凝思">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BYA's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/28/Intermediate-Linux-command-personal-experience-and-suggestions/" class="post-title-link" itemprop="url">Linux 命令掌握的阶段性总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-28 21:35:24" itemprop="dateCreated datePublished" datetime="2019-03-28T21:35:24+08:00">2019-03-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/Intermediate/" itemprop="url" rel="index"><span itemprop="name">Intermediate</span></a>
+                </span>
+            </span>
+
+          
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="命令类型概览"><a href="#命令类型概览" class="headerlink" title="命令类型概览"></a>命令类型概览</h2><div id="command1" style="width: 1000px; height: 800px;"></div>
+<script type="text/javascript" src="/Echarts_js/echarts.js"></script>
+<script type="text/javascript" src="/Echarts_js/linux_total_command_list.js"></script>
+## 个人学习经验梳理
+
+<h3 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a><strong>免责声明</strong></h3><p>就我的Linux 操作技术而言，自我客观地评价，目前应该算是在应用层级上的中上游水平。所以，我的所有经验，肯定囿于目前的能力与视野，不过先写下来也无妨，日后好进行修正与精进。简言之，这些仅仅是个人的使用经验与学习习惯的总结，更多的是以linux 命令工具的学习掌握为例，反思我个人的学习模式。因为我发现工具、技能的应用范围必然有限，但背后的学习模式是基本普适的，并可以迁移至其他领域，且得到不断优化提高的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/28/Intermediate-Linux-command-personal-experience-and-suggestions/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bya.cool/2019/02/23/Engineering-Environment-module/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="小白大侠">
+      <meta itemprop="description" content="轻风碎月 静夜凝思">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BYA's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/02/23/Engineering-Environment-module/" class="post-title-link" itemprop="url">Environment Modules 环境变量模块化管理工具的使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-02-23 14:13:54" itemprop="dateCreated datePublished" datetime="2019-02-23T14:13:54+08:00">2019-02-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Engineering/" itemprop="url" rel="index"><span itemprop="name">Engineering</span></a>
+                </span>
+            </span>
+
+          
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="1-Modules-功能简介"><a href="#1-Modules-功能简介" class="headerlink" title="1. Modules 功能简介"></a>1. Modules 功能简介</h3><p>​         超级计算机的硬件设施和应用软件，分别是整个超算系统的最底层和最顶层，在它们之间，还存在着我们称之为软件栈（software stack）的系统软件：包括编译器、并行运行环境、作业调度系统、性能分析和调试工具等等。一般较为成熟的超算平台，都必备多种版本、不同种类的编译器、MPI 库，以及数学库等；并在此基础之上，进行各类应用软件的编译与环境配置。于普通使用者而言，因使用需求的变化，其所需的使用场景也不尽相同。若用户自行配置，则可能因为对命令行操作生疏等原因，导致环境变量配置出错，学习成本高，影响使用效率。</p>
+<p>Environment module 工具，常用于高性能计算集群（即HPC ：High  Perfermance Computing ）的环境配置管理上。它可以将软件编译器，MPI库，数学库、应用软件（计算类软件、分析类软件等）等，以模块的方式，统一到一个框架下，使得用户可以动态切换环境变量，便捷高效。且由于很多资源调度软件，如LSF、PBS、MOAB等，可以通过脚本文件来提交作业。所以，module工具同样可以在shell scripts中使用。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/02/23/Engineering-Environment-module/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bya.cool/2018/11/24/Resource-guo-xue-shu-mu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="小白大侠">
+      <meta itemprop="description" content="轻风碎月 静夜凝思">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BYA's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/24/Resource-guo-xue-shu-mu/" class="post-title-link" itemprop="url">国学入门经典书目梳理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-24 11:17:52" itemprop="dateCreated datePublished" datetime="2018-11-24T11:17:52+08:00">2018-11-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Resource/" itemprop="url" rel="index"><span itemprop="name">Resource</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Resource/%E5%9B%BD%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">国学</span></a>
+                </span>
+            </span>
+
+          
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="国学最低限度之必读书目-梁启超"><a href="#国学最低限度之必读书目-梁启超" class="headerlink" title="国学最低限度之必读书目   梁启超"></a>国学最低限度之必读书目   梁启超</h3><div id="guoxue" style="width: 1000px; height: 800px;"></div>
+<script type="text/javascript" src="/Echarts_js/echarts.js"></script>
+<script type="text/javascript" src="/Echarts_js/guoxue_list.js"></script>
+1923年梁启超应《清华周刊》记者之约，拟就**[《国学入门书要目及其读法》](http://www.guoxue.com/?p=1739)**，约160种。后来他又为"校课既繁、所治专门"的青年学生精简此书目，开列出《最低限度之必读书目》：
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/24/Resource-guo-xue-shu-mu/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bya.cool/2018/11/11/Thoughts-motivation-of-writing-blogs-and-the-expected-blog-content/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="小白大侠">
+      <meta itemprop="description" content="轻风碎月 静夜凝思">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BYA's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/11/Thoughts-motivation-of-writing-blogs-and-the-expected-blog-content/" class="post-title-link" itemprop="url">我为什么要写博客？</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-11 15:04:16" itemprop="dateCreated datePublished" datetime="2018-11-11T15:04:16+08:00">2018-11-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Thoughts/" itemprop="url" rel="index"><span itemprop="name">Thoughts</span></a>
+                </span>
+            </span>
+
+          
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="为什么现在要写博客了？"><a href="#为什么现在要写博客了？" class="headerlink" title="为什么现在要写博客了？"></a>为什么现在要写博客了？</h2><p>​    学生生涯结束至此一年有余，经历了刚开始与工作的磨合，渐渐已经习惯现在的生活节奏，也自知稍嫌乏味单调。工作以后，好多旧时的爱好，也渐渐无暇，或是没有彼时的心境去体味，去沉湎其中了。在告别校园生活后，与社会自然是多了些直接接触，种种经历或愉快、或糟糕，于己而言，总是有些经验积累的。可是这和我现在决定要写博客，有什么关系？好像也没什么直接关系，本来日子就过的糙一些，后知后觉，没有多少筹划反思。不过，写博客这件事，好比颗种子，其实是很久之前，就在心底种下了的······</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/11/Thoughts-motivation-of-writing-blogs-and-the-expected-blog-content/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bya.cool/2018/11/03/Thoughts-Hello-World-for-the-happy-beginning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="小白大侠">
+      <meta itemprop="description" content="轻风碎月 静夜凝思">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BYA's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/03/Thoughts-Hello-World-for-the-happy-beginning/" class="post-title-link" itemprop="url">hello 个 world 庆祝一下</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-03 22:00:21" itemprop="dateCreated datePublished" datetime="2018-11-03T22:00:21+08:00">2018-11-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Thoughts/" itemprop="url" rel="index"><span itemprop="name">Thoughts</span></a>
+                </span>
+            </span>
+
+          
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h2><p>​    在很久很久以前，也就是公元200多年前的古希腊，叙拉古的赫农王（King Hieron）让工匠为他打造了一顶纯金王冠，虽然王冠重量和当初交给工匠的金子一样重，但是，还是疑心工匠在其中勾兑掺假，王冠不纯。于是，就让阿基米德来检验王冠。最初阿基米德也无计可施，后来某天洗澡时，坐进浴缸，看到水往外溢，顿悟出——可以利用皇冠在水中的排水量，来测量皇冠的体积。于是兴奋的跳出澡盆，衣服都顾不得穿就跑了出去，大声的喊道：“<strong>尤里卡！尤里卡！</strong>”（ερηκα，意思是“找到了”。）</p>
+<p>​    经过了进一步的实验以后，便来到了王宫，他把王冠和同等重量的纯金放在盛满水的两个盆里，比较两盆溢出来的水，发现放王冠的盆里溢出来的水比另一盆多。这就说明王冠的体积比相同重量的纯金的体积大，密度不相同，所以证明了王冠里掺进了其他金属。</p>
+<p>​    后来，阿基米德从中总结出著名的浮力定律（即——朗朗上口的<strong><em>G = F浮 = ρ液gV排</em></strong>）。而在重大发现之后，忘情高呼Eureka，也作为经典传统，流传开来。在<strong><a href="https://movie.douban.com/subject/1889243/" target="_blank" rel="noopener">《星际穿越 Interstellar》</a></strong>中，曾有所致敬：在墨菲（<em>Jessica Chastain</em> 饰）终于破译出，她老爸从四维空间中传来的message后，一路飞奔，将手稿抛向空中，纵情呐喊：Eureka！并开心地解释到：it’s traditional …</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/03/Thoughts-Hello-World-for-the-happy-beginning/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bya.cool/1900/03/26/Records-change-of-blogs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="小白大侠">
+      <meta itemprop="description" content="轻风碎月 静夜凝思">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BYA's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/1900/03/26/Records-change-of-blogs/" class="post-title-link" itemprop="url">博客站点记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：1900-03-26 22:16:42" itemprop="dateCreated datePublished" datetime="1900-03-26T22:16:42+08:05">1900-03-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
+              </span>
+
+          
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="2018年"><a href="#2018年" class="headerlink" title="2018年"></a>2018年</h3><ul>
+<li>11月：<ul>
+<li>搭建github pages + hexo 个人博客， 选择yilia主题。</li>
+<li>博客内容规划梳理。</li>
+<li>hello world 一文庆祝。</li>
+<li>Echarts可视化作品两个。</li>
+<li>单相思，写信寄之，遭戏弄。</li>
+</ul>
+</li>
+<li>12月：<ul>
+<li>疗情伤，郁结抒怀，撰文斥之。</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/1900/03/26/Records-change-of-blogs/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小白大侠"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">小白大侠</p>
+  <div class="site-description" itemprop="description">轻风碎月 静夜凝思</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/baiyongan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;baiyongan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/7be33dc73f81" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;7be33dc73f81" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bya@mail.ustc.edu.com" title="E-Mail → mailto:bya@mail.ustc.edu.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      独学而无友 则孤陋而寡闻
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.book110.com/" title="http:&#x2F;&#x2F;www.book110.com" rel="noopener" target="_blank">荐书堂</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://leetcode-cn.com/" title="https:&#x2F;&#x2F;leetcode-cn.com" rel="noopener" target="_blank">LeetCode-cn</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cspiration.com/leetcodeClassification#1" title="https:&#x2F;&#x2F;cspiration.com&#x2F;leetcodeClassification#1" rel="noopener" target="_blank">LeetCode</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn" rel="noopener" target="_blank">CoolShell</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://zhangwenli.com/blog/" title="http:&#x2F;&#x2F;zhangwenli.com&#x2F;blog&#x2F;" rel="noopener" target="_blank">羡辙</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wdxtub.com/" title="https:&#x2F;&#x2F;wdxtub.com" rel="noopener" target="_blank">小土刀</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cxyxiaowu.com/" title="https:&#x2F;&#x2F;www.cxyxiaowu.com" rel="noopener" target="_blank">程序员小吴(算法)</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://python-web-guide.readthedocs.io/" title="https:&#x2F;&#x2F;python-web-guide.readthedocs.io&#x2F;" rel="noopener" target="_blank">python-web-guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://python.iswbm.com/en/latest/" title="http:&#x2F;&#x2F;python.iswbm.com&#x2F;en&#x2F;latest&#x2F;" rel="noopener" target="_blank">python-编程时光</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://redstonewill.com/" title="https:&#x2F;&#x2F;redstonewill.com" rel="noopener" target="_blank">红色石头</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+<div class="beian-meng">
+<a href="https://icp.gov.moe" target="_blank">萌 ICP备 </a>
+<a href="https://icp.gov.moe/?keyword=20209207" target="_blank"> 20209207号</a>
+</div>
+
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-crown"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小白大侠</span>
+  <span class="post-meta-divider">|</span>
+    <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+    </div>
+
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'WjBhD9l9A6J5mrWl9wkgQxFu-gzGzoHsz',
+      appKey     : '1FL3ULSfrjaAYYiisMlYysHk',
+      placeholder: "你好呀，陌生人，有什么话想说嘛？",
+      avatar     : 'robohash',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+<!-- 页面点击特效 -->
+<script type="text/javascript" src="/js/click.js"></script>

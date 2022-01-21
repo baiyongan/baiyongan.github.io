@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-bya.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-bya.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-bya.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bya.cool","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":360,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="1. Modules 功能简介​         超级计算机的硬件设施和应用软件，分别是整个超算系统的最底层和最顶层，在它们之间，还存在着我们称之为软件栈（software stack）的系统软件：包括编译器、并行运行环境、作业调度系统、性能分析和调试工具等等。一般较为成熟的超算平台，都必备多种版本、不同种类的编译器、MPI 库，以及数学库等；并在此基础之上，进行各类应用软件的编译与环境配置。于普">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Environment Modules 环境变量模块化管理工具的使用">
+<meta property="og:url" content="http://bya.cool/2019/02/23/Engineering-Environment-module/index.html">
+<meta property="og:site_name" content="BYA&#39;s Blog">
+<meta property="og:description" content="1. Modules 功能简介​         超级计算机的硬件设施和应用软件，分别是整个超算系统的最底层和最顶层，在它们之间，还存在着我们称之为软件栈（software stack）的系统软件：包括编译器、并行运行环境、作业调度系统、性能分析和调试工具等等。一般较为成熟的超算平台，都必备多种版本、不同种类的编译器、MPI 库，以及数学库等；并在此基础之上，进行各类应用软件的编译与环境配置。于普">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://bya.cool/images/plan_on_hpc.png">
+<meta property="og:image" content="http://bya.cool/images/hpc_module.png">
+<meta property="article:published_time" content="2019-02-23T06:13:54.000Z">
+<meta property="article:modified_time" content="2022-01-04T16:43:27.000Z">
+<meta property="article:author" content="小白大侠">
+<meta property="article:tag" content="modules">
+<meta property="article:tag" content="HPC">
+<meta property="article:tag" content="环境变量">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://bya.cool/images/plan_on_hpc.png">
+
+<link rel="canonical" href="http://bya.cool/2019/02/23/Engineering-Environment-module/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Environment Modules 环境变量模块化管理工具的使用 | BYA's Blog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?50ee4c4119ca03830c1b5bde8308daae";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">BYA's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">轻风碎月 静夜凝思</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-外链">
+
+    <a href="/links/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>外链</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/baiyongan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bya.cool/2019/02/23/Engineering-Environment-module/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="小白大侠">
+      <meta itemprop="description" content="轻风碎月 静夜凝思">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BYA's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Environment Modules 环境变量模块化管理工具的使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-02-23 14:13:54" itemprop="dateCreated datePublished" datetime="2019-02-23T14:13:54+08:00">2019-02-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Engineering/" itemprop="url" rel="index"><span itemprop="name">Engineering</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/02/23/Engineering-Environment-module/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/02/23/Engineering-Environment-module/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="1-Modules-功能简介"><a href="#1-Modules-功能简介" class="headerlink" title="1. Modules 功能简介"></a>1. Modules 功能简介</h3><p>​         超级计算机的硬件设施和应用软件，分别是整个超算系统的最底层和最顶层，在它们之间，还存在着我们称之为软件栈（software stack）的系统软件：包括编译器、并行运行环境、作业调度系统、性能分析和调试工具等等。一般较为成熟的超算平台，都必备多种版本、不同种类的编译器、MPI 库，以及数学库等；并在此基础之上，进行各类应用软件的编译与环境配置。于普通使用者而言，因使用需求的变化，其所需的使用场景也不尽相同。若用户自行配置，则可能因为对命令行操作生疏等原因，导致环境变量配置出错，学习成本高，影响使用效率。</p>
+<p>Environment module 工具，常用于高性能计算集群（即HPC ：High  Perfermance Computing ）的环境配置管理上。它可以将软件编译器，MPI库，数学库、应用软件（计算类软件、分析类软件等）等，以模块的方式，统一到一个框架下，使得用户可以动态切换环境变量，便捷高效。且由于很多资源调度软件，如LSF、PBS、MOAB等，可以通过脚本文件来提交作业。所以，module工具同样可以在shell scripts中使用。</p>
+<a id="more"></a>
+
+<p>若要充分发挥Environment  module 工具的功用，只需要记住两点即可:</p>
+<ul>
+<li><ol>
+<li>编写modulefiles，将应用软件所需的环境变量等写入其中，配置成模块。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>使用module command(s)，动态调用已经配置好的模块。</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-Modules-安装及配置"><a href="#2-Modules-安装及配置" class="headerlink" title="2. Modules 安装及配置"></a>2. Modules 安装及配置</h3><h4 id="2-0-测试环境"><a href="#2-0-测试环境" class="headerlink" title="2.0 测试环境"></a>2.0 测试环境</h4><p>CentOS 7.2系统，modules版本为4.2.1，源码安装方式，安装位置为/opt目录。</p>
+<h4 id="2-1-源码编译"><a href="#2-1-源码编译" class="headerlink" title="2.1  源码编译"></a>2.1  源码编译</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">上传module 压缩包至/opt目录</span><br><span class="line">cd /opt</span><br><span class="line">tar -xvf  modules-4.2.1.tar.gz</span><br><span class="line">./configure --help #查看帮助页面</span><br><span class="line">./configure --prefix=/opt/modules/modules421 #指定安装目录为/opt/modules/modules421</span><br><span class="line">make install</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">设置软链接，实现登录启动modules工具</span><br><span class="line">ln -s  /opt/modules/modules421/init/profile.sh /etc/profile.d/modules.sh</span><br><span class="line">ln -s  /opt/modules/modules421/init/profile.csh /etc/profile.d/modules.csh</span><br><span class="line">source /etc/profile #或重新登录命令行界面之后，则可以使用module 的一系列命令</span><br><span class="line"></span><br><span class="line">修改modulerc文件，自定义$MODULEPATH变量</span><br><span class="line">在/opt/modules/modules421/init文件夹下的modulerc文件，可以自定义多个modulefiles所在的文件夹</span><br><span class="line"></span><br><span class="line">[root@node02 init]#  echo $MODULEPATH   #查看默认的module path</span><br><span class="line">/opt/modules/modules421/modulefiles</span><br><span class="line">cd $MODULEPATH</span><br><span class="line">mkdir  &#123;application,compiler,cuda,mathlib,mpi,python,tool&#125;</span><br><span class="line">更新modulerc文件。</span><br><span class="line">vim /opt/modules/modules421/init/modulerc</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">%Module1.0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> This file defines  the initial setup <span class="keyword">for</span> the modulefiles search path</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> and modulefiles you  want to load by default <span class="keyword">for</span> all users. It should</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> contains a lines of  module <span class="built_in">command</span> like <span class="string">'module use path'</span> and</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="string">'module load mod'</span></span></span><br><span class="line"></span><br><span class="line">module use --append  &#123;/opt/modules/modules421/modulefiles/application&#125;</span><br><span class="line">module use --append  &#123;/opt/modules/modules421/modulefiles/compiler&#125;</span><br><span class="line">module use --append  &#123;/opt/modules/modules421/modulefiles/cuda&#125;</span><br><span class="line">module use --append  &#123;/opt/modules/modules421/modulefiles/mathlib&#125;</span><br><span class="line">module use --append  &#123;/opt/modules/modules421/modulefiles/mpi&#125;</span><br><span class="line">module use --append  &#123;/opt/modules/modules421/modulefiles/python&#125;</span><br><span class="line">module use --append  &#123;/opt/modules/modules421/modulefiles/tool&#125;</span><br><span class="line"></span><br><span class="line">重新登陆，查看自定义的MODULEPATH。</span><br><span class="line">[root@node02 init]#  source /etc/profile</span><br><span class="line">[root@node02 init]#  echo $MODULEPATH</span><br><span class="line">/opt/modules/modules421/modulefiles/application:/opt/modules/modules421/modulefiles/compiler:/opt/modules/modules421/modulefiles/cuda:/opt/modules/modules421/modulefiles/mathlib:/opt/modules/modules421/modulefiles/mpi:/opt/modules/modules421/modulefiles/python:/opt/modules/modules421/modulefiles/tool</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-编写配置modulefiles文件"><a href="#2-2-编写配置modulefiles文件" class="headerlink" title="2.2 编写配置modulefiles文件"></a>2.2 编写配置modulefiles文件</h4><h5 id="modulefile文件创建"><a href="#modulefile文件创建" class="headerlink" title="modulefile文件创建"></a>modulefile文件创建</h5><p>以gcc-4.8.5为例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@node02  modulefiles]# pwd</span><br><span class="line">/opt/modules/modules421/modulefiles</span><br><span class="line">[root@node02  modulefiles]# mkdir -p compiler/&#123;gcc,intel,pgi&#125;</span><br><span class="line">[root@node02  modulefiles]# tree compiler/</span><br><span class="line">compiler/</span><br><span class="line">├── gcc</span><br><span class="line">├── intel</span><br><span class="line">└── pgi</span><br><span class="line">3 directories, 0 files</span><br><span class="line"></span><br><span class="line">命名规则：一般"foldername/modulefile"  即 以"软件名/版本号"进行区分，gcc-4.8.5 编译器的modulefile文件，则命名为4.8.5。</span><br></pre></td></tr></table></figure>
+
+<h5 id="modulefile编写规范"><a href="#modulefile编写规范" class="headerlink" title="modulefile编写规范"></a>modulefile编写规范</h5><p>以一个典型的modulefile为例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">%Module 1.0</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Edited by BYA <span class="keyword">in</span>  2018/3/6</span></span><br><span class="line"><span class="meta">#</span><span class="bash">Modified by BYA one  day <span class="keyword">in</span> the future</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash">conflict               </span></span><br><span class="line">module-whatis   Intel Compiler version 2015.3.187  (icc,icpc,ifort)</span><br><span class="line"><span class="meta">#</span><span class="bash">module load</span></span><br><span class="line">prepend-path    PATH             /opt/intel/composer_xe_2015.3.187/bin/intel64</span><br><span class="line">prepend-path    LIBRARY_PATH     /opt/intel/composer_xe_2015.3.187/compiler/lib/intel64</span><br><span class="line">prepend-path    LD_LIBRARY_PATH  /opt/intel/composer_xe_2015.3.187/compiler/lib/intel64</span><br><span class="line">prepend-path    MANPATH          /opt/intel/composer_xe_2015.3.187/man</span><br><span class="line"></span><br><span class="line">setenv          CC              icc</span><br><span class="line">setenv          CXX             icpc</span><br><span class="line">setenv          FC              ifort</span><br><span class="line">setenv          F77             ifort</span><br><span class="line">setenv          F90             ifort</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">###</span></span></span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<p><strong>#%Module 1.0</strong>    抬头须存在；</p>
+<p><strong>conflict</strong>   一行，代表与本模块冲突的软件模块，若没有，可#注释；</p>
+<p><strong>module-whatis</strong>     指明模块的简单介绍，使用”module whatis 模块名”命令的时候可以查看；</p>
+<p><strong>module load</strong>，代表该模块之前需要预先加载的其他模块；</p>
+<p><strong>prepend-path  环境变量名 具体路径</strong></p>
+<p>一般的环境变量有PATH、LIBRARY_PATH、LD_LIBRARY_PATH、MANPATH等，prepend-path 会把指定路径，<strong>追加</strong>到对应的环境变量中 ；</p>
+<p><strong>setenv</strong>    <strong>环境变量名 具体值</strong>   </p>
+<p>setenv 会设定环境变量的具体值。 </p>
+<h4 id="2-3-整体规划与实施"><a href="#2-3-整体规划与实施" class="headerlink" title="2.3 整体规划与实施"></a>2.3 整体规划与实施</h4><p>若要配置比较大规模的超算环境，需要将软件需求，协调规范到一个整体框架之下，如果不清楚如何配置，可以调研参考下各大超算平台的配置：如<strong>中科大超算中心</strong>，<strong>中科院超算中心</strong>等。</p>
+<p>如下为针对某项目需求，所制定的设计初稿：</p>
+<p><img src="/images/plan_on_hpc.png" alt="plan_on_hpc"></p>
+<p>最终的实现结果如下：</p>
+<p><img src="/images/hpc_module.png" alt="hpc_module"></p>
+<h3 id="3-Modules-使用方式"><a href="#3-Modules-使用方式" class="headerlink" title="3. Modules 使用方式"></a>3. Modules 使用方式</h3><h4 id="3-1-modules-常用指令"><a href="#3-1-modules-常用指令" class="headerlink" title="3.1 modules 常用指令"></a>3.1 modules 常用指令</h4><p>显示manual ：module  或 module –h，man module </p>
+<p>查看可用模块：module  avail  </p>
+<p>查看已加载模块：module  list   </p>
+<p>加载模块：module load/add  MODULE_NAME  </p>
+<p>卸载模块：module unload/rm  MODULE_NAME  </p>
+<p>切换模块：module  switch/swap OLD_MODULE NEW_MODULE</p>
+<p>卸载所有已加载的模块：module  purge</p>
+<p>显示模块说明：module whatis  MODULE_NAME</p>
+<p>显示该模块内容：module  display/show MODULE_NAME</p>
+<h4 id="3-2-modules-使用示例"><a href="#3-2-modules-使用示例" class="headerlink" title="3.2 modules 使用示例"></a>3.2 modules 使用示例</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">示例使用：</span><br><span class="line">[root@hpc-material02  ~]# module purge</span><br><span class="line">[root@hpc-material02  ~]# module list</span><br><span class="line">No Modulefiles  Currently Loaded.</span><br><span class="line">[root@hpc-material02  ~]# module load openmpi/1.6.5/gcc/4.8.5</span><br><span class="line">[root@hpc-material02  ~]# module list</span><br><span class="line">Currently Loaded  Modulefiles:</span><br><span class="line">1) openmpi/1.6.5/gcc/4.8.5  </span><br><span class="line">[root@hpc-material02  ~]# module whatis openmpi/1.6.5/gcc/4.8.5</span><br><span class="line">----------------------------------------  /opt/modules/ModuleFiles/mpi -----------------------------------------</span><br><span class="line">openmpi/1.6.5/gcc/4.8.5:  Openmpi-1.6.5 compiled by gcc-4.8.5</span><br><span class="line">[root@hpc-material02  ~]# module display openmpi/1.6.5/gcc/4.8.5</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">/opt/modules/ModuleFiles/mpi/openmpi/1.6.5/gcc/4.8.5:</span><br><span class="line">module-whatis       Openmpi-1.6.5  compiled by gcc-4.8.5</span><br><span class="line">prepend-path        PATH        /opt/openmpi/openmpi-1.6.5_gcc-4.8.5/bin</span><br><span class="line">prepend-path        LD_LIBRARY_PATH        /opt/openmpi/openmpi-1.6.5_gcc-4.8.5/lib</span><br><span class="line">prepend-path        MANPATH        /opt/openmpi/openmpi-1.6.5_gcc-4.8.5/share/man</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">[root@hpc-material02  ~]# echo $PATH | sed 's/:/\n/g'</span><br><span class="line">/opt/openmpi/openmpi-1.6.5_gcc-4.8.5/bin</span><br><span class="line">/usr/local/sbin</span><br><span class="line">/usr/local/bin</span><br><span class="line">/usr/sbin</span><br><span class="line">/usr/bin</span><br><span class="line">/root/bin</span><br><span class="line">[root@hpc-material02  ~]# echo $LD_LIBRARY_PATH | sed 's/:/\n/g'</span><br><span class="line">/opt/openmpi/openmpi-1.6.5_gcc-4.8.5/lib</span><br><span class="line">[root@hpc-material02  ~]# module rm openmpi/1.6.5/gcc/4.8.5 </span><br><span class="line">[root@hpc-material02  ~]# echo $PATH | sed 's/:/\n/g'</span><br><span class="line">/usr/local/sbin</span><br><span class="line">/usr/local/bin</span><br><span class="line">/usr/sbin</span><br><span class="line">/usr/bin</span><br><span class="line">/root/bin</span><br><span class="line">[root@hpc-material02  ~]# echo $LD_LIBRARY_PATH | sed 's/:/\n/g'</span><br><span class="line"> </span><br><span class="line">[root@hpc-material02  ~]#</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-使用建议"><a href="#4-使用建议" class="headerlink" title="4. 使用建议"></a>4. 使用建议</h3><p>作业调度的时候，module可以写入提交脚本之中，需要先将<strong>MODULEPATH</strong>变量export 一下，然后使用module 相关的命令即可；</p>
+<p>编译与配置的时候，可参考下INSTALL.txt文件。</p>
+<h3 id="5-参考文献"><a href="#5-参考文献" class="headerlink" title="5. 参考文献"></a>5. 参考文献</h3><p>[1] <a href="https://en.wikipedia.org/wiki/Environment_Modules_(software)" target="_blank" rel="noopener">Environment Modules (software) wikipedia</a></p>
+<p>[2] <a href="https://www.cnblogs.com/li12242/p/9994633.html" target="_blank" rel="noopener">Environment Modules 简明教程</a></p>
+
+    </div>
+
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>小白大侠
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://bya.cool/2019/02/23/Engineering-Environment-module/" title="Environment Modules 环境变量模块化管理工具的使用">http://bya.cool/2019/02/23/Engineering-Environment-module/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/modules/" rel="tag"><i class="fa fa-tag"></i> modules</a>
+              <a href="/tags/HPC/" rel="tag"><i class="fa fa-tag"></i> HPC</a>
+              <a href="/tags/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" rel="tag"><i class="fa fa-tag"></i> 环境变量</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/03/28/Intermediate-Linux-command-personal-experience-and-suggestions/" rel="prev" title="Linux 命令掌握的阶段性总结">
+      <i class="fa fa-chevron-left"></i> Linux 命令掌握的阶段性总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/11/24/Thoughts-reading-analysis-of-past-2-years/" rel="next" title="私人阅读史之两年时间读书分析">
+      私人阅读史之两年时间读书分析 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Modules-功能简介"><span class="nav-number">1.</span> <span class="nav-text">1. Modules 功能简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Modules-安装及配置"><span class="nav-number">2.</span> <span class="nav-text">2. Modules 安装及配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-0-测试环境"><span class="nav-number">2.1.</span> <span class="nav-text">2.0 测试环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-源码编译"><span class="nav-number">2.2.</span> <span class="nav-text">2.1  源码编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-编写配置modulefiles文件"><span class="nav-number">2.3.</span> <span class="nav-text">2.2 编写配置modulefiles文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#modulefile文件创建"><span class="nav-number">2.3.1.</span> <span class="nav-text">modulefile文件创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#modulefile编写规范"><span class="nav-number">2.3.2.</span> <span class="nav-text">modulefile编写规范</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-整体规划与实施"><span class="nav-number">2.4.</span> <span class="nav-text">2.3 整体规划与实施</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Modules-使用方式"><span class="nav-number">3.</span> <span class="nav-text">3. Modules 使用方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-modules-常用指令"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 modules 常用指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-modules-使用示例"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 modules 使用示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-使用建议"><span class="nav-number">4.</span> <span class="nav-text">4. 使用建议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-参考文献"><span class="nav-number">5.</span> <span class="nav-text">5. 参考文献</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小白大侠"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">小白大侠</p>
+  <div class="site-description" itemprop="description">轻风碎月 静夜凝思</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/baiyongan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;baiyongan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/7be33dc73f81" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;7be33dc73f81" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bya@mail.ustc.edu.com" title="E-Mail → mailto:bya@mail.ustc.edu.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      独学而无友 则孤陋而寡闻
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.book110.com/" title="http:&#x2F;&#x2F;www.book110.com" rel="noopener" target="_blank">荐书堂</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://leetcode-cn.com/" title="https:&#x2F;&#x2F;leetcode-cn.com" rel="noopener" target="_blank">LeetCode-cn</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cspiration.com/leetcodeClassification#1" title="https:&#x2F;&#x2F;cspiration.com&#x2F;leetcodeClassification#1" rel="noopener" target="_blank">LeetCode</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn" rel="noopener" target="_blank">CoolShell</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://zhangwenli.com/blog/" title="http:&#x2F;&#x2F;zhangwenli.com&#x2F;blog&#x2F;" rel="noopener" target="_blank">羡辙</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wdxtub.com/" title="https:&#x2F;&#x2F;wdxtub.com" rel="noopener" target="_blank">小土刀</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cxyxiaowu.com/" title="https:&#x2F;&#x2F;www.cxyxiaowu.com" rel="noopener" target="_blank">程序员小吴(算法)</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://python-web-guide.readthedocs.io/" title="https:&#x2F;&#x2F;python-web-guide.readthedocs.io&#x2F;" rel="noopener" target="_blank">python-web-guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://python.iswbm.com/en/latest/" title="http:&#x2F;&#x2F;python.iswbm.com&#x2F;en&#x2F;latest&#x2F;" rel="noopener" target="_blank">python-编程时光</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://redstonewill.com/" title="https:&#x2F;&#x2F;redstonewill.com" rel="noopener" target="_blank">红色石头</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+<div class="beian-meng">
+<a href="https://icp.gov.moe" target="_blank">萌 ICP备 </a>
+<a href="https://icp.gov.moe/?keyword=20209207" target="_blank"> 20209207号</a>
+</div>
+
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-crown"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小白大侠</span>
+  <span class="post-meta-divider">|</span>
+    <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+    </div>
+
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'WjBhD9l9A6J5mrWl9wkgQxFu-gzGzoHsz',
+      appKey     : '1FL3ULSfrjaAYYiisMlYysHk',
+      placeholder: "你好呀，陌生人，有什么话想说嘛？",
+      avatar     : 'robohash',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+<!-- 页面点击特效 -->
+<script type="text/javascript" src="/js/click.js"></script>

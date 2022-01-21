@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-bya.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-bya.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-bya.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bya.cool","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":360,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本书特色本书介绍了Python语言在Linux系统管理中的应用，包括编写Python脚本管理Linux系统，使用Python编写的自动化工具管理Linux系统，以及使用Python打造专属的管理工具等。 实战类书籍，有大量实战案例。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter 1 Python语言与Linux系统管理 《Python Linux系统管理与自动化运维》">
+<meta property="og:url" content="http://bya.cool/2019/09/30/Chapter-1-Booknote-Python-Linux-Adminstration-and-Automated-Operation/index.html">
+<meta property="og:site_name" content="BYA&#39;s Blog">
+<meta property="og:description" content="本书特色本书介绍了Python语言在Linux系统管理中的应用，包括编写Python脚本管理Linux系统，使用Python编写的自动化工具管理Linux系统，以及使用Python打造专属的管理工具等。 实战类书籍，有大量实战案例。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-09-30T14:21:58.000Z">
+<meta property="article:modified_time" content="2022-01-04T16:43:27.000Z">
+<meta property="article:author" content="小白大侠">
+<meta property="article:tag" content="Roadmap">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://bya.cool/2019/09/30/Chapter-1-Booknote-Python-Linux-Adminstration-and-Automated-Operation/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Chapter 1 Python语言与Linux系统管理 《Python Linux系统管理与自动化运维》 | BYA's Blog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?50ee4c4119ca03830c1b5bde8308daae";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">BYA's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">轻风碎月 静夜凝思</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-外链">
+
+    <a href="/links/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>外链</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/baiyongan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bya.cool/2019/09/30/Chapter-1-Booknote-Python-Linux-Adminstration-and-Automated-Operation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="小白大侠">
+      <meta itemprop="description" content="轻风碎月 静夜凝思">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BYA's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Chapter 1 Python语言与Linux系统管理 《Python Linux系统管理与自动化运维》
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-30 22:21:58" itemprop="dateCreated datePublished" datetime="2019-09-30T22:21:58+08:00">2019-09-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/DevOps/" itemprop="url" rel="index"><span itemprop="name">DevOps</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/09/30/Chapter-1-Booknote-Python-Linux-Adminstration-and-Automated-Operation/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/09/30/Chapter-1-Booknote-Python-Linux-Adminstration-and-Automated-Operation/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="本书特色"><a href="#本书特色" class="headerlink" title="本书特色"></a>本书特色</h2><p>本书介绍了Python语言在Linux系统管理中的应用，包括编写Python脚本管理Linux系统，使用Python编写的自动化工具管理Linux系统，以及使用Python打造专属的管理工具等。</p>
+<p>实战类书籍，有<strong>大量实战案例</strong>。</p>
+<a id="more"></a>
+
+<h2 id="如何阅读本书？"><a href="#如何阅读本书？" class="headerlink" title="如何阅读本书？"></a>如何阅读本书？</h2><p>共11章，每一章专注于解决某一类问题，均可单独成册，择需阅读即可。</p>
+<p>Chapter1: 为什么学Python？</p>
+<p>Chapter2：Python的多个生态工具，解决学习Python中的环境问题。</p>
+<p>Chapter3~7：如何用Python编写脚本管理Linux？可提高Python编程技能。</p>
+<p>如何构建命令行工具？</p>
+<p>如何处理文本问题？</p>
+<p>如何进行系统管理？</p>
+<p>如何监控Linux系统？</p>
+<p>如何处理文档和报告？······</p>
+<p>Chapter8~10：多个Python语言开发的工具：网络嗅探工具Scapy、自动化部署Fabric、自动部署工具Ansible，偏重运维操作。简单易用、功能强大、扩展性强，运维工程师的得力助手。</p>
+<p><strong>Chapter11：综合案例</strong>——Python打造MySQL的数据库专家系统，以数据库为载体，介绍了Python中的高级语言特性，和Python中的系统架构。充分理解本章，可以使自身Python水平有较大提升。</p>
+<h2 id="勘误-amp-资源"><a href="#勘误-amp-资源" class="headerlink" title="勘误&amp;资源"></a>勘误&amp;资源</h2><p><strong><a href="https://github.com/lalor/python_for_linux_system_administration" target="_blank" rel="noopener">github-lalor</a></strong></p>
+<h2 id="Python-语言的流行证明"><a href="#Python-语言的流行证明" class="headerlink" title="Python 语言的流行证明"></a>Python 语言的流行证明</h2><p>学习一门新技术，该越流行，对于初学者越友好，容易提升技能，还有求职优势。</p>
+<p><strong>TIOBE 的编程语言排行榜</strong>——使编程语言流行趋势的一个指标，它基于互联网上有经验的工程师、课程和第三方厂商的数量，使用搜索引擎计算而得。</p>
+<p><strong>Google Trend</strong> ：查询Python关键词搜索</p>
+<p><strong>微信搜索指数</strong>：对比关键词</p>
+<h2 id="why-Python-开始流行？"><a href="#why-Python-开始流行？" class="headerlink" title="why Python 开始流行？"></a>why Python 开始流行？</h2><ol>
+<li>简单易学：专注于如何解决问题，而不是编程语言的语法和结构</li>
+<li>语法优美：缩进标识代码块，减少大括号，句末分号等视觉杂讯，提高可读性</li>
+<li>强大的库：battery included</li>
+<li>开发效率高：实现相同功能，Python的代码往往只有C、C++、Java的 1/5~1/3，能够满足互联网快速迭代的需求。</li>
+<li>应用领域广泛：Web开发、网络编程、自动化运维、自动化测试、Linux系统管理、数据分析、科学计算、人工智能、机器学习等。<strong>Python介于脚本语言和系统语言之间，所以，我们按照需求，可以将它当成一门脚本语言来编写脚本，也可以当成系统语言来编写服务。</strong></li>
+</ol>
+<h2 id="Python语言的缺点"><a href="#Python语言的缺点" class="headerlink" title="Python语言的缺点"></a>Python语言的缺点</h2><ol>
+<li><strong>执行速度不够快</strong>：不是啥严重问题，一方面，网络或磁盘的延迟会抵消部分Python本身消耗的时间，另一方面，Python 和C特别容易结合，可以分离一部分需要优化速度的应用，将其转换为编译好的扩展，提高整体效率。</li>
+<li><strong>Python中的GIL锁限制并发</strong>：Python对多处理器支持不好，GIL，即Python全局解释器锁，Global Interpreter Lock，当Python的默认解释器要执行字节码时，都需要先申请这个锁，也就是说，如果试图通过多线程扩展应用程序，将总是被这个GIL限制。</li>
+<li><strong>Python2 和Python3 不兼容</strong></li>
+</ol>
+<h2 id="Python语言应用场景"><a href="#Python语言应用场景" class="headerlink" title="Python语言应用场景"></a>Python语言应用场景</h2><p><strong>应用场景几乎无限</strong></p>
+<p>Web开发：适合快速迭代，非常适合互联网公司。如Django、Pyramid、Bottle、Tornado、Flask、web2py等。说明其能经受大规模用户的并发访问考验。</p>
+<p>用户图形接口（GUI）：标准库tkInter，PyGObject、PyQt、PySide、Kivy、wxPython等。TKinter可轻松在不同平台间使用。</p>
+<p>数值计算和科学计算：取代Matlab，成为科研新宠，SciPy、NumPy、Pandas等。</p>
+<p>系统管理：OpenStack开源云计算平台即使用Python开发，除此，还有Ansible和Salt等自动化部署工具。</p>
+<p>其他：pygame开发游戏，PIL库处理图片，NLTK进行自然语言处理等。</p>
+<h2 id="why-Python适合Linux系统管理"><a href="#why-Python适合Linux系统管理" class="headerlink" title="why Python适合Linux系统管理"></a>why Python适合Linux系统管理</h2><ol>
+<li>Python程序语法清晰、简单易懂，相对而言，shell作为基本功，语法复杂、可读性、可维护性差。</li>
+<li>Python表达能力强：相对shell，有丰富的数据结构等，也可以进行多线程编程，shell办不到。</li>
+<li>Python可跨平台：Python标准库对操作系统的接口进行了封装，如Python标准库绑定了POSIX以及其他常规操作工具，如环境变量、文件、套接字、管道、进程、多线程、正则、命令行参数、Shell命令启动器、文件名扩展等。相对于shell，有了跨平台的优势。</li>
+<li>可方面地与操作系统集成，可以使用标准库对OS地封装，也可以在Python中执行Linux命令，完成任何管理任务。</li>
+<li>许多Linux系统管理的开源项目：如psutil监控、IPy的IP地址管理等</li>
+<li>许多自动化管理工具：Fabric、Ansible、SaltStack等</li>
+<li><strong>Linux系统管理，可以发挥Python优点，避免其缺点</strong>——开发效率高，执行速度要求不高</li>
+</ol>
+<h2 id="Python2-vs-Python3"><a href="#Python2-vs-Python3" class="headerlink" title="Python2 vs Python3"></a>Python2 vs Python3</h2><p>通过Google统计分析</p>
+<p>在<strong><a href="https://cloud.google.com/bigquery/querying-data" target="_blank" rel="noopener">https://cloud.google.com/bigquery/querying-data</a></strong> 中执行下面的语句，查询不同Python版本依赖包的下载数据</p>
+<p><strong>SELECT details.python, count(*)  as count FROM [the-psf:pypi.downloads20190930] GROUP BY details.python;</strong></p>
+<p>统计中国Python版本使用情况</p>
+<p><strong>SELECT details.python, count(*)  as count FROM [the-psf:pypi.downloads20190930] where country_code = ‘CN’ GROUP BY details.python;</strong></p>
+<p>建议：</p>
+<p>充分使用__<strong>future__</strong>  库，可以很好兼容Python2 和Python3 ；</p>
+<p>可参考<a href="https://wiki.openstack.org/wiki/Python3" target="_blank" rel="noopener">OpenStack</a>的做法，兼容Python2和Python3，也可用six库同时兼容2和3；</p>
+<p>了解在Python3 中，已经弃用的Python2 语法；</p>
+<p>版本推荐：Python2 &gt; 2.7    Python3 &gt; 3.4</p>
+<h2 id="拓展阅读"><a href="#拓展阅读" class="headerlink" title="拓展阅读"></a>拓展阅读</h2><p><a href="https://mp.weixin.qq.com/s?src=11&timestamp=1569855067&ver=1884&signature=JqSmr4FcWkHUOixFmflaJkSN4gTMJePXfLHA9iDDclycxQKhgkIZ84nJLFz3CU-gnvS-EbMtbaLcWUgOFZD4ds5gU55zVm1wRPTQTcns2C32aDN2aoI4qJJlc9Tgu0BW&new=1" target="_blank" rel="noopener">TIOBE之2019年8月编程语言排行</a></p>
+<p><a href="https://www.zhihu.com/question/20430292" target="_blank" rel="noopener">知乎-像 TIOBE 这样的编程语言排行榜是如何统计出来的？</a></p>
+<p><a href="https://www.tiobe.com/tiobe-index/programming-languages-definition/" target="_blank" rel="noopener">官网-TIOBE Programming Community Index Definition</a></p>
+<h2 id="个人学习路线"><a href="#个人学习路线" class="headerlink" title="个人学习路线"></a>个人学习路线</h2><table>
+<thead>
+<tr>
+<th>章节</th>
+<th align="left">要求掌握程度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>chapter1</td>
+<td align="left">了解</td>
+</tr>
+<tr>
+<td>chapter2</td>
+<td align="left">熟练应用</td>
+</tr>
+<tr>
+<td>chapter 3,4,5,7</td>
+<td align="left">熟练应用</td>
+</tr>
+<tr>
+<td>chapter 6</td>
+<td align="left">学习了解</td>
+</tr>
+<tr>
+<td>chapter11</td>
+<td align="left">重点阅读，争取掌握</td>
+</tr>
+<tr>
+<td>chapter8</td>
+<td align="left">有空再看</td>
+</tr>
+<tr>
+<td>chapter9</td>
+<td align="left">有空再看</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>小白大侠
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://bya.cool/2019/09/30/Chapter-1-Booknote-Python-Linux-Adminstration-and-Automated-Operation/" title="Chapter 1 Python语言与Linux系统管理 《Python Linux系统管理与自动化运维》">http://bya.cool/2019/09/30/Chapter-1-Booknote-Python-Linux-Adminstration-and-Automated-Operation/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Roadmap/" rel="tag"><i class="fa fa-tag"></i> Roadmap</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/23/Fundation-Python-module-json-pickle/" rel="prev" title="Python 序列化模块——json">
+      <i class="fa fa-chevron-left"></i> Python 序列化模块——json
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/09/11/Fundation-Python-Library-Index/" rel="next" title="Python 标准库学习路线梳理">
+      Python 标准库学习路线梳理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本书特色"><span class="nav-number">1.</span> <span class="nav-text">本书特色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何阅读本书？"><span class="nav-number">2.</span> <span class="nav-text">如何阅读本书？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#勘误-amp-资源"><span class="nav-number">3.</span> <span class="nav-text">勘误&amp;资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-语言的流行证明"><span class="nav-number">4.</span> <span class="nav-text">Python 语言的流行证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#why-Python-开始流行？"><span class="nav-number">5.</span> <span class="nav-text">why Python 开始流行？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python语言的缺点"><span class="nav-number">6.</span> <span class="nav-text">Python语言的缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python语言应用场景"><span class="nav-number">7.</span> <span class="nav-text">Python语言应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#why-Python适合Linux系统管理"><span class="nav-number">8.</span> <span class="nav-text">why Python适合Linux系统管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python2-vs-Python3"><span class="nav-number">9.</span> <span class="nav-text">Python2 vs Python3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展阅读"><span class="nav-number">10.</span> <span class="nav-text">拓展阅读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人学习路线"><span class="nav-number">11.</span> <span class="nav-text">个人学习路线</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小白大侠"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">小白大侠</p>
+  <div class="site-description" itemprop="description">轻风碎月 静夜凝思</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/baiyongan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;baiyongan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/7be33dc73f81" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;7be33dc73f81" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bya@mail.ustc.edu.com" title="E-Mail → mailto:bya@mail.ustc.edu.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      独学而无友 则孤陋而寡闻
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.book110.com/" title="http:&#x2F;&#x2F;www.book110.com" rel="noopener" target="_blank">荐书堂</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://leetcode-cn.com/" title="https:&#x2F;&#x2F;leetcode-cn.com" rel="noopener" target="_blank">LeetCode-cn</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cspiration.com/leetcodeClassification#1" title="https:&#x2F;&#x2F;cspiration.com&#x2F;leetcodeClassification#1" rel="noopener" target="_blank">LeetCode</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn" rel="noopener" target="_blank">CoolShell</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://zhangwenli.com/blog/" title="http:&#x2F;&#x2F;zhangwenli.com&#x2F;blog&#x2F;" rel="noopener" target="_blank">羡辙</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wdxtub.com/" title="https:&#x2F;&#x2F;wdxtub.com" rel="noopener" target="_blank">小土刀</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cxyxiaowu.com/" title="https:&#x2F;&#x2F;www.cxyxiaowu.com" rel="noopener" target="_blank">程序员小吴(算法)</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://python-web-guide.readthedocs.io/" title="https:&#x2F;&#x2F;python-web-guide.readthedocs.io&#x2F;" rel="noopener" target="_blank">python-web-guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://python.iswbm.com/en/latest/" title="http:&#x2F;&#x2F;python.iswbm.com&#x2F;en&#x2F;latest&#x2F;" rel="noopener" target="_blank">python-编程时光</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://redstonewill.com/" title="https:&#x2F;&#x2F;redstonewill.com" rel="noopener" target="_blank">红色石头</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+<div class="beian-meng">
+<a href="https://icp.gov.moe" target="_blank">萌 ICP备 </a>
+<a href="https://icp.gov.moe/?keyword=20209207" target="_blank"> 20209207号</a>
+</div>
+
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-crown"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小白大侠</span>
+  <span class="post-meta-divider">|</span>
+    <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+    </div>
+
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'WjBhD9l9A6J5mrWl9wkgQxFu-gzGzoHsz',
+      appKey     : '1FL3ULSfrjaAYYiisMlYysHk',
+      placeholder: "你好呀，陌生人，有什么话想说嘛？",
+      avatar     : 'robohash',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+<!-- 页面点击特效 -->
+<script type="text/javascript" src="/js/click.js"></script>

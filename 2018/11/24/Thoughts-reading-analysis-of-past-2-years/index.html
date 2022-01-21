@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-bya.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-bya.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-bya.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bya.cool","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":360,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="## 前言  读书原为自己受用，且是非常个性化的体验，阅读不过一种自己选择的生活方式，已从刻意为之变为习以为常之事，故而，本不该拿出来标榜。不过，我对数据可视化&amp;设计，向来偏爱有加，爱鼓捣一些视频，图像等作品出来，并常常有想要炫耀的天然冲动。之前的可视化创作呢，更多的是一时灵感而已，但该阅读数据的记录，则是两年时间，锱铢积累而成的。一开始也并非意图明确，只是从最简单的时间记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="私人阅读史之两年时间读书分析">
+<meta property="og:url" content="http://bya.cool/2018/11/24/Thoughts-reading-analysis-of-past-2-years/index.html">
+<meta property="og:site_name" content="BYA&#39;s Blog">
+<meta property="og:description" content="## 前言  读书原为自己受用，且是非常个性化的体验，阅读不过一种自己选择的生活方式，已从刻意为之变为习以为常之事，故而，本不该拿出来标榜。不过，我对数据可视化&amp;设计，向来偏爱有加，爱鼓捣一些视频，图像等作品出来，并常常有想要炫耀的天然冲动。之前的可视化创作呢，更多的是一时灵感而已，但该阅读数据的记录，则是两年时间，锱铢积累而成的。一开始也并非意图明确，只是从最简单的时间记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://bya.cool/images/connect_the_dots.png">
+<meta property="article:published_time" content="2018-11-24T07:30:45.000Z">
+<meta property="article:modified_time" content="2022-01-04T16:43:27.000Z">
+<meta property="article:author" content="小白大侠">
+<meta property="article:tag" content="阅读">
+<meta property="article:tag" content="Echarts">
+<meta property="article:tag" content="反思">
+<meta property="article:tag" content="可视化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://bya.cool/images/connect_the_dots.png">
+
+<link rel="canonical" href="http://bya.cool/2018/11/24/Thoughts-reading-analysis-of-past-2-years/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>私人阅读史之两年时间读书分析 | BYA's Blog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?50ee4c4119ca03830c1b5bde8308daae";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">BYA's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">轻风碎月 静夜凝思</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-外链">
+
+    <a href="/links/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>外链</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/baiyongan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bya.cool/2018/11/24/Thoughts-reading-analysis-of-past-2-years/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="小白大侠">
+      <meta itemprop="description" content="轻风碎月 静夜凝思">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BYA's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          私人阅读史之两年时间读书分析
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-24 15:30:45" itemprop="dateCreated datePublished" datetime="2018-11-24T15:30:45+08:00">2018-11-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Thoughts/" itemprop="url" rel="index"><span itemprop="name">Thoughts</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/11/24/Thoughts-reading-analysis-of-past-2-years/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/11/24/Thoughts-reading-analysis-of-past-2-years/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div id="myreading" style="width: 100% ;height: 600px;"></div>
+<script type="text/javascript" src="/Echarts_js/echarts.js"></script>
+<script type="text/javascript" src="/Echarts_js/jquery.js"></script>
+<script type="text/javascript" src="/Echarts_js/reading_details.js"></script>
+<div id="myanalysis" style="width: 900; height: 600px;"></div>
+<script type="text/javascript" src="/Echarts_js/echarts.js"></script>
+<script type="text/javascript" src="/Echarts_js/jquery.js"></script>
+<script type="text/javascript" src="/Echarts_js/reading_analysis.js"></script>
+## 前言
+
+<p>读书原为自己受用，且是非常个性化的体验，阅读不过一种自己选择的生活方式，已从刻意为之变为习以为常之事，故而，本不该拿出来标榜。不过，我对数据可视化&amp;设计，向来偏爱有加，爱鼓捣一些视频，图像等作品出来，并常常有想要炫耀的天然冲动。之前的可视化创作呢，更多的是一时灵感而已，但该阅读数据的记录，则是两年时间，锱铢积累而成的。一开始也并非意图明确，只是从最简单的时间记录开始，到后来，则渐渐区分功用类别，并不断完善、优化，最终，偶然接触 Echarts，甚爱之，折腾一番，将读书记录得以可视化出来，更爱之。所以呢，勉强可称为铺陈了两年的局，故而，还是有别于一般可视化的cheap fancy tricks的。既然图都摆出来了，要没些文字相互映衬，还是显得有些华而不实。也只好搜索枯肠，挤上几句，可阅读量着实一般，阅读技能也亟待提升，愿为人师又自忖不够格，还是做做反思吧。</p>
+<a id="more"></a>
+
+<p>以上两个图表，呈现的是2016年8月5日至2018年8月4日两年内，个人的业余阅读事件，分学生时期一年，工作时期一年。总阅读时间为693小时，平均每天57分钟，实际仅占用总体时间的3.96%，数据大体准确，的确难说得上嗜书如命，记录的数据中，没有技术类书籍的阅读，基本以非功利性阅读为主。因为掌握技能，不必要仅通过阅读的方式，且借以视频、实践、交流讨论等方式，往往更加直接高效。</p>
+<p><strong>气泡图</strong>，是对单次阅读事件的具体记录。横轴代表日期跨度，纵轴代表一天24h，旋转滚轮，可切换全景/局部进行查看。每个圆圈就是一个具体的阅读事件，书籍的功用类别用颜色区分，阅读时长借由圆圈的大小区分，鼠标悬停其上，可以查看数据细节。</p>
+<p><strong>饼图</strong>，则是对各书籍阅读时长的统计分析。功用类别暂分十种，按照在本人心目中的重视程度，依次顺时针排列。鼠标悬停，点击，可查看具体数据统计。</p>
+<h2 id="我的书籍分类"><a href="#我的书籍分类" class="headerlink" title="我的书籍分类"></a><strong>我的书籍分类</strong></h2><p>至于书籍为什么这么分类？没遵循多少客观逻辑，纯粹是主观需求与偏好的综合。毕竟，中图法也都这么社会主义特色（分五大类部：<strong>马列毛邓</strong>；哲学；社会科学；自然科学；综合性图书。），不是么？我何必按传统的学科来区分呢？</p>
+<p><strong>百读不厌</strong>：位列于此的，自然是留下深刻阅读体验的书籍。有上乘的文字游戏如《围城》，也有晓畅幽默而兼具通达深刻的《明朝那些事儿》系列、文学艺术巅峰之作《红楼梦》，以及启迪我踏上经典阅读之路的《1978—2008私人阅读史》。</p>
+<p><strong>国学根基：</strong>之前也是煞有介事地阅读西方哲学，崇拜尼采，尼采著作及其相关传记，文学作品等：《查拉图斯特拉如是说》，《尼采：在世纪的转折点上》，《当尼采哭泣》等（我确能理解及同情尼采的偏头痛、追求莎乐美的疯魔），是青年蓬勃生命力时期的读物。但实际上，没踏实看过几本他的著作，就按耐不住浮躁的心性，干过蠢事，后来看《悲剧的诞生》等，看不懂，还得要看希腊神话，基督教的东西，倦懒，作罢。至于国故，依少年心性，向来是觉得其老旧不堪，嗤之以鼻的。但是发现我专业课的美女老师在看《道德经》，想想李耳先生应该不一般，便从公开课学起，然后断断续续地扩展开来。记得当初，就是为了和室友攀比吹嘘，而背的《道德经》。不过，读着读着，虽说还是一知半解，但隐约已有种文化上的亲近感，心灵上慢慢有了依傍，感觉找到了中华文化的根，便打算沿着这个精神主脉一路走下去了（好事如我，还特意对比过《论语》、《老子》的中英版本，就算翻译地再信、达、雅，单纯文字上的魅力也差去好多，大约自此，更激发出一种文化上由衷的自豪感）。其实，若有意扎实国学根底，这其中一些源头之书，趁着幼年时期记忆力强，熟读成诵多好。但我小时候既没这么个意愿，也没这个氛围，大概是忙着玩泥巴、捉蜻蜓之类的吧。</p>
+<p><strong>灵感激发：</strong>这个要激发的灵感其实很窄，就是关于读书旨趣培养的。因为我对阅读的内容比较在乎，但对读书方式完全不挑剔，怎么简单怎么来，基本依靠网络资源的搜集，便够看的了，即使是特模糊的影印版pdf，都忍得下去。很多时候，连去图书馆借书这一环节都省了。若看电子书，就是捧个手机或kindle，几乎没有仪式感。如今积习已成，日常完全电子化阅读，即便入手实体书，更多的也是已阅之后，纪念为主。</p>
+<p><strong>明达人生：</strong>其实是想看看，那些活的比较通达，或是比较不那么蒙昧的人都是什么个想法。</p>
+<p><strong>视野拓展：</strong>主要一些近来口碑还行，也广为流行的作品，非虚构类为主。</p>
+<p><strong>思维锻炼：</strong>这个方面不够重视，分配的精力有些少了，真的应该扎扎实实打下基础的。</p>
+<p><strong>性格砥砺：</strong>基本上是人物传记类的书籍，精神上的挚友&amp;导师的人生历程，足以促进青年的发愤。</p>
+<p><strong>思想启蒙：</strong>一些启发不同角度思考，观察社会的作品。</p>
+<p><strong>文学涵养：</strong>一些影响力较大的文学名著吧。</p>
+<p><strong>娱乐消遣：</strong>现在说来，<strong>I never read just for fun，I read to be powerful</strong>，已经过了读小说消遣的年纪，什么武侠、科幻等，畅销榜单的书籍等等，曾经也稍稍浏览过，并不多。</p>
+<p>如今看来，发现上述分类过于剑走偏锋了，阅读之路上，没有一个流畅的衔接过程，更多还是随性而为。其实若是不知道自己兴趣、钟情所在，还想胸有乾坤，有所作为，那就必然要经历个广泛涉猎的阶段，没有一定的阅读量做基础，纯粹空谈。不过，更聪明的做法，是从一开始，就秉着构建一个足够客观，相对完善的知识体系的这一初衷去读书，多研究下中图法、杜威十进分类法等，观其大略，先有个宏观的知识脉络与目标，再按图索骥，开展实际的阅读。与此同时，也不排斥偶然的际遇，不断修正、完善认知体系。这样，也就不至于理工科训练出身，以为读过几本课外书，便不着边际起来，反倒惯出个闲散慵懒的心性。我的阅读分类可以称之为主观偏见了，而在<strong>《猜测和偏见》</strong>一书的末尾，作者何帆有一个可借鉴的书单，分类还算周全，总之比我的定义靠谱的多（这我承认，我的阅读史才起步不过几年，及时认识到问题就好），但若是我嘛，则会倾向于给心理学 &amp; 数学科普类更高的权重，所以说到底，阅读体验还是自己的，合不合适，自己做决定，途径只有一个——<strong>just read it</strong>。</p>
+<ul>
+<li><p><strong>历史</strong></p>
+</li>
+<li><p><strong>政治学、社会学、宏观经济学</strong></p>
+</li>
+<li><p><strong>微观经济学、博弈论</strong></p>
+</li>
+<li><p><strong>脑神经科学、遗传学、进化生物学、心理学、行为经济学</strong></p>
+</li>
+<li><p><strong>科技创新、工程学</strong></p>
+</li>
+<li><p><strong>逻辑学、统计学、数学、物理学、复杂科学、科学哲学</strong></p>
+</li>
+<li><p><strong>哲学</strong></p>
+</li>
+<li><p><strong>文学</strong></p>
+<p>——总结自《猜测和偏见》附录</p>
+</li>
+</ul>
+<h2 id="阅读需求的改变"><a href="#阅读需求的改变" class="headerlink" title="阅读需求的改变"></a><strong>阅读需求的改变</strong></h2><p>工作之后，求生欲盖过了求知欲，体现在阅读上也很明显，（参考气泡图全景图，左半边明显比右半边密集）无论是阅读量，书目的难度、时间分配上等等，基本上是全方位的退步。曾有些伤怀，但后来想到，实际上，<strong>社会是一本大书，这本书不是人人能读懂，不是人人需要去读，也不是人人想读，但是，人人又都参与其中的书写创作。</strong>现实问题常使人无措，失落，很棘手，很恼人，却绝非靠埋头读书就能解决，抑或躲避得了的，<strong>书籍该是我不渝的陪伴，而不应是我的避难所</strong>，<strong>that‘s too coward</strong>。（其实即使曾经生猛如我，被社会时不时锤上一锤，也不再刚愎自用了）而目前，体现在个人的阅读需求上，其重心便已经有意识地进行转变：<strong>从消遣性阅读转为功利性阅读</strong>，并在上述分类之外，又添加了一个<strong>经世致用</strong>的子类。既然身处其中，收起年少的张狂，认清局面，端正态度就好。否则，下述很可能就是我的成长之路啊？!</p>
+<p><strong>无钱无闲&gt;&gt;无钱有闲&gt;&gt;有钱无闲 &gt;&gt;有钱有闲</strong>？！（<strong>无钱无闲again？！</strong>）</p>
+<p><strong>高中备考的愣头小子&gt;&gt;大学浪来浪去的二货青年&gt;&gt;给资本大佬卖命的倔强小韭菜&gt;&gt;附庸风雅的油腻中年大叔？！</strong>（<strong>恓恓遑遑的窘迫中年大叔？！</strong>）（人越中年，若琐事缠身，加之感受力变得迟钝，读书的诉求估计会越来越淡。）</p>
+<p>No way，拒绝油腻，拒绝犬儒，还是趁年轻，keep reading，我还需要通过它来change mindset，keep my mind wide open呢。</p>
+<p>总之，上述也只是二十几岁青年两年时间的阅读经历，以及关于读书的一些看法与反思。其实即使在读书这件小事上面，也一如<strong>乔帮主</strong>所说的，<strong>you can’t connect the dots looking forward; you can only connect them looking backwards。</strong>虽说精神主脉已定，但未来的路还很长，未知的际遇也在远方的某段时期，待我赴去，共同经历，与之思想碰撞交汇。</p>
+<p><img src="/images/connect_the_dots.png" alt="connect_the_dots"></p>
+<h2 id="一些阅读上的建议"><a href="#一些阅读上的建议" class="headerlink" title="一些阅读上的建议"></a><strong>一些阅读上的建议</strong></h2><p><strong>阅读技巧：</strong></p>
+<p><strong>《如何阅读一本书》</strong>高屋建瓴，把阅读能力的“初-中-高-特”级层次，阐述得清晰明了。</p>
+<p><strong>《如何有效阅读一本书》</strong>，”搜集—选购—阅读—笔记“，较实用，结合自身情况完善各环节，对知识存留率的提升会有很大帮助。</p>
+<p><strong>经验分享：</strong></p>
+<p><strong>《1978—2008私人阅读史》</strong>中有很多人关于30年阅读历程的反思之作，读起来挺触动的。</p>
+<p><strong>《谈修养》</strong>朱光潜【著】谈读书的见解。这个就在当时点拨了浮躁的我，懂得了一些怎么选书、怎么读书的道理。</p>
+<p><strong>《像名人那样读书》</strong>吴金敦、刘新勇【编著】（这本书是近期图书馆偶遇的，a little bit surprise，有人已经帮忙把我想看的整理好了），这其中一些过来人的经验之谈，若是能真的践行一下，还是很受用的。</p>
+<p><strong>《读书这么好的事》</strong>张新颖【著】简单有趣，反复读了好几遍，算是成功给自己洗脑——我爱看书，我爱看书，我爱看书~~</p>
+<p>一些《像名人那样读书》中，对我比较有用的经验之谈，总结如下：</p>
+<blockquote>
+<p>读书有三种态度：一种是绝对信从的态度，凡是书上说的话就是天经地义；一种是批判的态度，用现实生活来检验，凡是对现实生活有益处的，取它，否则就不取；又一种是随随便便的态度，从书上学到些什么，用来装点自己，以便同人家谈闲天的时候可以应付，不致受人家讥笑，认为一窍不通。······青年应当抱而且必须抱的是第二种态度。要知道处理现实生活是目的，读书只是达到这个目的的许多手段之一。不要盲从“开卷有益”的成语，也不要相信“为读书而读书”的迂谈。要使书为你所用，不要让你自己去做书的奴隶。                        ——叶圣陶《读书的态度》</p>
+</blockquote>
+<blockquote>
+<p>世间最不行的是读书者，因为他只能看别人的思想艺术，不用自己。这也就是叔本华（Schopenhauer）所谓的“脑子里给别人跑马”。较好的是思索者，但还不免是空想，所以更好的是观察者，他用自己的眼睛去读世间这一部活书。···总之，我们自发的读书，即嗜好的读书——请教别人是大抵无用，只好先行泛览，然后抉择而入于自己所爱的较专的一门或几门；但专读书也有弊病，所以必须和社会接触，使所读的书活起来。        ——鲁迅《读书杂谈》（那看来，我还磕磕绊绊也同样悟出来了，不过早点读到并理解这个经验多好。）</p>
+</blockquote>
+<p>——2019/3/13 夜 to be continued</p>
+<p>功利性阅读别轻易尝试，too boring！！人生苦短，多遇见些合脾性的文与人，少些执拗与judge，take it easy就好。</p>
+<p>——2019/9/21 夜 still on the way</p>
+<p>儒—道—禅，逻辑，客观，非理性</p>
+<p>——2020/4/29 晨 some bullshit ideas</p>
+
+    </div>
+
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>小白大侠
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://bya.cool/2018/11/24/Thoughts-reading-analysis-of-past-2-years/" title="私人阅读史之两年时间读书分析">http://bya.cool/2018/11/24/Thoughts-reading-analysis-of-past-2-years/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%98%85%E8%AF%BB/" rel="tag"><i class="fa fa-tag"></i> 阅读</a>
+              <a href="/tags/Echarts/" rel="tag"><i class="fa fa-tag"></i> Echarts</a>
+              <a href="/tags/%E5%8F%8D%E6%80%9D/" rel="tag"><i class="fa fa-tag"></i> 反思</a>
+              <a href="/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> 可视化</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/02/23/Engineering-Environment-module/" rel="prev" title="Environment Modules 环境变量模块化管理工具的使用">
+      <i class="fa fa-chevron-left"></i> Environment Modules 环境变量模块化管理工具的使用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/11/24/Resource-guo-xue-shu-mu/" rel="next" title="国学入门经典书目梳理">
+      国学入门经典书目梳理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#我的书籍分类"><span class="nav-number">1.</span> <span class="nav-text">我的书籍分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阅读需求的改变"><span class="nav-number">2.</span> <span class="nav-text">阅读需求的改变</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些阅读上的建议"><span class="nav-number">3.</span> <span class="nav-text">一些阅读上的建议</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小白大侠"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">小白大侠</p>
+  <div class="site-description" itemprop="description">轻风碎月 静夜凝思</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/baiyongan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;baiyongan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/7be33dc73f81" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;7be33dc73f81" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bya@mail.ustc.edu.com" title="E-Mail → mailto:bya@mail.ustc.edu.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      独学而无友 则孤陋而寡闻
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.book110.com/" title="http:&#x2F;&#x2F;www.book110.com" rel="noopener" target="_blank">荐书堂</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://leetcode-cn.com/" title="https:&#x2F;&#x2F;leetcode-cn.com" rel="noopener" target="_blank">LeetCode-cn</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cspiration.com/leetcodeClassification#1" title="https:&#x2F;&#x2F;cspiration.com&#x2F;leetcodeClassification#1" rel="noopener" target="_blank">LeetCode</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn" rel="noopener" target="_blank">CoolShell</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://zhangwenli.com/blog/" title="http:&#x2F;&#x2F;zhangwenli.com&#x2F;blog&#x2F;" rel="noopener" target="_blank">羡辙</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wdxtub.com/" title="https:&#x2F;&#x2F;wdxtub.com" rel="noopener" target="_blank">小土刀</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cxyxiaowu.com/" title="https:&#x2F;&#x2F;www.cxyxiaowu.com" rel="noopener" target="_blank">程序员小吴(算法)</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://python-web-guide.readthedocs.io/" title="https:&#x2F;&#x2F;python-web-guide.readthedocs.io&#x2F;" rel="noopener" target="_blank">python-web-guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://python.iswbm.com/en/latest/" title="http:&#x2F;&#x2F;python.iswbm.com&#x2F;en&#x2F;latest&#x2F;" rel="noopener" target="_blank">python-编程时光</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://redstonewill.com/" title="https:&#x2F;&#x2F;redstonewill.com" rel="noopener" target="_blank">红色石头</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+<div class="beian-meng">
+<a href="https://icp.gov.moe" target="_blank">萌 ICP备 </a>
+<a href="https://icp.gov.moe/?keyword=20209207" target="_blank"> 20209207号</a>
+</div>
+
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-crown"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小白大侠</span>
+  <span class="post-meta-divider">|</span>
+    <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+    </div>
+
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'WjBhD9l9A6J5mrWl9wkgQxFu-gzGzoHsz',
+      appKey     : '1FL3ULSfrjaAYYiisMlYysHk',
+      placeholder: "你好呀，陌生人，有什么话想说嘛？",
+      avatar     : 'robohash',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+<!-- 页面点击特效 -->
+<script type="text/javascript" src="/js/click.js"></script>

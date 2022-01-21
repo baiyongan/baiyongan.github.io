@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-bya.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-bya.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-bya.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bya.cool","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":360,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="命令类型概览   ## 个人学习经验梳理  免责声明就我的Linux 操作技术而言，自我客观地评价，目前应该算是在应用层级上的中上游水平。所以，我的所有经验，肯定囿于目前的能力与视野，不过先写下来也无妨，日后好进行修正与精进。简言之，这些仅仅是个人的使用经验与学习习惯的总结，更多的是以linux 命令工具的学习掌握为例，反思我个人的学习模式。因为我发现工具、技能的应用范围必然有限，但背后的学习模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 命令掌握的阶段性总结">
+<meta property="og:url" content="http://bya.cool/2019/03/28/Intermediate-Linux-command-personal-experience-and-suggestions/index.html">
+<meta property="og:site_name" content="BYA&#39;s Blog">
+<meta property="og:description" content="命令类型概览   ## 个人学习经验梳理  免责声明就我的Linux 操作技术而言，自我客观地评价，目前应该算是在应用层级上的中上游水平。所以，我的所有经验，肯定囿于目前的能力与视野，不过先写下来也无妨，日后好进行修正与精进。简言之，这些仅仅是个人的使用经验与学习习惯的总结，更多的是以linux 命令工具的学习掌握为例，反思我个人的学习模式。因为我发现工具、技能的应用范围必然有限，但背后的学习模式">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://bya.cool/images/Cone_of_Learning.jpg">
+<meta property="og:image" content="http://bya.cool/images/flow.jpg">
+<meta property="article:published_time" content="2019-03-28T13:35:24.000Z">
+<meta property="article:modified_time" content="2022-01-04T16:43:27.000Z">
+<meta property="article:author" content="小白大侠">
+<meta property="article:tag" content="Echarts">
+<meta property="article:tag" content="commamds">
+<meta property="article:tag" content="反思">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://bya.cool/images/Cone_of_Learning.jpg">
+
+<link rel="canonical" href="http://bya.cool/2019/03/28/Intermediate-Linux-command-personal-experience-and-suggestions/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux 命令掌握的阶段性总结 | BYA's Blog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?50ee4c4119ca03830c1b5bde8308daae";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">BYA's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">轻风碎月 静夜凝思</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-外链">
+
+    <a href="/links/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>外链</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/baiyongan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bya.cool/2019/03/28/Intermediate-Linux-command-personal-experience-and-suggestions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="小白大侠">
+      <meta itemprop="description" content="轻风碎月 静夜凝思">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BYA's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux 命令掌握的阶段性总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-28 21:35:24" itemprop="dateCreated datePublished" datetime="2019-03-28T21:35:24+08:00">2019-03-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/Intermediate/" itemprop="url" rel="index"><span itemprop="name">Intermediate</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/03/28/Intermediate-Linux-command-personal-experience-and-suggestions/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/03/28/Intermediate-Linux-command-personal-experience-and-suggestions/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="命令类型概览"><a href="#命令类型概览" class="headerlink" title="命令类型概览"></a>命令类型概览</h2><div id="command1" style="width: 1000px; height: 800px;"></div>
+<script type="text/javascript" src="/Echarts_js/echarts.js"></script>
+<script type="text/javascript" src="/Echarts_js/linux_total_command_list.js"></script>
+## 个人学习经验梳理
+
+<h3 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a><strong>免责声明</strong></h3><p>就我的Linux 操作技术而言，自我客观地评价，目前应该算是在应用层级上的中上游水平。所以，我的所有经验，肯定囿于目前的能力与视野，不过先写下来也无妨，日后好进行修正与精进。简言之，这些仅仅是个人的使用经验与学习习惯的总结，更多的是以linux 命令工具的学习掌握为例，反思我个人的学习模式。因为我发现工具、技能的应用范围必然有限，但背后的学习模式是基本普适的，并可以迁移至其他领域，且得到不断优化提高的。</p>
+<a id="more"></a>
+
+
+
+<h3 id="学习的基本流程：调研—实践—总结"><a href="#学习的基本流程：调研—实践—总结" class="headerlink" title="学习的基本流程：调研—实践—总结"></a>学习的基本流程：调研—实践—总结</h3><p><strong>资料的搜集与筛选：</strong>信息搜集整理能力</p>
+<p>目前，只要掌握基本的网络搜索功能，想要获得一项技能的学习资料，是轻而易举的，而且还能得到海量的学习资源。但是其中存在一些典型的思维误区，以为信息就是知识，储备即能掌握，这是非常自欺欺人的。所以，既要有基本的检索技能，也要能够客观判断自身能力水平，并依此筛选适合目前能力水平的资料。</p>
+<p><strong>学习计划的制订与执行：</strong>规划力与执行力</p>
+<p>网上以及现实工作交流中，经验丰富的工程师，会提供一些他们认为切实有效的学习建议与学习路线，这时候，就可以结合自身的需求与兴趣，制定大致的学习计划，并贯彻执行。因为每个人的具体情况不一样，所以，学习计划应该是根据自身期望（要学什么，掌握到什么水平）与学习习惯制定并执行的。</p>
+<p><strong>实践中的反馈与总结：</strong>客观理性以及自省反思能力</p>
+<p>投入到实际的运用中去，从中暴露出方方面面的隐性问题，并依此得到最切实中肯的反馈，使得自身技术能力迅速得到良性提升。这就既要dive into it，figure it out，也要能从全局角度看待问题，把握进度与方向。</p>
+<p>所以，简而言之，这套流程还是学生时期以来，最简单的预习—学习—复习流程，只不过是针对陌生领域，变成了调研—掌握—总结的模式。</p>
+<h3 id="技能晋级的模式：基础-进阶-高级"><a href="#技能晋级的模式：基础-进阶-高级" class="headerlink" title="技能晋级的模式：基础-进阶-高级"></a>技能晋级的模式：基础-进阶-高级</h3><p>与上面学习流程对应的，是由浅入深的学习模式。不同阶段，对于技能的要求程度（掌握程度和熟练程度）是不一样的。</p>
+<p><strong>基础阶段：有的放矢，80/20原则</strong></p>
+<p>掌握最常用，最高频的用法即可，懂得基础的知识点与概念，熟练程度为中等，掌握程度为中等，心中有个大致知识框架，并了解具体的应用场景。</p>
+<p><strong>进阶阶段：术业有专攻</strong>，<strong>选择 &gt; 努力</strong></p>
+<p>吾生也有涯，而学也无涯，以有涯随无涯，则殆已。只要大致明白具体的应用有哪些，再结合岗位要求和自身的兴趣需求，朝着想要努力的方向，主动投入资源（包括时间、精力、金钱），必然能得到技术的精进。</p>
+<p><strong>高级阶段：游刃有余，熟能生巧</strong></p>
+<p>通过解决实际问题，与项目经验的积累，这时候，能够进一步精进技术细节等，形成自己特有的风格，技术的熟练度和掌握度得到进一步强化，以致熟能生巧，从心所欲。就像专业网球选手一样，虽然最开始学的都是标准教材一样的动作，但是经过基础训练+实际比赛之后，最终，每个人都会形成自己的风格习惯，whatever，这才是diversity的魅力所在。虽然可能风格迥异，但此时都已然不惑于工具的使用，能更客观地鉴别评判其优劣，知道能够优雅操作更好，不过切实有效的才是最好的。而且作为技能高手，必然有其相似之处——熟练，精准，深刻，灵活，客观，全局，远瞻等等（自忖还没到~~瞎琢磨的）。</p>
+<h3 id="相应的心态转变"><a href="#相应的心态转变" class="headerlink" title="相应的心态转变"></a>相应的心态转变</h3><p>为了避免从入门到放弃这种尴尬局面（其实<strong>快速试错</strong>是<strong>很有必要</strong>的），这其中就要求前期搜集与宏观大致规划，以及中期坚决执行与灵活调整，后期及时反馈与修正的能力。经历过上述过程以后，心态会随之慢慢变化，大致是从一个萌新菜鸡，到中级进阶者，再到高级引导者级别的转变，个中滋味，每个有一技之长的人，大都能有切身体会（约略像王国维的为学三境界？）。此时，回想起曾经跨专业找工作时，迷茫又自卑的我，受一个科大师兄面试官所点拨的一样：<strong>不管你干什么，干好就行</strong>。的确如此，只要能把事情做好，就会体验到正确的心态及行事逻辑，然后自然而然，在习惯的驱使下，导致良性的正反馈循环。毕竟，也不过就是一项项技能而已，天赋高低，可能会决定一个人的上限，但努力与否，则决定了一个人的下限。</p>
+<h3 id="具体的学习技巧与习惯"><a href="#具体的学习技巧与习惯" class="headerlink" title="具体的学习技巧与习惯"></a>具体的学习技巧与习惯</h3><p>针对Linux 命令行工具的掌握而言，因为它的使用场景是Linux系统下的操作与管理，所以，是以实践性质为主。下面则是我的一些使用习惯与思考，其中一些点，譬如说交流沟通等，我自己有些做的不足之处，但是先记录下来，待以后再来审视（是的，道理都懂，但还是过不好这一生）：</p>
+<p><strong>养成良性的习惯：</strong></p>
+<p>命令行操作 &amp; 英文工作环境 &amp; 官方文档 &amp; 优质参考书 or 教学视频</p>
+<p>慢慢摆脱之前在 windows下的鼠标操作，查询基础命令用法时，尽量第一选择是阅读官方manual，其次是优秀的搜索引擎如 google 与专业论坛等，习惯英文原文资料的阅读。浸淫其中，才能逐渐建立新的习惯。同时，follow the <strong>fitful</strong> mentor，无论是视频学习还是书本阅读，选择权威，口碑好的，适合自己的，大概率总是没错，不贪多，但求精。</p>
+<p><strong>选择合适的工具：</strong></p>
+<p>工欲善其事，必先利其器，一个合适称手的工具，能够让学习事半功倍。</p>
+<p>建议个人版 Ubuntu，企业版 CentOS，虚拟机安装VMWare，命令行客户端 Xshell，文本编辑器VIM，或Sublime。一开始就定好一个业界普遍使用的工具，把它的<strong>快捷键，常用功能，高级功能</strong>等掌握好，能减少很多不必要的时间浪费。</p>
+<p><strong>最少必要知识的掌握：</strong></p>
+<p>学中文汉字时，学童启蒙阶段，除了基本的拼音读法和常用汉字等，接着要学习查阅字典的方法。这样，即使碰见一个生僻字，只要会查阅字典的部首索引，或者猜测读音，也能找到并认识它。很显然，不需要先背下整个汉语词典，才去组词造句，构思行文，只要掌握了查阅字典的方式即可。而<strong>Linux命令的最少必要知识，则是——命令的模式pattern+常用cases，manual的查阅能力（俗称的面向API文档编程，呵呵) + google/baidu的搜索能力（俗称的面向stack overflow編程，哈哈）</strong>。</p>
+<p><strong>学习中的衡量与取舍：</strong></p>
+<p>一个或者一组命令的常见功能，应用场景，使用频度、难度等，心中有个大概衡量与认识即可。只有在具体的使用中，才能潜移默化的理解。比如，对于ls、cd，mkdir，scp这种高频基础命令，要尽量掌握80%，乃至100%的功能。<strong>原则就是用最小的时间，精力成本，学习掌握并运用到实际需求中。</strong>其实也只有应用的多了，才知道哪些高频使用，哪些是冷僻的。然后就知道有所侧重。</p>
+<p><strong>重要度排序：高频 + 低难度 &gt;= 高频 + 高难度 &gt;低频+低难度 &gt;低频+高难度</strong></p>
+<p>对应的掌握排序：依此则是熟练应用&gt;掌握&gt;基本识记即可。</p>
+<div id="command2" style="width: 1200px; height: 900px;"></div>
+<script type="text/javascript" src="/Echarts_js/echarts.js"></script>
+<script type="text/javascript" src="/Echarts_js/linux_common_command_list.js"></script>
+**以问题为导向的实践练习：**
+
+<p>学习掌握工具的目的是为了解决实际工程问题，而不是为了应用该工具。要知君子不器，要使工具为我所用，而不是成为工具的奴隶，也不要把自己当作一个工具来看待，这是其一。其二，一如学习烹饪，并不是拿着一本烹饪大全，背记下食谱步骤，就能一步到位。而是先磕磕绊绊，手忙脚乱地做个简单的菜，熟悉下流程，然后精进掌握厨艺，同样，学习大部分linux命令，更多是problem-solving type，learning by doing，学习完命令的基本pattern和高频用法后，再结合具体的使用场景，相辅相成，得以迅速掌握。</p>
+<p><strong>及时的笔记总结：</strong></p>
+<p>从接触一个新单词到实际应用，其中大致会有5~6遍的识记过程，但是并不可以直接跳到第七第八次就能掌握的（至少目前不能，羡慕《Matrix I》里面Neo的学习模式），谨记日积跬步，功不唐捐，这样才能从日常碎片化的零散学习，逐渐积累沉淀，最终能到框架化的全局掌握。仅就我个人的习惯，建议笔记类使用OneNote，记忆类用Anki（听说是神器，暂时没有用）。</p>
+<p><strong>优质社群的交流与分享：</strong></p>
+<p>独学而无友，如果有一二个经验丰富的指导者，或者优质的交流社区等<strong>（俗称的面向github编程）</strong>，<strong>变被动学习为主动学习</strong>，何乐而不为？分享知识与见解，才能产生有趣的思维碰撞与有效的信息交换。在专业的氛围下，进行交流讨论与学习，这样可以不受限于个人所处的现实环境，因为如果没有明显觉知的话（后知后觉如我），现实环境对于人的影响是潜移默化且十分巨大的，它也会很大程度上促进、抑或限制一个人的思维和行为。</p>
+<p><img src="/images/Cone_of_Learning.jpg" alt="Cone_of_Learning"></p>
+<p><strong>业务层级的深度拓展：</strong></p>
+<p>掌握了基本的命令工具之后，就可以完成一些简单的操作，但是如果要处理稍微复杂的自动化任务的话，则需要能够组合应用，并能够编写shell脚本，并接触业务层级的东西等。在计算机领域，各类企业级工具层出不穷，迭代迅速，很多技术工具由盛转衰，而Linux系统的命令工具相对来说，并不易被淘汰。所以<strong>坚持扎实基本功</strong>，<strong>钻研基本技术</strong>是相对更明智的选择。</p>
+<p><strong>自我驱动学习逻辑的迁移：</strong></p>
+<p>形成一套内在的学习逻辑，就可以进行有效的迁移：</p>
+<p>譬如对于类Unix命令如LSF体系命令等的学习，Python 及其标准库的学习，git 的学习等，莫不如此。</p>
+<p>以Python的学习为例：</p>
+<p>背景了解调研：</p>
+<p>其应用场景有哪些，工具优劣，选择一本口碑比较好的入门级别的书 《Learn python the hard way》；</p>
+<p>选择合适的工具：</p>
+<p>IDE如PyCharm，交互式如IPython，jupyter notebook等。 </p>
+<p>最少必要知识：</p>
+<p>基本的语法语义，数据结构等，高效的查阅方法<strong>dir() help()</strong>，<strong>google Python xxx keyword</strong></p>
+<p>学习中的取舍：</p>
+<p>首先熟练深入掌握一些高频的常用库：os、shutil、sys、glob、re、math、datetime库等，其他的，真正用到了再查就好（有两个行话：STFW 和 RTFM，前已有述，此处不表）。后续进阶则选择学习某个应用领域的库工具：如数据分析领域，numpy、scipy、pandas、matplotlib等。</p>
+<p>解决复杂工程问题：</p>
+<p>从易到难，从简单到复杂的处理实际问题等，然后获得进一步提升，总结反思，继续精进。</p>
+<p>一如《心流》里面所提及的心流体验一样，在此不表。</p>
+<p><img src="/images/flow.jpg" alt="flow"></p>
+<p>——补写于 2019/9/13 未完待续</p>
+<h2 id="拓展阅读"><a href="#拓展阅读" class="headerlink" title="拓展阅读"></a>拓展阅读</h2><ul>
+<li><p><strong>《快乐的Linux命令行》</strong></p>
+</li>
+<li><p><strong>《Linux 鸟哥的私房菜》</strong>·</p>
+</li>
+<li><p><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjE3ODU3MQ==&mid=2650444436&idx=1&sn=8558f6a93cddfdf0bfd8c17acebd11cd&chksm=83bbf770b4cc7e660626b058904986ba7958a68bc9d58a2a3ad33e68f416e3c23153a70190fe&scene=21#wechat_redirect" target="_blank" rel="noopener"><strong>Linux 命令汇总</strong></a></p>
+</li>
+<li><p><a href="https://link.zhihu.com/?target=https%3A//github.com/jlevy/the-art-of-command-line/blob/master/README-zh.md"><strong>github - jlevy/the-art-of-command-line</strong></a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/73341354" target="_blank" rel="noopener"><strong>知乎专栏 - Linux上，最常用的一批命令解析</strong></a></p>
+</li>
+<li><p><a href="https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247484231&idx=1&sn=4cf217a4d692a7aba804e5d96186b15b&chksm=ebd74246dca0cb5024de2f1d9f9e2ecb631e49752713c25bbe44f44856e919df5a973049c189&scene=21#wechat_redirect" target="_blank" rel="noopener"><strong>看完这篇Linux基本的操作就会了</strong></a></p>
+</li>
+<li><p><a href="https://www.xinli001.com/info/100406701" target="_blank" rel="noopener"><strong>「心流」是种怎样的极致生活体验？</strong></a></p>
+</li>
+<li><p><a href="https://www.jianshu.com/p/58ef791b872a" target="_blank" rel="noopener"><strong>心流，一种最优的幸福体验</strong></a></p>
+</li>
+</ul>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1>
+    </div>
+
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>小白大侠
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://bya.cool/2019/03/28/Intermediate-Linux-command-personal-experience-and-suggestions/" title="Linux 命令掌握的阶段性总结">http://bya.cool/2019/03/28/Intermediate-Linux-command-personal-experience-and-suggestions/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Echarts/" rel="tag"><i class="fa fa-tag"></i> Echarts</a>
+              <a href="/tags/commamds/" rel="tag"><i class="fa fa-tag"></i> commamds</a>
+              <a href="/tags/%E5%8F%8D%E6%80%9D/" rel="tag"><i class="fa fa-tag"></i> 反思</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/07/14/Fundation-Python-PyCharm-Keyboard-Shortcuts/" rel="prev" title="PyCharm 快捷键">
+      <i class="fa fa-chevron-left"></i> PyCharm 快捷键
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/02/23/Engineering-Environment-module/" rel="next" title="Environment Modules 环境变量模块化管理工具的使用">
+      Environment Modules 环境变量模块化管理工具的使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令类型概览"><span class="nav-number">1.</span> <span class="nav-text">命令类型概览</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#免责声明"><span class="nav-number">1.1.</span> <span class="nav-text">免责声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习的基本流程：调研—实践—总结"><span class="nav-number">1.2.</span> <span class="nav-text">学习的基本流程：调研—实践—总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#技能晋级的模式：基础-进阶-高级"><span class="nav-number">1.3.</span> <span class="nav-text">技能晋级的模式：基础-进阶-高级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相应的心态转变"><span class="nav-number">1.4.</span> <span class="nav-text">相应的心态转变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体的学习技巧与习惯"><span class="nav-number">1.5.</span> <span class="nav-text">具体的学习技巧与习惯</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展阅读"><span class="nav-number">2.</span> <span class="nav-text">拓展阅读</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number"></span> <span class="nav-text"></span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小白大侠"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">小白大侠</p>
+  <div class="site-description" itemprop="description">轻风碎月 静夜凝思</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/baiyongan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;baiyongan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/7be33dc73f81" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;7be33dc73f81" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bya@mail.ustc.edu.com" title="E-Mail → mailto:bya@mail.ustc.edu.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      独学而无友 则孤陋而寡闻
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.book110.com/" title="http:&#x2F;&#x2F;www.book110.com" rel="noopener" target="_blank">荐书堂</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://leetcode-cn.com/" title="https:&#x2F;&#x2F;leetcode-cn.com" rel="noopener" target="_blank">LeetCode-cn</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cspiration.com/leetcodeClassification#1" title="https:&#x2F;&#x2F;cspiration.com&#x2F;leetcodeClassification#1" rel="noopener" target="_blank">LeetCode</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn" rel="noopener" target="_blank">CoolShell</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://zhangwenli.com/blog/" title="http:&#x2F;&#x2F;zhangwenli.com&#x2F;blog&#x2F;" rel="noopener" target="_blank">羡辙</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wdxtub.com/" title="https:&#x2F;&#x2F;wdxtub.com" rel="noopener" target="_blank">小土刀</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cxyxiaowu.com/" title="https:&#x2F;&#x2F;www.cxyxiaowu.com" rel="noopener" target="_blank">程序员小吴(算法)</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://python-web-guide.readthedocs.io/" title="https:&#x2F;&#x2F;python-web-guide.readthedocs.io&#x2F;" rel="noopener" target="_blank">python-web-guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://python.iswbm.com/en/latest/" title="http:&#x2F;&#x2F;python.iswbm.com&#x2F;en&#x2F;latest&#x2F;" rel="noopener" target="_blank">python-编程时光</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://redstonewill.com/" title="https:&#x2F;&#x2F;redstonewill.com" rel="noopener" target="_blank">红色石头</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+<div class="beian-meng">
+<a href="https://icp.gov.moe" target="_blank">萌 ICP备 </a>
+<a href="https://icp.gov.moe/?keyword=20209207" target="_blank"> 20209207号</a>
+</div>
+
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-crown"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小白大侠</span>
+  <span class="post-meta-divider">|</span>
+    <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+    </div>
+
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'WjBhD9l9A6J5mrWl9wkgQxFu-gzGzoHsz',
+      appKey     : '1FL3ULSfrjaAYYiisMlYysHk',
+      placeholder: "你好呀，陌生人，有什么话想说嘛？",
+      avatar     : 'robohash',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+<!-- 页面点击特效 -->
+<script type="text/javascript" src="/js/click.js"></script>

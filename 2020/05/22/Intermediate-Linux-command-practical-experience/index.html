@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-bya.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-bya.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-bya.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bya.cool","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":360,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="目前的瓶颈与破局在刚开始接触实际工作时，linux 的命令工具应用的比较多，日常的应用场景大致熟悉之后，也知道哪些工具常不常用、某个命令能做什么、怎么去查询帮助文档、哪些需要组合起来，才能实现特定功能等等······ 但是目前的瓶颈就是，平台应用场景有限，故而经验有限。且更多时候，仅能保证解决问题，却还不能漂亮地、流畅地解决问题。现在打算看一下实战总结类的相关书籍，汲取下经验，然后结合自身实际，做">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 命令实战经验 &amp; shell脚本总结系列">
+<meta property="og:url" content="http://bya.cool/2020/05/22/Intermediate-Linux-command-practical-experience/index.html">
+<meta property="og:site_name" content="BYA&#39;s Blog">
+<meta property="og:description" content="目前的瓶颈与破局在刚开始接触实际工作时，linux 的命令工具应用的比较多，日常的应用场景大致熟悉之后，也知道哪些工具常不常用、某个命令能做什么、怎么去查询帮助文档、哪些需要组合起来，才能实现特定功能等等······ 但是目前的瓶颈就是，平台应用场景有限，故而经验有限。且更多时候，仅能保证解决问题，却还不能漂亮地、流畅地解决问题。现在打算看一下实战总结类的相关书籍，汲取下经验，然后结合自身实际，做">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-22T12:33:00.000Z">
+<meta property="article:modified_time" content="2022-01-04T16:43:27.000Z">
+<meta property="article:author" content="小白大侠">
+<meta property="article:tag" content="命令">
+<meta property="article:tag" content="运维">
+<meta property="article:tag" content="实战">
+<meta property="article:tag" content="脚本">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://bya.cool/2020/05/22/Intermediate-Linux-command-practical-experience/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux 命令实战经验 & shell脚本总结系列 | BYA's Blog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?50ee4c4119ca03830c1b5bde8308daae";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">BYA's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">轻风碎月 静夜凝思</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-外链">
+
+    <a href="/links/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>外链</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/baiyongan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bya.cool/2020/05/22/Intermediate-Linux-command-practical-experience/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="小白大侠">
+      <meta itemprop="description" content="轻风碎月 静夜凝思">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BYA's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux 命令实战经验 & shell脚本总结系列
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-22 20:33:00" itemprop="dateCreated datePublished" datetime="2020-05-22T20:33:00+08:00">2020-05-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/practical/" itemprop="url" rel="index"><span itemprop="name">practical</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/22/Intermediate-Linux-command-practical-experience/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/22/Intermediate-Linux-command-practical-experience/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="目前的瓶颈与破局"><a href="#目前的瓶颈与破局" class="headerlink" title="目前的瓶颈与破局"></a>目前的瓶颈与破局</h1><p>在刚开始接触实际工作时，linux 的命令工具应用的比较多，日常的应用场景大致熟悉之后，也知道哪些工具常不常用、某个命令能做什么、怎么去查询帮助文档、哪些需要组合起来，才能实现特定功能等等······</p>
+<p>但是目前的瓶颈就是，平台应用场景有限，故而经验有限。且更多时候，仅能保证解决问题，却还不能漂亮地、流畅地解决问题。现在打算看一下实战总结类的相关书籍，<strong>汲取下经验</strong>，然后<strong>结合自身实际，做些增补</strong>。</p>
+<a id="more"></a>
+
+<p>关于 linux 命令使用的 tricks 应该很多，我对这些个炫技操作没那么苛求。只要当碰见实际问题时，知道用什么来实现，进而能追溯其语法格式，熟练运用常用模式即可。所以我的学习目标是<strong>实战经验为主，总结笔记备忘</strong>，主要参考的书籍是 <a href="https://book.douban.com/subject/26849802/" target="_blank" rel="noopener"><strong>《Linux大棚命令百篇 · 上 (文件和文本篇)》</strong></a>，以及 <a href="https://book.douban.com/subject/26849844/" target="_blank" rel="noopener"><strong>《Linux 大棚命令百篇 · 下 (网络和系统篇)》</strong></a>。其作者是百度运维部的工程师，一线经验丰富，其内容特点：<strong>1. 聚焦专题、2. 贴近实战、3. 易于阅读</strong>。</p>
+<p>p.s. 该书评价不错，值得一读。linux 也不是我现在主要关注的技术点，隔三岔五睡前看几页，再小小总结一下，水一篇 blog，逐渐做个系列，这种节奏还是比较惬意的😂。不过技术问题是普适的，笔记期间，我也会适当添补一些资料，力求用例精确可复现，希望该笔记系列也能对读者有所帮助~~（如有纰漏之处，还请多多留言指出，谢谢）</p>
+<h1 id="实战经验的总结-amp-归纳"><a href="#实战经验的总结-amp-归纳" class="headerlink" title="实战经验的总结&amp;归纳"></a>实战经验的总结&amp;归纳</h1><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><h3 id="测试版本"><a href="#测试版本" class="headerlink" title="测试版本"></a>测试版本</h3><p>所有案例都经本地测试通过，linux 测试版本为Centos 7.4</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya linux_practice]$ cat /etc/redhat-release </span><br><span class="line">CentOS Linux release 7.4.1708 (Core) </span><br><span class="line">[baiyongan@bya linux_practice]$ uname -a</span><br><span class="line">Linux bya 3.10.0-693.el7.x86_64 #1 SMP Tue Aug 22 21:09:27 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux</span><br></pre></td></tr></table></figure>
+
+<h3 id="基本行文结构"><a href="#基本行文结构" class="headerlink" title="基本行文结构"></a>基本行文结构</h3><blockquote>
+<p><strong>命令小结：作为简介，描述命令的功能、使用频度、重要程度、应用场景等。</strong></p>
+<p><strong>实战经验：一般，是在原书内容之上，结合manual手册、互联网资料的提炼总结。</strong></p>
+<p><strong>拓展阅读：一些可能的拓展资料</strong></p>
+<p><strong>备注（或有）：主要是一些针对文章内容的备忘</strong></p>
+</blockquote>
+<h2 id="工具篇"><a href="#工具篇" class="headerlink" title="工具篇"></a>工具篇</h2><table>
+<thead>
+<tr>
+<th align="center">工具</th>
+<th align="center">链接</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">vmware</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Xshell</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">vim</td>
+<td align="center"></td>
+<td align="center">.</td>
+</tr>
+</tbody></table>
+<h2 id="上-·-文件和文本"><a href="#上-·-文件和文本" class="headerlink" title="上 · 文件和文本"></a>上 · 文件和文本</h2><h3 id="shell-基础及工具篇"><a href="#shell-基础及工具篇" class="headerlink" title="shell 基础及工具篇"></a>shell 基础及工具篇</h3><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">链接</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>shell</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>chsh</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>export</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>read</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>expr</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>tmux</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>alias</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>history</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>xargs</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>time</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>sleep</strong></td>
+<td align="center"></td>
+<td align="center">.</td>
+</tr>
+</tbody></table>
+<h3 id="文件和磁盘篇"><a href="#文件和磁盘篇" class="headerlink" title="文件和磁盘篇"></a>文件和磁盘篇</h3><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">链接</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>file</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>ln</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>find</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>du</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>gzip</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>bzip2</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>zip</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>dd</strong></td>
+<td align="center"></td>
+<td align="center">.</td>
+</tr>
+</tbody></table>
+<h3 id="文本处理篇"><a href="#文本处理篇" class="headerlink" title="文本处理篇"></a>文本处理篇</h3><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">链接</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>echo</strong></td>
+<td align="center"><a href="http://bya.cool/2020/05/22/Series-Linux-command-echo/">linux运维实战系列— echo 打印</a></td>
+<td align="center">2020/5/22</td>
+</tr>
+<tr>
+<td align="center"><strong>grep、egrep、fgrep</strong></td>
+<td align="center"><a href="http://bya.cool/2020/05/23/Series-Linux-command-grep-egrep-fgrep/"><strong>Linux 运维实战系列——文本处理三剑客之一 grep</strong></a></td>
+<td align="center">2020/5/23</td>
+</tr>
+<tr>
+<td align="center"><strong>sed</strong></td>
+<td align="center"><a href="http://bya.cool/2020/05/27/Series-Linux-command-sed/"><strong>Linux 运维实战系列——文本处理三剑客之一 sed</strong></a></td>
+<td align="center">2020/5/27</td>
+</tr>
+<tr>
+<td align="center"><strong>awk</strong></td>
+<td align="center"><a href="http://bya.cool/2020/05/30/Series-Linux-command-awk/"><strong>Linux 运维实战系列——文本处理三剑客之一 awk</strong></a></td>
+<td align="center">2020/5/30</td>
+</tr>
+<tr>
+<td align="center"><strong>cut</strong></td>
+<td align="center"><a href="http://bya.cool/2020/05/24/Series-Linux-command-cut/">Linux 运维实战系列——cut 剪切</a></td>
+<td align="center">2020/5/24</td>
+</tr>
+<tr>
+<td align="center"><strong>wc</strong></td>
+<td align="center"><a href="http://bya.cool/2020/05/24/Series-Linux-command-wc/">Linux 运维实战系列—— wc 字数统计</a></td>
+<td align="center">2020/5/24</td>
+</tr>
+<tr>
+<td align="center"><strong>split</strong></td>
+<td align="center"><a href="http://bya.cool/2020/05/24/Series-Linux-command-split/">Linux 运维实战系列—— split 拆分</a></td>
+<td align="center">2020/5/24</td>
+</tr>
+<tr>
+<td align="center"><strong>paste</strong></td>
+<td align="center"><a href="http://bya.cool/2020/05/24/Series-Linux-command-paste/">Linux 运维实战系列——paste 粘贴</a></td>
+<td align="center">2020/5/24</td>
+</tr>
+<tr>
+<td align="center"><strong>sort</strong></td>
+<td align="center"><a href="http://bya.cool/2020/05/23/Series-Linux-command-sort/">Linux运维实战之—sort</a></td>
+<td align="center">2020/5/23</td>
+</tr>
+<tr>
+<td align="center"><strong>vi/vim</strong></td>
+<td align="center"></td>
+<td align="center">.</td>
+</tr>
+</tbody></table>
+<h2 id="下-·-网络和系统"><a href="#下-·-网络和系统" class="headerlink" title="下 · 网络和系统"></a>下 · 网络和系统</h2><h3 id="网络篇"><a href="#网络篇" class="headerlink" title="网络篇"></a>网络篇</h3><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">链接</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>ping</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>DNS相关(nslookup、dig)</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>iproute2</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>tcpdump</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>nc</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>ssh-copy-id</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>rsync</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>wget</strong></td>
+<td align="center"></td>
+<td align="center">.</td>
+</tr>
+</tbody></table>
+<h3 id="进程和性能篇"><a href="#进程和性能篇" class="headerlink" title="进程和性能篇"></a>进程和性能篇</h3><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">链接</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>uptime</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>free</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>vmstat</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>mpstat</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>top</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>iostat</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>pidof</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>sar</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>lsof</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>fuser</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>ps</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>kill</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>trap</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>nohup</strong></td>
+<td align="center"></td>
+<td align="center">.</td>
+</tr>
+</tbody></table>
+<h3 id="系统管理篇"><a href="#系统管理篇" class="headerlink" title="系统管理篇"></a>系统管理篇</h3><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">链接</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>uname</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>whoami</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>service</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>chkconfig</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>dmidecode</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>lsmod</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>chroot</strong></td>
+<td align="center"></td>
+<td align="center">.</td>
+</tr>
+</tbody></table>
+<h3 id="增补-其他实用工具篇"><a href="#增补-其他实用工具篇" class="headerlink" title="增补-其他实用工具篇"></a>增补-其他实用工具篇</h3><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">链接</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>bash背景知识</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>screen</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>fg、bg</strong></td>
+<td align="center"></td>
+<td align="center">.</td>
+</tr>
+</tbody></table>
+<h3 id="shell脚本篇"><a href="#shell脚本篇" class="headerlink" title="shell脚本篇"></a>shell脚本篇</h3><table>
+<thead>
+<tr>
+<th align="center">场景</th>
+<th align="center">链接</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">.</td>
+</tr>
+</tbody></table>
+<h1 id="拓展阅读"><a href="#拓展阅读" class="headerlink" title="拓展阅读"></a>拓展阅读</h1><p> <a href="https://book.douban.com/subject/26849802/" target="_blank" rel="noopener"><strong>《Linux大棚命令百篇 · 上 (文件和文本篇)》</strong></a></p>
+<p><a href="https://book.douban.com/subject/26849844/" target="_blank" rel="noopener"><strong>《Linux 大棚命令百篇 · 下 (网络和系统篇)》</strong></a></p>
+<h1 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h1><p><del>文本处理相关</del></p>
+<p><del>sed</del> 、<del>awk</del>、<del>grep</del></p>
+<p>find、lsof、fuser、sar</p>
+<p>网络相关</p>
+
+    </div>
+
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>小白大侠
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://bya.cool/2020/05/22/Intermediate-Linux-command-practical-experience/" title="Linux 命令实战经验 &amp; shell脚本总结系列">http://bya.cool/2020/05/22/Intermediate-Linux-command-practical-experience/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag"><i class="fa fa-tag"></i> 命令</a>
+              <a href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag"><i class="fa fa-tag"></i> 运维</a>
+              <a href="/tags/%E5%AE%9E%E6%88%98/" rel="tag"><i class="fa fa-tag"></i> 实战</a>
+              <a href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag"><i class="fa fa-tag"></i> 脚本</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/22/Series-Linux-command-echo/" rel="prev" title="Linux 运维实战系列——echo 打印">
+      <i class="fa fa-chevron-left"></i> Linux 运维实战系列——echo 打印
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/11/Intermediate-Python-pythonic-code-snippets/" rel="next" title="如何写出 Pythonic 的代码？">
+      如何写出 Pythonic 的代码？ <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目前的瓶颈与破局"><span class="nav-number">1.</span> <span class="nav-text">目前的瓶颈与破局</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实战经验的总结-amp-归纳"><span class="nav-number">2.</span> <span class="nav-text">实战经验的总结&amp;归纳</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">2.1.</span> <span class="nav-text">说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#测试版本"><span class="nav-number">2.1.1.</span> <span class="nav-text">测试版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本行文结构"><span class="nav-number">2.1.2.</span> <span class="nav-text">基本行文结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具篇"><span class="nav-number">2.2.</span> <span class="nav-text">工具篇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上-·-文件和文本"><span class="nav-number">2.3.</span> <span class="nav-text">上 · 文件和文本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#shell-基础及工具篇"><span class="nav-number">2.3.1.</span> <span class="nav-text">shell 基础及工具篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件和磁盘篇"><span class="nav-number">2.3.2.</span> <span class="nav-text">文件和磁盘篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本处理篇"><span class="nav-number">2.3.3.</span> <span class="nav-text">文本处理篇</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下-·-网络和系统"><span class="nav-number">2.4.</span> <span class="nav-text">下 · 网络和系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络篇"><span class="nav-number">2.4.1.</span> <span class="nav-text">网络篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程和性能篇"><span class="nav-number">2.4.2.</span> <span class="nav-text">进程和性能篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统管理篇"><span class="nav-number">2.4.3.</span> <span class="nav-text">系统管理篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增补-其他实用工具篇"><span class="nav-number">2.4.4.</span> <span class="nav-text">增补-其他实用工具篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shell脚本篇"><span class="nav-number">2.4.5.</span> <span class="nav-text">shell脚本篇</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拓展阅读"><span class="nav-number">3.</span> <span class="nav-text">拓展阅读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#备注"><span class="nav-number">4.</span> <span class="nav-text">备注</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小白大侠"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">小白大侠</p>
+  <div class="site-description" itemprop="description">轻风碎月 静夜凝思</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/baiyongan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;baiyongan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.jianshu.com/u/7be33dc73f81" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;7be33dc73f81" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>简书</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bya@mail.ustc.edu.com" title="E-Mail → mailto:bya@mail.ustc.edu.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      独学而无友 则孤陋而寡闻
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.book110.com/" title="http:&#x2F;&#x2F;www.book110.com" rel="noopener" target="_blank">荐书堂</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://leetcode-cn.com/" title="https:&#x2F;&#x2F;leetcode-cn.com" rel="noopener" target="_blank">LeetCode-cn</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cspiration.com/leetcodeClassification#1" title="https:&#x2F;&#x2F;cspiration.com&#x2F;leetcodeClassification#1" rel="noopener" target="_blank">LeetCode</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn" rel="noopener" target="_blank">CoolShell</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://zhangwenli.com/blog/" title="http:&#x2F;&#x2F;zhangwenli.com&#x2F;blog&#x2F;" rel="noopener" target="_blank">羡辙</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://wdxtub.com/" title="https:&#x2F;&#x2F;wdxtub.com" rel="noopener" target="_blank">小土刀</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cxyxiaowu.com/" title="https:&#x2F;&#x2F;www.cxyxiaowu.com" rel="noopener" target="_blank">程序员小吴(算法)</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://python-web-guide.readthedocs.io/" title="https:&#x2F;&#x2F;python-web-guide.readthedocs.io&#x2F;" rel="noopener" target="_blank">python-web-guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://python.iswbm.com/en/latest/" title="http:&#x2F;&#x2F;python.iswbm.com&#x2F;en&#x2F;latest&#x2F;" rel="noopener" target="_blank">python-编程时光</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://redstonewill.com/" title="https:&#x2F;&#x2F;redstonewill.com" rel="noopener" target="_blank">红色石头</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+
+<div class="beian-meng">
+<a href="https://icp.gov.moe" target="_blank">萌 ICP备 </a>
+<a href="https://icp.gov.moe/?keyword=20209207" target="_blank"> 20209207号</a>
+</div>
+
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-crown"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小白大侠</span>
+  <span class="post-meta-divider">|</span>
+    <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+    </div>
+
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'WjBhD9l9A6J5mrWl9wkgQxFu-gzGzoHsz',
+      appKey     : '1FL3ULSfrjaAYYiisMlYysHk',
+      placeholder: "你好呀，陌生人，有什么话想说嘛？",
+      avatar     : 'robohash',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+<!-- 页面点击特效 -->
+<script type="text/javascript" src="/js/click.js"></script>
