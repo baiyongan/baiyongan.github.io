@@ -122,9 +122,9 @@ menu:
   categories: /categories/ || fa fa-th
   tags: /tags/ || fa fa-tags
   外链: /links/ || fa fa-paper-plane
-  计划: /plans/ || fa fa-tasks
+  # 计划: /plans/ || fa fa-tasks
   # schedule: /schedule/ || fa fa-calendar # 我还是不知道schedule怎么用
-  about: /about/ || fa fa-fish
+  # about: /about/ || fa fa-fish
   # sitemap: /sitemap.xml || fa fa-sitemap
   # commonweal: /404/ || fa fa-heartbeat
 
@@ -182,7 +182,7 @@ site_state: true
 social:
   GitHub: https://github.com/baiyongan || fab fa-github
   简书: https://www.jianshu.com/u/7be33dc73f81 || fa fa-book
-  E-Mail: mailto:bya@mail.ustc.edu.com || fa fa-envelope
+  E-Mail: mailto:bya@mail.ustc.edu.cn || fa fa-envelope
   #Weibo: https://weibo.com/yourname || fab fa-weibo
   #Google: https://plus.google.com/yourname || fab fa-google
   #Twitter: https://twitter.com/yourname || fab fa-twitter
@@ -281,9 +281,8 @@ reward_settings:
   comment:  
 
 reward:
-  小薇君管理网站维护费: /images/wechatpay.png
-  不定期更新 微信端长按识别哦: /images/ask-money.png
-  大侄子收取炸鸡可乐钱: /images/alipay.png
+  # 微信: /images/wechatpay.png
+  # 支付宝: /images/alipay.png
   #bitcoin: /images/bitcoin.png
 
 # Subscribe through Telegram Channel, Twitter, etc.
@@ -1012,7 +1011,7 @@ js: js
 images: images
 
 
-#添加轮播图——BYA2020/6/4
+#添加轮播图——BYA 2020/6/4
 #Home carousel map, from means link, img means picture
 carousel: 
    enable: true
@@ -1029,10 +1028,10 @@ carousel:
         'link':'http://bya.cool/2020/04/27/Intermediate-Python-Book-keypoints-summary-list',
         'img':'http://bya.cool/images/python.jpg'
       },
-      {
-        'link':'/about/',
-        'img':'http://bya.cool/images/skill.jpg'
-      },
+      # {
+      #   'link':'/about/',
+      #   'img':'http://bya.cool/images/skill.jpg'
+      # },
    ]
 
 
@@ -1043,7 +1042,6 @@ carousel:
 # 交际拓展
 # 效率工具
 # 消遣放松
-# 放弃使用狗屁缩略图，怎么省事怎么来
 
 informationlinks:
   - nickname: USTC     # 昵称
