@@ -1,1753 +1,445 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-bya.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-bya.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-bya.png">
-
-<link rel="stylesheet" href="/css/main.css">
-
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"bya.cool","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":360,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="轻风碎月 静夜凝思">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>BYA's Blog - 轻风碎月 静夜凝思</title><meta name="keywords" content="reading note, thoughts, python, golang, linux, bash, shell, git, docker, machine learning, data science, AI, web, js, javascripts, echarts, ATimeLogger, 可视化, 博客, 读书, movie, 时间管理"><meta name="author" content="小白同学"><meta name="copyright" content="小白同学"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="轻风碎月 静夜凝思">
 <meta property="og:type" content="website">
 <meta property="og:title" content="BYA&#39;s Blog">
 <meta property="og:url" content="http://bya.cool/page/2/index.html">
 <meta property="og:site_name" content="BYA&#39;s Blog">
 <meta property="og:description" content="轻风碎月 静夜凝思">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="小白大侠">
-<meta property="article:tag" content="golang">
-<meta property="article:tag" content=" leetcode">
-<meta property="article:tag" content=" linux">
-<meta property="article:tag" content=" bash">
-<meta property="article:tag" content=" git">
-<meta property="article:tag" content=" python">
-<meta property="article:tag" content=" docker">
-<meta property="article:tag" content=" machine learning">
-<meta property="article:tag" content=" data science">
-<meta property="article:tag" content=" AI">
-<meta property="article:tag" content=" web">
-<meta property="article:tag" content=" js">
-<meta property="article:tag" content=" javascripts">
-<meta property="article:tag" content=" echarts">
-<meta property="article:tag" content=" ATimeLogger">
-<meta property="article:tag" content=" 可视化">
-<meta property="article:tag" content=" 博客">
-<meta property="article:tag" content=" 读书">
-<meta property="article:tag" content=" movie">
-<meta property="article:tag" content=" 时间管理">
+<meta property="og:image" content="http://bya.cool/img/avatar.jpg">
+<meta property="article:author" content="小白同学">
+<meta property="article:tag" content="reading note, thoughts, python, golang, linux, bash, shell, git, docker, machine learning, data science, AI, web, js, javascripts, echarts, ATimeLogger, 可视化, 博客, 读书, movie, 时间管理">
 <meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://bya.cool/page/2/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : true,
-    isPost : false,
-    lang   : 'zh-CN'
-  };
-</script>
-
-  <title>BYA's Blog</title>
-  
-
-
-  <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?50ee4c4119ca03830c1b5bde8308daae";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">BYA's Blog</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">轻风碎月 静夜凝思</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-外链">
-
-    <a href="/links/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>外链</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <div class="reading-progress-bar"></div>
-
-  <a href="https://github.com/baiyongan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content index posts-expand">
-            
-
-<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<style type="text/css">
-
-.glyphicon-chevron-left:before{
-    content: "《"
-}
-.glyphicon-chevron-right:before{
-    content: "》"
-}
-
-@media (max-width: 767px){
-    .rights{
-        display: none;
+<meta name="twitter:image" content="http://bya.cool/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="http://bya.cool/page/2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?50ee4c4119ca03830c1b5bde8308daae";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
     }
-    .carousel{
-        width: 100% !important;
-        height: 100% !important;
-    }
-    .slide{
-        width: 100% !important;
-        height: 100% !important;
-    }
-
-}
-
-.carousel{
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.carousel-inner {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-}
-.carousel-inner > .item {
-  display: none;
-  position: relative;
-  -webkit-transition: 0.6s ease-in-out left;
-  -o-transition: 0.6s ease-in-out left;
-  transition: 0.6s ease-in-out left;
-}
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img {
-  line-height: 1;
-}
-@media all and (transform-3d), (-webkit-transform-3d) {
-  .carousel-inner > .item {
-    -webkit-transition: -webkit-transform 0.6s ease-in-out;
-    -moz-transition: -moz-transform 0.6s ease-in-out;
-    -o-transition: -o-transform 0.6s ease-in-out;
-    transition: transform 0.6s ease-in-out;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-perspective: 1000px;
-    -moz-perspective: 1000px;
-    perspective: 1000px;
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'BYA\'s Blog',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-02-02 01:24:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
   }
-  .carousel-inner > .item.next,
-  .carousel-inner > .item.active.right {
-    -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0);
-    left: 0;
+  .justified-gallery img {
+    opacity: 1
   }
-  .carousel-inner > .item.prev,
-  .carousel-inner > .item.active.left {
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
-    left: 0;
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
   }
-  .carousel-inner > .item.next.left,
-  .carousel-inner > .item.prev.right,
-  .carousel-inner > .item.active {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    left: 0;
-  }
-}
-.carousel-inner > .active,
-.carousel-inner > .next,
-.carousel-inner > .prev {
-  display: block;
-}
-.carousel-inner > .active {
-  left: 0;
-}
-.carousel-inner > .next,
-.carousel-inner > .prev {
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
-.carousel-inner > .next {
-  left: 100%;
-}
-.carousel-inner > .prev {
-  left: -100%;
-}
-.carousel-inner > .next.left,
-.carousel-inner > .prev.right {
-  left: 0;
-}
-.carousel-inner > .active.left {
-  left: -100%;
-}
-.carousel-inner > .active.right {
-  left: 100%;
-}
-.carousel-control {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 15%;
-  opacity: 0.5;
-  filter: alpha(opacity=50);
-  font-size: 20px;
-  color: #fff;
-  text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-  background-color: rgba(0, 0, 0, 0);
-}
-.carousel-control.left {
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
-  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
-}
-.carousel-control.right {
-  left: auto;
-  right: 0;
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
-  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
-}
-.carousel-control:hover,
-.carousel-control:focus {
-  outline: 0;
-  color: #fff;
-  text-decoration: none;
-  opacity: 0.9;
-  filter: alpha(opacity=90);
-}
-.carousel-control .icon-prev,
-.carousel-control .icon-next,
-.carousel-control .glyphicon-chevron-left,
-.carousel-control .glyphicon-chevron-right {
-  position: absolute;
-  top: 50%;
-  margin-top: -10px;
-  z-index: 5;
-  display: inline-block;
-}
-.carousel-control .icon-prev,
-.carousel-control .glyphicon-chevron-left {
-  left: 50%;
-  margin-left: -10px;
-}
-.carousel-control .icon-next,
-.carousel-control .glyphicon-chevron-right {
-  right: 50%;
-  margin-right: -10px;
-}
-.carousel-control .icon-prev,
-.carousel-control .icon-next {
-  width: 20px;
-  height: 20px;
-  line-height: 1;
-  font-family: serif;
-}
-.carousel-control .icon-prev:before {
-  content: '\2039';
-}
-.carousel-control .icon-next:before {
-  content: '\203a';
-}
-.carousel-indicators {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  z-index: 15;
-  width: 60%;
-  margin-left: -30%;
-  padding-left: 0;
-  list-style: none;
-  text-align: center;
-}
-.carousel-indicators li {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin: 1px;
-  text-indent: -999px;
-  border: 1px solid #fff;
-  border-radius: 10px;
-  cursor: pointer;
-  background-color: #000 \9;
-  background-color: rgba(0, 0, 0, 0);
-}
-.carousel-indicators .active {
-  margin: 0;
-  width: 12px;
-  height: 12px;
-  background-color: #fff;
-}
-.carousel-caption {
-  position: absolute;
-  left: 15%;
-  right: 15%;
-  bottom: 20px;
-  z-index: 10;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  color: #fff;
-  text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-}
-.carousel-caption .btn {
-  text-shadow: none;
-}
-@media screen and (min-width: 768px) {
-  .carousel-control .glyphicon-chevron-left,
-  .carousel-control .glyphicon-chevron-right,
-  .carousel-control .icon-prev,
-  .carousel-control .icon-next {
-    width: 30px;
-    height: 30px;
-    margin-top: -10px;
-    font-size: 30px;
-  }
-  .carousel-control .glyphicon-chevron-left,
-  .carousel-control .icon-prev {
-    margin-left: -10px;
-  }
-  .carousel-control .glyphicon-chevron-right,
-  .carousel-control .icon-next {
-    margin-right: -10px;
-  }
-  .carousel-caption {
-    left: 20%;
-    right: 20%;
-    padding-bottom: 30px;
-  }
-  .carousel-indicators {
-    bottom: 20px;
-  }
-}
-</style>
-<div width="100%" height="320px" style="border: 0px; overflow: hidden; border-radius: 10px;" scrolling="no">
-            
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3500" >
-        <!-- 轮播（Carousel）指标 -->
-        <ol class="carousel-indicators">
-        
-        
-
-            <li data-target="#myCarousel" data-slide-to="0"></li>
-            
-
-        
-
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            
-
-        
-
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-            
-
-        
-        </ol>
-        <!-- 轮播（Carousel）项目 -->
-        <div class="carousel-inner" style="height: 480px; border-radius: 10px; width: 100%;">
-
-        
-         
-        
-            
-                <a class="item active" href="/tags/%E9%98%85%E8%AF%BB/" target="_blank" style="height: 100%;">
-                    <img src="http://bya.cool/images/read.jpg"   style="width: 100%; height: 100%" >
-                </a>
-                
-                
-
-        
-        
-            
-                    <a class="item" href="/tags/%E5%91%BD%E4%BB%A4/" target="_blank" style="height: 100%;">
-                        <img src="http://bya.cool/images/linux.jpg"  style="width: 100%; height: 100%;" >
-                    </a>
-            
-
-        
-        
-            
-                    <a class="item" href="http://bya.cool/2020/04/27/Intermediate-Python-Book-keypoints-summary-list" target="_blank" style="height: 100%;">
-                        <img src="http://bya.cool/images/python.jpg"  style="width: 100%; height: 100%;" >
-                    </a>
-            
-
-        
-
-     
-        </div>
-        <!-- 轮播（Carousel）导航 -->
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            
-        </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-           
-        </a>
-    </div> 
-</div>
-
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://bya.cool/2020/05/10/Intermediate-Python-how-to-read-a-open-source-project/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="小白大侠">
-      <meta itemprop="description" content="轻风碎月 静夜凝思">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BYA's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/10/Intermediate-Python-how-to-read-a-open-source-project/" class="post-title-link" itemprop="url">如何阅读 Python 的开源项目？(转载自 董伟明)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-10 12:07:18" itemprop="dateCreated datePublished" datetime="2020-05-10T12:07:18+08:00">2020-05-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/Intermediate/" itemprop="url" rel="index"><span itemprop="name">Intermediate</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/Intermediate/Experience/" itemprop="url" rel="index"><span itemprop="name">Experience</span></a>
-                </span>
-            </span>
-
-          
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="为什么要阅读开源代码"><a href="#为什么要阅读开源代码" class="headerlink" title="为什么要阅读开源代码"></a>为什么要阅读开源代码</h2><p>阅读Python开源项目代码主要有如下三个原因：</p>
-<ul>
-<li><p>在工作过程中<strong>遇到一些问题</strong>，Google和 StackOverFlow 等网站找不到解决办法，只能去翻源码。</p>
-</li>
-<li><p>对某些项目或者方向非常<strong>感兴趣</strong>，希望<strong>深入</strong>。</p>
-</li>
-<li><p>学习遇到瓶颈需要<strong>汲取</strong>开源项目的<strong>经验</strong>和用法来做提高。</p>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/10/Intermediate-Python-how-to-read-a-open-source-project/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://bya.cool/2020/05/07/Intermediate-Python-how-to-write-better-python-functions/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="小白大侠">
-      <meta itemprop="description" content="轻风碎月 静夜凝思">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BYA's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/07/Intermediate-Python-how-to-write-better-python-functions/" class="post-title-link" itemprop="url">如何写出更好的 Python 函数 （翻译-转载）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-07 15:59:47" itemprop="dateCreated datePublished" datetime="2020-05-07T15:59:47+08:00">2020-05-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/Intermediate/" itemprop="url" rel="index"><span itemprop="name">Intermediate</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/Intermediate/Experience/" itemprop="url" rel="index"><span itemprop="name">Experience</span></a>
-                </span>
-            </span>
-
-          
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Python 简洁灵活，但是要想用好，并不简单，那么如何写出一个好的Python函数呢？《Writing Idiomatic Python》一书的作者在 Medium 上发表了一篇文章，给出了 6 个建议。</p>
-<h3 id="0-怎样算是一个好的函数？"><a href="#0-怎样算是一个好的函数？" class="headerlink" title="0. 怎样算是一个好的函数？"></a>0. 怎样算是一个好的函数？</h3><p>“<strong>好</strong>”的 Python 函数和“<strong>差</strong>”的 Python 函数之间<strong>有什么差别</strong>呢？每个人都有自己的理解。基于我的理解，如果一个 Python 函数能够符合下面的大部分条件，我会认为它是一个“好”函数：</p>
-<blockquote>
-<ul>
-<li><strong>命名合理</strong></li>
-<li><strong>单一功能</strong></li>
-<li><strong>包括文档字符串</strong></li>
-<li><strong>返回一个值</strong></li>
-<li><strong>不超过 50 行</strong></li>
-<li><strong>是幂等函数或纯函数</strong></li>
-</ul>
-</blockquote>
-<p>对许多人来说，这些要求可能显得过于苛刻了。</p>
-<p>不过，<strong>如果你的函数遵循这些规则，你的代码会非常漂亮</strong>。</p>
-<p>下面，我将一一讨论这些规则，然后总结它们是如何创造“好”函数的。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/07/Intermediate-Python-how-to-write-better-python-functions/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://bya.cool/2020/05/04/Thoughts-easter-egg-of-mouse-effect/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="小白大侠">
-      <meta itemprop="description" content="轻风碎月 静夜凝思">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BYA's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/04/Thoughts-easter-egg-of-mouse-effect/" class="post-title-link" itemprop="url">鼠标特效背后的秘密</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-04 14:44:07" itemprop="dateCreated datePublished" datetime="2020-05-04T14:44:07+08:00">2020-05-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Thoughts/" itemprop="url" rel="index"><span itemprop="name">Thoughts</span></a>
-                </span>
-            </span>
-
-          
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>点击屏幕空白处，会蹦出句诗啊、名言啊啥的。其实呢，也藏着一脉隐线，感兴趣的话，可以进来瞅瞅啊，但我真的更希望，你能在阅读本文之前，就重新加载页面，点上一通，大致get到彩蛋。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/04/Thoughts-easter-egg-of-mouse-effect/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://bya.cool/2020/05/02/Intermediate-Python-magic-methods/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="小白大侠">
-      <meta itemprop="description" content="轻风碎月 静夜凝思">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BYA's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/02/Intermediate-Python-magic-methods/" class="post-title-link" itemprop="url">Python 中的魔术方法(magic methods)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-02 07:36:50" itemprop="dateCreated datePublished" datetime="2020-05-02T07:36:50+08:00">2020-05-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/Intermediate/" itemprop="url" rel="index"><span itemprop="name">Intermediate</span></a>
-                </span>
-            </span>
-
-          
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="拓展阅读"><a href="#拓展阅读" class="headerlink" title="拓展阅读"></a>拓展阅读</h2><p><a href="https://my.oschina.net/jhao104/blog/779743" target="_blank" rel="noopener"><strong>Python魔术方法-Magic Method</strong></a></p>
-<p><a href="https://pyzh.readthedocs.io/en/latest/python-magic-methods-guide.html#id28" target="_blank" rel="noopener"><strong>(译)Python魔法方法指南</strong></a></p>
-
-      
-    </div>
-
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://bya.cool/2020/05/02/Fundation-Python-69-builtins/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="小白大侠">
-      <meta itemprop="description" content="轻风碎月 静夜凝思">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BYA's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/02/Fundation-Python-69-builtins/" class="post-title-link" itemprop="url">Python 内置函数</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-02 07:34:11" itemprop="dateCreated datePublished" datetime="2020-05-02T07:34:11+08:00">2020-05-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/Fundation/" itemprop="url" rel="index"><span itemprop="name">Fundation</span></a>
-                </span>
-            </span>
-
-          
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h2><p>内置函数，一般都是因为使用频率比较频繁或是元操作，所以通过内置函数的形式提供出来。</p>
-<p>python 版本不同，其内容也有变化，例如之前Py2 vs. Py3 还存在 xrange() vs. range()， raw_input() vs. input()，现在只保留range()、input()。依据目前的python 3.8 版本，共计69个（实际上，<a href="https://treyhunner.com/2019/04/is-it-a-class-or-a-function-its-a-callable/#The_distinction_between_functions_and_classes_often_doesn' target="_blank" rel="noopener"t_matter">only 42 of them are actually functions</a>）。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/02/Fundation-Python-69-builtins/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://bya.cool/2020/05/01/Booknote-Emotion-Management/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="小白大侠">
-      <meta itemprop="description" content="轻风碎月 静夜凝思">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BYA's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/01/Booknote-Emotion-Management/" class="post-title-link" itemprop="url">情绪觉察与管理主题书单</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-01 10:20:11" itemprop="dateCreated datePublished" datetime="2020-05-01T10:20:11+08:00">2020-05-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Booknote/" itemprop="url" rel="index"><span itemprop="name">Booknote</span></a>
-                </span>
-            </span>
-
-          
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="我怎么就要进行情绪管理了？"><a href="#我怎么就要进行情绪管理了？" class="headerlink" title="我怎么就要进行情绪管理了？"></a>我怎么就要进行情绪管理了？</h2><p>昨天晚上随便刷微信公众号，偶然间在 <strong>幸福的味道</strong> 这个公众号中，见到的一篇推送文章——【3本调整心态控制情绪书籍】，推荐了三本书：《自控力》、《情绪急救》、《如何控制自己的情绪》。其中第一本之前大致翻阅过，其他两本看了看简介，豆瓣评分啥的，感觉还真挺适合我的。</p>
-<p>因为最近一段时期的生活波折，尤其发现，我的情绪波动那是大起大落，加之脾气是真的犟、且差、且硬，心态上也曾长期负面压抑，敏感易怒，攻击性强，难以扭颓。总之，<strong>情商低是TM硬伤</strong>，得调解。既然都意识到了（其实早意识到了），先试着与自己和解吧。正好利用现在这段空窗期，进行些情绪管理的主题阅读，大体本着有病治病，没病消遣的初衷。毕竟，到这个年纪大致也明白了，<strong>人生路漫漫，谁都只能陪伴着走一段旅程而已，也惟有自己，必须要和自己有苦有甜，或晴或雨地过上不长不短几十年</strong>。身心健康该是首位，为啥不学着心疼、照顾下自己呢？不是说要变得自私，而是去学着自爱。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/01/Booknote-Emotion-Management/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://bya.cool/2020/04/29/Fundation-Python-introspection-reflection/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="小白大侠">
-      <meta itemprop="description" content="轻风碎月 静夜凝思">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BYA's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/29/Fundation-Python-introspection-reflection/" class="post-title-link" itemprop="url">Python 自省与反射</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-29 11:11:08" itemprop="dateCreated datePublished" datetime="2020-04-29T11:11:08+08:00">2020-04-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/Fundation/" itemprop="url" rel="index"><span itemprop="name">Fundation</span></a>
-                </span>
-            </span>
-
-          
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="自省"><a href="#自省" class="headerlink" title="自省"></a><strong>自省</strong></h2><p>In computing, <strong>type introspection</strong> is the ability of a program to examine the type or properties of an object at runtime. Some programming languages possess this capability.<br>在计算机科学中，内省是指计算机程序在运行时（Run time）检查对象（Object）类型（以及属性等）的一种能力，通常也可以称作运行时类型检查。</p>
-<table>
-<thead>
-<tr>
-<th align="center">方法</th>
-<th align="center">作用</th>
-<th align="center">类型</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">help()</td>
-<td align="center">查看函数或者模块用途的详细说明</td>
-<td align="center">自省</td>
-</tr>
-<tr>
-<td align="center"><strong>dir()</strong></td>
-<td align="center"><strong>返回对象所有属性</strong></td>
-<td align="center">自省</td>
-</tr>
-<tr>
-<td align="center"><strong>type()</strong></td>
-<td align="center"><strong>查看对象类型</strong></td>
-<td align="center">自省</td>
-</tr>
-<tr>
-<td align="center"><strong>isinstance()</strong></td>
-<td align="center"><strong>判断一个对象是否是一个已知的类型</strong></td>
-<td align="center">自省</td>
-</tr>
-<tr>
-<td align="center">issubclass()</td>
-<td align="center">判断一个类是不是另一个类的子类</td>
-<td align="center">自省</td>
-</tr>
-<tr>
-<td align="center">id()</td>
-<td align="center">返回地址值</td>
-<td align="center">自省</td>
-</tr>
-<tr>
-<td align="center">callable()</td>
-<td align="center">判断对象是否可调用</td>
-<td align="center">自省</td>
-</tr>
-</tbody></table>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/29/Fundation-Python-introspection-reflection/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://bya.cool/2020/04/28/Intermediate-Python-scope-namespace-LEGB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="小白大侠">
-      <meta itemprop="description" content="轻风碎月 静夜凝思">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BYA's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/28/Intermediate-Python-scope-namespace-LEGB/" class="post-title-link" itemprop="url">Python 命名空间、作用域及LEGB规则</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-28 17:05:50" itemprop="dateCreated datePublished" datetime="2020-04-28T17:05:50+08:00">2020-04-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/Intermediate/" itemprop="url" rel="index"><span itemprop="name">Intermediate</span></a>
-                </span>
-            </span>
-
-          
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><p>Python使用叫做命名空间的东西来记录变量的轨迹。</p>
-<p>命名空间是一个字典（dictionary），它的键就是变量名，它的值就是那些变量的值，即 {name:object}映射。</p>
-<p>A <em>namespace</em> is a mapping from names to objects. Most namespaces are currently implemented as Python dictionaries。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/28/Intermediate-Python-scope-namespace-LEGB/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://bya.cool/2020/04/28/Fundation-Python-global-nonlocal/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="小白大侠">
-      <meta itemprop="description" content="轻风碎月 静夜凝思">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BYA's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/28/Fundation-Python-global-nonlocal/" class="post-title-link" itemprop="url">Python 中的 global、nonlocal 辨析</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-28 14:49:37" itemprop="dateCreated datePublished" datetime="2020-04-28T14:49:37+08:00">2020-04-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/Fundation/" itemprop="url" rel="index"><span itemprop="name">Fundation</span></a>
-                </span>
-            </span>
-
-          
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="global-语句"><a href="#global-语句" class="headerlink" title="global 语句"></a>global 语句</h2><ul>
-<li><p>语法：声明此变量为全局变量</p>
-</li>
-<li><p>用法： global [变量名]</p>
-</li>
-<li><p>注意：引用全局变量时，不需要global 声明，但是后面使用或者修改这个全局变量的时候，需要global声明。</p>
-</li>
-<li><p><strong>应用场景</strong>：变量定义在函数<strong>外部</strong>的时候，如果函数里面想改变这个<strong>全局变量</strong>的值，需要在当前的引用函数里面<strong>重新定义</strong>一个<strong>变量</strong>， 并<strong>用关键字global修饰</strong>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/28/Fundation-Python-global-nonlocal/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://bya.cool/2020/04/27/Intermediate-Python-Book-keypoints-summary-list/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="小白大侠">
-      <meta itemprop="description" content="轻风碎月 静夜凝思">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BYA's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/27/Intermediate-Python-Book-keypoints-summary-list/" class="post-title-link" itemprop="url">《Intermediate Python》 总结与拓展系列</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-27 16:00:10" itemprop="dateCreated datePublished" datetime="2020-04-27T16:00:10+08:00">2020-04-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/Intermediate/" itemprop="url" rel="index"><span itemprop="name">Intermediate</span></a>
-                </span>
-            </span>
-
-          
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>该书是一本python进阶书籍，章节精简，用例简洁，却能精辟地展现原理。同时章节之间独立，且有延伸阅读。本文的内容，则是我结合自身实际需求，在原书的基础上，做的总结与拓展。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/27/Intermediate-Python-Book-keypoints-summary-list/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
       }
     }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="小白大侠"
-      src="/images/avatar.jpg">
-  <p class="site-author-name" itemprop="name">小白大侠</p>
-  <div class="site-description" itemprop="description">轻风碎月 静夜凝思</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-          <span class="site-state-item-count">48</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">18</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">57</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/baiyongan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;baiyongan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://www.jianshu.com/u/7be33dc73f81" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;7be33dc73f81" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>简书</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:bya@mail.ustc.edu.com" title="E-Mail → mailto:bya@mail.ustc.edu.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-  </div>
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">57</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/custom/relax.jpeg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">BYA's Blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">BYA's Blog</h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/baiyongan" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:bya@mail.ustc.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/2020/05/10/Intermediate-Python-how-to-read-a-open-source-project/" title="如何阅读 Python 的开源项目？(转载自 董伟明)"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="如何阅读 Python 的开源项目？(转载自 董伟明)"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/05/10/Intermediate-Python-how-to-read-a-open-source-project/" title="如何阅读 Python 的开源项目？(转载自 董伟明)">如何阅读 Python 的开源项目？(转载自 董伟明)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-05-10T04:07:18.000Z" title="发表于 2020-05-10 12:07:18">2020-05-10</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-04T16:43:27.000Z" title="更新于 2022-01-05 00:43:27">2022-01-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Python/Intermediate/">Intermediate</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Python/Intermediate/Experience/">Experience</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%BA%90%E7%A0%81/">源码</a></span></div><div class="content">为什么要阅读开源代码阅读Python开源项目代码主要有如下三个原因：
 
+在工作过程中遇到一些问题，Google和 StackOverFlow 等网站找不到解决办法，只能去翻源码。
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
-      独学而无友 则孤陋而寡闻
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://www.book110.com/" title="http:&#x2F;&#x2F;www.book110.com" rel="noopener" target="_blank">荐书堂</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://leetcode-cn.com/" title="https:&#x2F;&#x2F;leetcode-cn.com" rel="noopener" target="_blank">LeetCode-cn</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://cspiration.com/leetcodeClassification#1" title="https:&#x2F;&#x2F;cspiration.com&#x2F;leetcodeClassification#1" rel="noopener" target="_blank">LeetCode</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn" rel="noopener" target="_blank">CoolShell</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://zhangwenli.com/blog/" title="http:&#x2F;&#x2F;zhangwenli.com&#x2F;blog&#x2F;" rel="noopener" target="_blank">羡辙</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://wdxtub.com/" title="https:&#x2F;&#x2F;wdxtub.com" rel="noopener" target="_blank">小土刀</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://www.cxyxiaowu.com/" title="https:&#x2F;&#x2F;www.cxyxiaowu.com" rel="noopener" target="_blank">程序员小吴(算法)</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://python-web-guide.readthedocs.io/" title="https:&#x2F;&#x2F;python-web-guide.readthedocs.io&#x2F;" rel="noopener" target="_blank">python-web-guide</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://python.iswbm.com/en/latest/" title="http:&#x2F;&#x2F;python.iswbm.com&#x2F;en&#x2F;latest&#x2F;" rel="noopener" target="_blank">python-编程时光</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://redstonewill.com/" title="https:&#x2F;&#x2F;redstonewill.com" rel="noopener" target="_blank">红色石头</a>
-        </li>
-    </ul>
-  </div>
+对某些项目或者方向非常感兴趣，希望深入。
 
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-
-<div class="beian-meng">
-<a href="https://icp.gov.moe" target="_blank">萌 ICP备 </a>
-<a href="https://icp.gov.moe/?keyword=20209207" target="_blank"> 20209207号</a>
-</div>
-
-
-<div class="copyright">
-  
-  &copy; 2018 – 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-crown"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">小白大侠</span>
-  <span class="post-meta-divider">|</span>
-    <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
-    </div>
-
-</div>
-
-
-    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
+学习遇到瓶颈需要汲取开源项目的经验和用法来做提高。
 
 
 
 
+有目的性地阅读开源项目没有目的的阅读开源项目就是耍流氓。浪费了时间，但是能学到的东西也很少。怎么样根据自身情况去阅读呢？
+
+和兴趣以及工作契合。举个例子，工作中没有机会用到Celery又不是想自己造个轮子，读它的源码做什么？所以要从平时能接触到的那些项目中选取。比如我，我肯定不去看 Django的代码，因为日常工作基本遇不到，遇到了现翻就好了。
+
+一个方向只看一两个典型的就可以了。比如Web框架，我只看过Bottle和Flask的源码（其实之前也看过Django 的，只是浅尝辄止），而且看Bottle已经是好几年前的事情了。并不是堆的多了更好，有时候反而选择太多会懵。
+
+不同技术阶段的选择代码量、复杂度不一样的项目，下面会具体推荐。
+
+清楚自己看代码的目的。就是你看代码是想了解人家怎么设计、调试BUG、还 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2020/05/07/Intermediate-Python-how-to-write-better-python-functions/" title="如何写出更好的 Python 函数 （翻译-转载）"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="如何写出更好的 Python 函数 （翻译-转载）"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/05/07/Intermediate-Python-how-to-write-better-python-functions/" title="如何写出更好的 Python 函数 （翻译-转载）">如何写出更好的 Python 函数 （翻译-转载）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-05-07T07:59:47.000Z" title="发表于 2020-05-07 15:59:47">2020-05-07</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-04T16:43:27.000Z" title="更新于 2022-01-05 00:43:27">2022-01-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Python/Intermediate/">Intermediate</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Python/Intermediate/Experience/">Experience</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">代码规范</a></span></div><div class="content">前言Python 简洁灵活，但是要想用好，并不简单，那么如何写出一个好的Python函数呢？《Writing Idiomatic Python》一书的作者在 Medium 上发表了一篇文章，给出了 6 个建议。
+0. 怎样算是一个好的函数？“好”的 Python 函数和“差”的 Python 函数之间有什么差别呢？每个人都有自己的理解。基于我的理解，如果一个 Python 函数能够符合下面的大部分条件，我会认为它是一个“好”函数：
+
+
+命名合理
+单一功能
+包括文档字符串
+返回一个值
+不超过 50 行
+是幂等函数或纯函数
+
+
+对许多人来说，这些要求可能显得过于苛刻了。
+不过，如果你的函数遵循这些规则，你的代码会非常漂亮。
+下面，我将一一讨论这些规则，然后总结它们是如何创造“好”函数的。
+
+
+1. 命名（Naming）在这个问题上，我最喜欢的一句话是：
+
+计算机科学中只有两件事很让人头疼：缓存失效和命名。
+
+尽管这听起来很莫名其妙，但给一个事情命名太难了。下面是一个反面案例：
+1def get_knn_from_df(df):
+
+上面这个例子来源于数据分析领域 (准确的讲是机器学习相关的， ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2020/05/04/Thoughts-easter-egg-of-mouse-effect/" title="鼠标特效背后的秘密"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="鼠标特效背后的秘密"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/05/04/Thoughts-easter-egg-of-mouse-effect/" title="鼠标特效背后的秘密">鼠标特效背后的秘密</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack sticky"></i><span class="sticky">置顶</span><span class="article-meta-separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-05-04T06:44:07.000Z" title="发表于 2020-05-04 14:44:07">2020-05-04</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-04T16:43:27.000Z" title="更新于 2022-01-05 00:43:27">2022-01-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Thoughts/">Thoughts</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%BD%A9%E8%9B%8B/">彩蛋</a></span></div><div class="content">点击屏幕空白处，会蹦出句诗啊、名言啊啥的。其实呢，也藏着一脉隐线，感兴趣的话，可以进来瞅瞅啊，但我真的更希望，你能在阅读本文之前，就重新加载页面，点上一通，大致get到彩蛋。
+
+
+在每次刷新页面后，鼠标点击的文字特效，都会从头开始——“人生天地之间 若白驹过隙 忽然而已“，那它的内在逻辑是啥呢？如下：
+出场顺序解释
+呱呱坠地
+青年立志
+
+
+为学三境界：勤、恒、悟
+
+
+学有所成
+
+
+建功立业
+
+
+红尘羁绊
+悲欢离合
+
+
+身世浮沉
+感慨抒怀
+
+
+倦鸟归林
+诚心劝谏
+
+通俗解释
+励志当 科！学！家！
+
+
+读小、初、高、本、硕、博……
+
+
+混个毕业证
+
+
+找个工作、混口饭吃
+
+
+专心搞钱，不，是追求事业
+
+找娘们儿，不，是寻觅爱情
+
+惨遭现实社会毒打、挫折教育
+
+
+
+变身负能量大怪兽
+起起落落、打怪升级
+有得有失、有悲有喜
+稀里糊涂，跌跌撞撞就这么过来了？
+伤痕累累、洋洋得意
+老了圆了，喝喝小酒、想想当年、吹吹牛逼
+
+
+年轻人，还是要脚踏实地，少些戾气
+活在当下、懂得珍惜
+
+—— 2020/5/4 青年节  社畜日常自嘲 
+一枚社畜的自我修养好吧，以我现在对人活一世理解的深度，也就只能琢磨到这 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2020/05/02/Intermediate-Python-magic-methods/" title="Python 中的魔术方法(magic methods)"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python 中的魔术方法(magic methods)"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/05/02/Intermediate-Python-magic-methods/" title="Python 中的魔术方法(magic methods)">Python 中的魔术方法(magic methods)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-05-01T23:36:50.000Z" title="发表于 2020-05-02 07:36:50">2020-05-02</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-04T16:43:27.000Z" title="更新于 2022-01-05 00:43:27">2022-01-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Python/Intermediate/">Intermediate</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/magic-methods/">magic methods</a></span></div><div class="content">拓展阅读Python魔术方法-Magic Method
+(译)Python魔法方法指南
+</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2020/05/02/Fundation-Python-69-builtins/" title="Python 内置函数"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python 内置函数"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/05/02/Fundation-Python-69-builtins/" title="Python 内置函数">Python 内置函数</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-05-01T23:34:11.000Z" title="发表于 2020-05-02 07:34:11">2020-05-02</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-04T16:43:27.000Z" title="更新于 2022-01-05 00:43:27">2022-01-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Python/Fundation/">Fundation</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0/">内置函数</a></span></div><div class="content">内置函数内置函数，一般都是因为使用频率比较频繁或是元操作，所以通过内置函数的形式提供出来。
+python 版本不同，其内容也有变化，例如之前Py2 vs. Py3 还存在 xrange() vs. range()， raw_input() vs. input()，现在只保留range()、input()。依据目前的python 3.8 版本，共计69个（实际上，only 42 of them are actually functions）。
+
+
+按功能类型分类
+
+
+类型
+数量
+
+
+
+数学运算
+7
+
+
+类型转换
+24
+
+
+序列操作
+8
+
+
+对象操作
+9
+
+
+反射操作
+8
+
+
+变量操作
+2
+
+
+交互操作
+2
+
+
+文件操作
+1
+
+
+编译执行
+5
+
+
+装饰器相关
+3
+
+
+注：其分类的对象操作和反射操作中，有自省的东西，见之前的博客——《Python  自省与反射》，文件操作和交互操作也可以合并，因为参照的别的博客文章，所以，还是宏观掌握，实际应用为主，也懒得自己重新分类了。
+数学运算
+
+
+函数名
+功能简介
+
+
+
+abs()
+返回一个数的绝对值
+
+
+divmod()
+返回两个数值的商和余数
+
+
+ ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2020/05/01/Booknote-Emotion-Management/" title="情绪觉察与管理主题书单"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="情绪觉察与管理主题书单"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/05/01/Booknote-Emotion-Management/" title="情绪觉察与管理主题书单">情绪觉察与管理主题书单</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-05-01T02:20:11.000Z" title="发表于 2020-05-01 10:20:11">2020-05-01</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-04T16:43:27.000Z" title="更新于 2022-01-05 00:43:27">2022-01-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Booknote/">Booknote</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%83%85%E7%BB%AA%E7%AE%A1%E7%90%86/">情绪管理</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/EQ/">EQ</a></span></div><div class="content">我怎么就要进行情绪管理了？昨天晚上随便刷微信公众号，偶然间在 幸福的味道 这个公众号中，见到的一篇推送文章——【3本调整心态控制情绪书籍】，推荐了三本书：《自控力》、《情绪急救》、《如何控制自己的情绪》。其中第一本之前大致翻阅过，其他两本看了看简介，豆瓣评分啥的，感觉还真挺适合我的。
+因为最近一段时期的生活波折，尤其发现，我的情绪波动那是大起大落，加之脾气是真的犟、且差、且硬，心态上也曾长期负面压抑，敏感易怒，攻击性强，难以扭颓。总之，情商低是TM硬伤，得调解。既然都意识到了（其实早意识到了），先试着与自己和解吧。正好利用现在这段空窗期，进行些情绪管理的主题阅读，大体本着有病治病，没病消遣的初衷。毕竟，到这个年纪大致也明白了，人生路漫漫，谁都只能陪伴着走一段旅程而已，也惟有自己，必须要和自己有苦有甜，或晴或雨地过上不长不短几十年。身心健康该是首位，为啥不学着心疼、照顾下自己呢？不是说要变得自私，而是去学着自爱。
+
+
+（其实都是扯淡，不指望读几本书就管理好情绪，我能学会准确定位描述情绪即可。性格特质、为人处世这档子，不必强求去改，在生活历练中来打磨吧。在追求卓越的路上，让自己的脾气尽情释 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2020/04/28/Intermediate-Python-scope-namespace-LEGB/" title="Python 命名空间、作用域及LEGB规则"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python 命名空间、作用域及LEGB规则"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/04/28/Intermediate-Python-scope-namespace-LEGB/" title="Python 命名空间、作用域及LEGB规则">Python 命名空间、作用域及LEGB规则</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-04-28T09:05:50.000Z" title="发表于 2020-04-28 17:05:50">2020-04-28</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-04T16:43:27.000Z" title="更新于 2022-01-05 00:43:27">2022-01-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Python/Intermediate/">Intermediate</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/LEGB/">LEGB</a></span></div><div class="content">定义命名空间Python使用叫做命名空间的东西来记录变量的轨迹。
+命名空间是一个字典（dictionary），它的键就是变量名，它的值就是那些变量的值，即 {name:object}映射。
+A namespace is a mapping from names to objects. Most namespaces are currently implemented as Python dictionaries。
+
+
+作用域Python 中 name-object 的映射存储在不同的作用域中，各个不同的作用域是相互独立的。而我们就在不同的作用域中搜索 name-object。
+Python是静态作用域，也就是说，在Python中，变量的作用域源于它在代码中的位置；在不同的位置，可能有不同的命名空间。命名空间是变量作用域的体现形式。如：函数定义了本地作用域，而模块定义的是全局作用域。如果想要在函数内定义全局作用域，需要加上global修饰符。
+命名空间的访问：globals() 和 locals()Python的命名空间是一个字典，字典内保存了变量名称与对象之间的映射关系。因此，查找变量 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2020/04/28/Fundation-Python-global-nonlocal/" title="Python 中的 global、nonlocal 辨析"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python 中的 global、nonlocal 辨析"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/04/28/Fundation-Python-global-nonlocal/" title="Python 中的 global、nonlocal 辨析">Python 中的 global、nonlocal 辨析</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-04-28T06:49:37.000Z" title="发表于 2020-04-28 14:49:37">2020-04-28</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-04T16:43:27.000Z" title="更新于 2022-01-05 00:43:27">2022-01-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Python/Fundation/">Fundation</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/global/">global</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/nonlocal/">nonlocal</a></span></div><div class="content">global 语句
+语法：声明此变量为全局变量
+
+用法： global [变量名]
+
+注意：引用全局变量时，不需要global 声明，但是后面使用或者修改这个全局变量的时候，需要global声明。
+
+应用场景：变量定义在函数外部的时候，如果函数里面想改变这个全局变量的值，需要在当前的引用函数里面重新定义一个变量， 并用关键字global修饰。
+
+
+123456789a = 1  # 外部全局变量def change():        global a # 与外部全局变量同名        a += 1        print(&quot;函数内部的a的值：&#123;&#125;&quot;.format(a))   # 2                            change()print(&quot;调用change函数后， 函数外部的a的值：&#123;&#125;&quot;.format(a))  # 2
+
+
+
+nonlocal 语句
+语法：允许内嵌函数修改定义在语法上位于外层的函数的作用域中的一个或者多个名称
+
+用法： nonlocal [变量名]
+
+注意 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2020/04/27/Intermediate-Python-Book-keypoints-summary-list/" title="《Intermediate Python》 总结与拓展系列"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="《Intermediate Python》 总结与拓展系列"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/04/27/Intermediate-Python-Book-keypoints-summary-list/" title="《Intermediate Python》 总结与拓展系列">《Intermediate Python》 总结与拓展系列</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack sticky"></i><span class="sticky">置顶</span><span class="article-meta-separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-04-27T08:00:10.000Z" title="发表于 2020-04-27 16:00:10">2020-04-27</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-04T16:43:27.000Z" title="更新于 2022-01-05 00:43:27">2022-01-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Python/Intermediate/">Intermediate</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/tips/">tips</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/key-points/">key points</a></span></div><div class="content">前言该书是一本python进阶书籍，章节精简，用例简洁，却能精辟地展现原理。同时章节之间独立，且有延伸阅读。本文的内容，则是我结合自身实际需求，在原书的基础上，做的总结与拓展。
+
+
+内容列表
+args 和 *kwargs
 
 
 
 
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
+类别
+内容
 
 
 
-
-  
-
-
+功能 &amp; 使用场景
+返回可变参数、应用于函数定义&amp;调用中
 
 
+难度 &amp; 使用频率
+低难度、高频
+
+
+日期记录
+2020-5-10总结
+
+
+博文链接
+Python 中的可变参数 *args 和 **kwargs
 
 
 
-
+调试 debugging
+生成器 generators
+map、filter、reduce
+set 数据结构
+三元运算符
+装饰器
+global 和 return
 
 
 
 
+类别
+内容
 
 
 
-  
+功能 &amp; 使用场景
+global 定义全局变量、return 返回值
 
-  
+
+难度 &amp; 使用频率
+低难度、高频
 
 
-<script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : false,
-      notify     : true,
-      appId      : 'WjBhD9l9A6J5mrWl9wkgQxFu-gzGzoHsz',
-      appKey     : '1FL3ULSfrjaAYYiisMlYysHk',
-      placeholder: "你好呀，陌生人，有什么话想说嘛？",
-      avatar     : 'robohash',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : false,
-      lang       : '' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : true,
-      serverURLs : ''
-    });
-  }, window.Valine);
-});
-</script>
+日期记录
+2020-4-28总结
 
-</body>
-</html>
-<!-- 页面点击特效 -->
-<script type="text/javascript" src="/js/click.js"></script>
+
+博文链接
+global vs nonlocal、LEGB规则
+
+
+
+对象变动 Mutation
+魔法方法 _slots_
+虚拟环境
+容器 collection ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2018/11/24/Thoughts-reading-analysis-of-past-2-years/" title="私人阅读史之两年时间读书分析"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="私人阅读史之两年时间读书分析"></a></div><div class="recent-post-info"><a class="article-title" href="/2018/11/24/Thoughts-reading-analysis-of-past-2-years/" title="私人阅读史之两年时间读书分析">私人阅读史之两年时间读书分析</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack sticky"></i><span class="sticky">置顶</span><span class="article-meta-separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2018-11-24T07:30:45.000Z" title="发表于 2018-11-24 15:30:45">2018-11-24</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-04T16:43:27.000Z" title="更新于 2022-01-05 00:43:27">2022-01-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Thoughts/">Thoughts</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%98%85%E8%AF%BB/">阅读</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/Echarts/">Echarts</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%8F%8D%E6%80%9D/">反思</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/">可视化</a></span></div><div class="content">
+
+
+
+
+
+
+
+## 前言
+
+读书原为自己受用，且是非常个性化的体验，阅读不过一种自己选择的生活方式，已从刻意为之变为习以为常之事，故而，本不该拿出来标榜。不过，我对数据可视化&amp;设计，向来偏爱有加，爱鼓捣一些视频，图像等作品出来，并常常有想要炫耀的天然冲动。之前的可视化创作呢，更多的是一时灵感而已，但该阅读数据的记录，则是两年时间，锱铢积累而成的。一开始也并非意图明确，只是从最简单的时间记录开始，到后来，则渐渐区分功用类别，并不断完善、优化，最终，偶然接触 Echarts，甚爱之，折腾一番，将读书记录得以可视化出来，更爱之。所以呢，勉强可称为铺陈了两年的局，故而，还是有别于一般可视化的cheap fancy tricks的。既然图都摆出来了，要没些文字相互映衬，还是显得有些华而不实。也只好搜索枯肠，挤上几句，可阅读量着实一般，阅读技能也亟待提升，愿为人师又自忖不够格，还是做做反思吧。
+
+
+以上两个图表，呈现的是2016年8月5日至2018年8月4日两年内，个人的业余阅读事件，分学生时期一年，工作时期一年。总阅读时间为693小时，平均每天57分钟，实际仅占用总体时间的3.96%， ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#content-inner">5</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">小白同学</div><div class="author-info__description">轻风碎月 静夜凝思</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">57</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/baiyongan"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/baiyongan" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:bya@mail.ustc.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2020/06/01/Series-linux-theme-file-operation/" title="命令速查系列——文件基本操作"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="命令速查系列——文件基本操作"/></a><div class="content"><a class="title" href="/2020/06/01/Series-linux-theme-file-operation/" title="命令速查系列——文件基本操作">命令速查系列——文件基本操作</a><time datetime="2020-06-01T06:17:18.000Z" title="发表于 2020-06-01 14:17:18">2020-06-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/05/30/Series-Linux-command-awk/" title="Linux 运维实战系列——文本处理三剑客之一 awk"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux 运维实战系列——文本处理三剑客之一 awk"/></a><div class="content"><a class="title" href="/2020/05/30/Series-Linux-command-awk/" title="Linux 运维实战系列——文本处理三剑客之一 awk">Linux 运维实战系列——文本处理三剑客之一 awk</a><time datetime="2020-05-30T06:30:02.000Z" title="发表于 2020-05-30 14:30:02">2020-05-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/05/27/Series-Linux-command-sed/" title="Linux 运维实战系列——文本处理三剑客之一 sed"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux 运维实战系列——文本处理三剑客之一 sed"/></a><div class="content"><a class="title" href="/2020/05/27/Series-Linux-command-sed/" title="Linux 运维实战系列——文本处理三剑客之一 sed">Linux 运维实战系列——文本处理三剑客之一 sed</a><time datetime="2020-05-27T06:39:37.000Z" title="发表于 2020-05-27 14:39:37">2020-05-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/05/24/Resource-Roadmap-data-structures-and-algorithms/" title="程序员的编程内功与外功(转载自知乎)"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="程序员的编程内功与外功(转载自知乎)"/></a><div class="content"><a class="title" href="/2020/05/24/Resource-Roadmap-data-structures-and-algorithms/" title="程序员的编程内功与外功(转载自知乎)">程序员的编程内功与外功(转载自知乎)</a><time datetime="2020-05-24T04:23:42.000Z" title="发表于 2020-05-24 12:23:42">2020-05-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/05/24/Series-Linux-command-paste/" title="Linux 运维实战系列——paste 粘贴"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux 运维实战系列——paste 粘贴"/></a><div class="content"><a class="title" href="/2020/05/24/Series-Linux-command-paste/" title="Linux 运维实战系列——paste 粘贴">Linux 运维实战系列——paste 粘贴</a><time datetime="2020-05-24T02:51:40.000Z" title="发表于 2020-05-24 10:51:40">2020-05-24</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Booknote/"><span class="card-category-list-name">Booknote</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Engineering/"><span class="card-category-list-name">Engineering</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">14</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/Fundation/"><span class="card-category-list-name">Fundation</span><span class="card-category-list-count">9</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/Intermediate/"><span class="card-category-list-name">Intermediate</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/cheatsheet/"><span class="card-category-list-name">cheatsheet</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/practical/"><span class="card-category-list-name">practical</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">20</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Python/" style="font-size: 1.22em; color: rgb(121, 29, 12)">Python</a><a href="/tags/%E8%A7%84%E5%88%92/" style="font-size: 1.15em; color: rgb(71, 102, 102)">规划</a><a href="/tags/%E9%98%85%E8%AF%BB/" style="font-size: 1.22em; color: rgb(20, 129, 75)">阅读</a><a href="/tags/%E4%BA%BA%E9%99%85%E4%BA%A4%E5%BE%80/" style="font-size: 1.15em; color: rgb(151, 129, 168)">人际交往</a><a href="/tags/Roadmap/" style="font-size: 1.3em; color: rgb(20, 146, 73)">Roadmap</a><a href="/tags/pip/" style="font-size: 1.15em; color: rgb(79, 191, 148)">pip</a><a href="/tags/pdb/" style="font-size: 1.15em; color: rgb(116, 195, 145)">pdb</a><a href="/tags/pycodestyle/" style="font-size: 1.15em; color: rgb(50, 29, 38)">pycodestyle</a><a href="/tags/pyenv/" style="font-size: 1.15em; color: rgb(76, 75, 125)">pyenv</a><a href="/tags/virtualenv/" style="font-size: 1.15em; color: rgb(79, 132, 98)">virtualenv</a><a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/" style="font-size: 1.15em; color: rgb(94, 117, 3)">命令行工具</a><a href="/tags/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/" style="font-size: 1.15em; color: rgb(19, 43, 126)">文本处理</a><a href="/tags/%E5%AD%97%E7%AC%A6%E9%9B%86%E7%BC%96%E7%A0%81/" style="font-size: 1.15em; color: rgb(135, 4, 64)">字符集编码</a><a href="/tags/modules/" style="font-size: 1.15em; color: rgb(105, 194, 187)">modules</a><a href="/tags/HPC/" style="font-size: 1.15em; color: rgb(116, 153, 183)">HPC</a><a href="/tags/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" style="font-size: 1.15em; color: rgb(140, 59, 66)">环境变量</a><a href="/tags/%E6%A0%87%E5%87%86%E5%BA%93/" style="font-size: 1.15em; color: rgb(97, 74, 171)">标准库</a><a href="/tags/%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0/" style="font-size: 1.15em; color: rgb(82, 1, 170)">内置函数</a><a href="/tags/PyCharm/" style="font-size: 1.15em; color: rgb(68, 64, 62)">PyCharm</a><a href="/tags/%E6%8E%A8%E5%AF%BC%E5%BC%8F/" style="font-size: 1.15em; color: rgb(172, 133, 190)">推导式</a><a href="/tags/global/" style="font-size: 1.15em; color: rgb(77, 78, 96)">global</a><a href="/tags/nonlocal/" style="font-size: 1.15em; color: rgb(106, 157, 156)">nonlocal</a><a href="/tags/%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/" style="font-size: 1.15em; color: rgb(60, 80, 154)">系统管理</a><a href="/tags/%E6%83%85%E7%BB%AA%E7%AE%A1%E7%90%86/" style="font-size: 1.15em; color: rgb(25, 61, 196)">情绪管理</a><a href="/tags/EQ/" style="font-size: 1.15em; color: rgb(119, 82, 151)">EQ</a><a href="/tags/lambda/" style="font-size: 1.15em; color: rgb(80, 200, 76)">lambda</a><a href="/tags/json/" style="font-size: 1.15em; color: rgb(10, 162, 170)">json</a><a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 1.45em; color: rgb(104, 5, 188)">命令</a><a href="/tags/%E9%80%9F%E6%9F%A5/" style="font-size: 1.3em; color: rgb(54, 143, 120)">速查</a><a href="/tags/Echarts/" style="font-size: 1.3em; color: rgb(122, 122, 104)">Echarts</a><a href="/tags/commamds/" style="font-size: 1.15em; color: rgb(72, 159, 68)">commamds</a><a href="/tags/%E5%8F%8D%E6%80%9D/" style="font-size: 1.22em; color: rgb(196, 21, 50)">反思</a><a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 1.38em; color: rgb(58, 73, 165)">运维</a><a href="/tags/%E5%AE%9E%E6%88%98/" style="font-size: 1.15em; color: rgb(173, 106, 10)">实战</a><a href="/tags/%E8%84%9A%E6%9C%AC/" style="font-size: 1.15em; color: rgb(122, 66, 59)">脚本</a><a href="/tags/tips/" style="font-size: 1.15em; color: rgb(157, 84, 132)">tips</a><a href="/tags/key-points/" style="font-size: 1.15em; color: rgb(68, 140, 67)">key points</a><a href="/tags/args/" style="font-size: 1.15em; color: rgb(158, 118, 105)">args</a><a href="/tags/kwargs/" style="font-size: 1.15em; color: rgb(141, 22, 40)">kwargs</a><a href="/tags/%E6%BA%90%E7%A0%81/" style="font-size: 1.15em; color: rgb(43, 91, 153)">源码</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/06/"><span class="card-archive-list-date">六月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/05/"><span class="card-archive-list-date">五月 2020</span><span class="card-archive-list-count">21</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/04/"><span class="card-archive-list-date">四月 2020</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/09/"><span class="card-archive-list-date">九月 2019</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/08/"><span class="card-archive-list-date">八月 2019</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/07/"><span class="card-archive-list-date">七月 2019</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/03/"><span class="card-archive-list-date">三月 2019</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/02/"><span class="card-archive-list-date">二月 2019</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">48</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">144.2k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-02-01T17:24:17.647Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 小白同学</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

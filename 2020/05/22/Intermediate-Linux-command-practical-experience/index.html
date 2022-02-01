@@ -1,269 +1,162 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-bya.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-bya.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-bya.png">
-
-<link rel="stylesheet" href="/css/main.css">
-
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"bya.cool","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":360,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="目前的瓶颈与破局在刚开始接触实际工作时，linux 的命令工具应用的比较多，日常的应用场景大致熟悉之后，也知道哪些工具常不常用、某个命令能做什么、怎么去查询帮助文档、哪些需要组合起来，才能实现特定功能等等······ 但是目前的瓶颈就是，平台应用场景有限，故而经验有限。且更多时候，仅能保证解决问题，却还不能漂亮地、流畅地解决问题。现在打算看一下实战总结类的相关书籍，汲取下经验，然后结合自身实际，做">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Linux 命令实战经验 &amp; shell脚本总结系列 | BYA's Blog</title><meta name="keywords" content="命令,运维,实战,脚本"><meta name="author" content="小白同学"><meta name="copyright" content="小白同学"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="目前的瓶颈与破局在刚开始接触实际工作时，linux 的命令工具应用的比较多，日常的应用场景大致熟悉之后，也知道哪些工具常不常用、某个命令能做什么、怎么去查询帮助文档、哪些需要组合起来，才能实现特定功能等等······ 但是目前的瓶颈就是，平台应用场景有限，故而经验有限。且更多时候，仅能保证解决问题，却还不能漂亮地、流畅地解决问题。现在打算看一下实战总结类的相关书籍，汲取下经验，然后结合自身实际，做">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux 命令实战经验 &amp; shell脚本总结系列">
 <meta property="og:url" content="http://bya.cool/2020/05/22/Intermediate-Linux-command-practical-experience/index.html">
 <meta property="og:site_name" content="BYA&#39;s Blog">
 <meta property="og:description" content="目前的瓶颈与破局在刚开始接触实际工作时，linux 的命令工具应用的比较多，日常的应用场景大致熟悉之后，也知道哪些工具常不常用、某个命令能做什么、怎么去查询帮助文档、哪些需要组合起来，才能实现特定功能等等······ 但是目前的瓶颈就是，平台应用场景有限，故而经验有限。且更多时候，仅能保证解决问题，却还不能漂亮地、流畅地解决问题。现在打算看一下实战总结类的相关书籍，汲取下经验，然后结合自身实际，做">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
 <meta property="article:published_time" content="2020-05-22T12:33:00.000Z">
 <meta property="article:modified_time" content="2022-01-04T16:43:27.000Z">
-<meta property="article:author" content="小白大侠">
+<meta property="article:author" content="小白同学">
 <meta property="article:tag" content="命令">
 <meta property="article:tag" content="运维">
 <meta property="article:tag" content="实战">
 <meta property="article:tag" content="脚本">
 <meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://bya.cool/2020/05/22/Intermediate-Linux-command-practical-experience/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
-
-  <title>Linux 命令实战经验 & shell脚本总结系列 | BYA's Blog</title>
-  
-
-
-  <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?50ee4c4119ca03830c1b5bde8308daae";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="http://bya.cool/2020/05/22/Intermediate-Linux-command-practical-experience/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?50ee4c4119ca03830c1b5bde8308daae";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Linux 命令实战经验 & shell脚本总结系列',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-01-05 00:43:27'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-</head>
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">BYA's Blog</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">轻风碎月 静夜凝思</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-外链">
-
-    <a href="/links/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>外链</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <div class="reading-progress-bar"></div>
-
-  <a href="https://github.com/baiyongan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://bya.cool/2020/05/22/Intermediate-Linux-command-practical-experience/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="小白大侠">
-      <meta itemprop="description" content="轻风碎月 静夜凝思">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BYA's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Linux 命令实战经验 & shell脚本总结系列
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-22 20:33:00" itemprop="dateCreated datePublished" datetime="2020-05-22T20:33:00+08:00">2020-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-05 00:43:27" itemprop="dateModified" datetime="2022-01-05T00:43:27+08:00">2022-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/practical/" itemprop="url" rel="index"><span itemprop="name">practical</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span>
-  
-  <span class="post-meta-item">
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-    <a title="valine" href="/2020/05/22/Intermediate-Linux-command-practical-experience/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/22/Intermediate-Linux-command-practical-experience/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h1 id="目前的瓶颈与破局"><a href="#目前的瓶颈与破局" class="headerlink" title="目前的瓶颈与破局"></a>目前的瓶颈与破局</h1><p>在刚开始接触实际工作时，linux 的命令工具应用的比较多，日常的应用场景大致熟悉之后，也知道哪些工具常不常用、某个命令能做什么、怎么去查询帮助文档、哪些需要组合起来，才能实现特定功能等等······</p>
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">57</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">BYA's Blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux 命令实战经验 &amp; shell脚本总结系列</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-05-22T12:33:00.000Z" title="发表于 2020-05-22 20:33:00">2020-05-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-04T16:43:27.000Z" title="更新于 2022-01-05 00:43:27">2022-01-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/practical/">practical</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Linux 命令实战经验 &amp; shell脚本总结系列"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="目前的瓶颈与破局"><a href="#目前的瓶颈与破局" class="headerlink" title="目前的瓶颈与破局"></a>目前的瓶颈与破局</h1><p>在刚开始接触实际工作时，linux 的命令工具应用的比较多，日常的应用场景大致熟悉之后，也知道哪些工具常不常用、某个命令能做什么、怎么去查询帮助文档、哪些需要组合起来，才能实现特定功能等等······</p>
 <p>但是目前的瓶颈就是，平台应用场景有限，故而经验有限。且更多时候，仅能保证解决问题，却还不能漂亮地、流畅地解决问题。现在打算看一下实战总结类的相关书籍，<strong>汲取下经验</strong>，然后<strong>结合自身实际，做些增补</strong>。</p>
-<a id="more"></a>
+<span id="more"></span>
 
-<p>关于 linux 命令使用的 tricks 应该很多，我对这些个炫技操作没那么苛求。只要当碰见实际问题时，知道用什么来实现，进而能追溯其语法格式，熟练运用常用模式即可。所以我的学习目标是<strong>实战经验为主，总结笔记备忘</strong>，主要参考的书籍是 <a href="https://book.douban.com/subject/26849802/" target="_blank" rel="noopener"><strong>《Linux大棚命令百篇 · 上 (文件和文本篇)》</strong></a>，以及 <a href="https://book.douban.com/subject/26849844/" target="_blank" rel="noopener"><strong>《Linux 大棚命令百篇 · 下 (网络和系统篇)》</strong></a>。其作者是百度运维部的工程师，一线经验丰富，其内容特点：<strong>1. 聚焦专题、2. 贴近实战、3. 易于阅读</strong>。</p>
+<p>关于 linux 命令使用的 tricks 应该很多，我对这些个炫技操作没那么苛求。只要当碰见实际问题时，知道用什么来实现，进而能追溯其语法格式，熟练运用常用模式即可。所以我的学习目标是<strong>实战经验为主，总结笔记备忘</strong>，主要参考的书籍是 <a target="_blank" rel="noopener" href="https://book.douban.com/subject/26849802/"><strong>《Linux大棚命令百篇 · 上 (文件和文本篇)》</strong></a>，以及 <a target="_blank" rel="noopener" href="https://book.douban.com/subject/26849844/"><strong>《Linux 大棚命令百篇 · 下 (网络和系统篇)》</strong></a>。其作者是百度运维部的工程师，一线经验丰富，其内容特点：<strong>1. 聚焦专题、2. 贴近实战、3. 易于阅读</strong>。</p>
 <p>p.s. 该书评价不错，值得一读。linux 也不是我现在主要关注的技术点，隔三岔五睡前看几页，再小小总结一下，水一篇 blog，逐渐做个系列，这种节奏还是比较惬意的😂。不过技术问题是普适的，笔记期间，我也会适当添补一些资料，力求用例精确可复现，希望该笔记系列也能对读者有所帮助~~（如有纰漏之处，还请多多留言指出，谢谢）</p>
 <h1 id="实战经验的总结-amp-归纳"><a href="#实战经验的总结-amp-归纳" class="headerlink" title="实战经验的总结&amp;归纳"></a>实战经验的总结&amp;归纳</h1><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><h3 id="测试版本"><a href="#测试版本" class="headerlink" title="测试版本"></a>测试版本</h3><p>所有案例都经本地测试通过，linux 测试版本为Centos 7.4</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya linux_practice]$ cat /etc/redhat-release </span><br><span class="line">CentOS Linux release 7.4.1708 (Core) </span><br><span class="line">[baiyongan@bya linux_practice]$ uname -a</span><br><span class="line">Linux bya 3.10.0-693.el7.x86_64 #1 SMP Tue Aug 22 21:09:27 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux</span><br></pre></td></tr></table></figure>
@@ -680,354 +573,35 @@
 <td align="center">.</td>
 </tr>
 </tbody></table>
-<h1 id="拓展阅读"><a href="#拓展阅读" class="headerlink" title="拓展阅读"></a>拓展阅读</h1><p> <a href="https://book.douban.com/subject/26849802/" target="_blank" rel="noopener"><strong>《Linux大棚命令百篇 · 上 (文件和文本篇)》</strong></a></p>
-<p><a href="https://book.douban.com/subject/26849844/" target="_blank" rel="noopener"><strong>《Linux 大棚命令百篇 · 下 (网络和系统篇)》</strong></a></p>
+<h1 id="拓展阅读"><a href="#拓展阅读" class="headerlink" title="拓展阅读"></a>拓展阅读</h1><p> <a target="_blank" rel="noopener" href="https://book.douban.com/subject/26849802/"><strong>《Linux大棚命令百篇 · 上 (文件和文本篇)》</strong></a></p>
+<p><a target="_blank" rel="noopener" href="https://book.douban.com/subject/26849844/"><strong>《Linux 大棚命令百篇 · 下 (网络和系统篇)》</strong></a></p>
 <h1 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h1><p><del>文本处理相关</del></p>
 <p><del>sed</del> 、<del>awk</del>、<del>grep</del></p>
 <p>find、lsof、fuser、sar</p>
 <p>网络相关</p>
-
-    </div>
-
-
-    
-    
-    
-        <div class="reward-container">
-  <div></div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
-  </button>
-  <div id="qr" style="display: none;">
-
-  </div>
-</div>
-
-        
-
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>小白大侠
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="http://bya.cool/2020/05/22/Intermediate-Linux-command-practical-experience/" title="Linux 命令实战经验 &amp; shell脚本总结系列">http://bya.cool/2020/05/22/Intermediate-Linux-command-practical-experience/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag"><i class="fa fa-tag"></i> 命令</a>
-              <a href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag"><i class="fa fa-tag"></i> 运维</a>
-              <a href="/tags/%E5%AE%9E%E6%88%98/" rel="tag"><i class="fa fa-tag"></i> 实战</a>
-              <a href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag"><i class="fa fa-tag"></i> 脚本</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/05/22/Series-Linux-command-echo/" rel="prev" title="Linux 运维实战系列——echo 打印">
-      <i class="fa fa-chevron-left"></i> Linux 运维实战系列——echo 打印
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/05/11/Intermediate-Python-pythonic-code-snippets/" rel="next" title="如何写出 Pythonic 的代码？">
-      如何写出 Pythonic 的代码？ <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-    <div class="comments" id="valine-comments"></div>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">小白同学</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://bya.cool/2020/05/22/Intermediate-Linux-command-practical-experience/">http://bya.cool/2020/05/22/Intermediate-Linux-command-practical-experience/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://bya.cool" target="_blank">BYA's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%91%BD%E4%BB%A4/">命令</a><a class="post-meta__tags" href="/tags/%E8%BF%90%E7%BB%B4/">运维</a><a class="post-meta__tags" href="/tags/%E5%AE%9E%E6%88%98/">实战</a><a class="post-meta__tags" href="/tags/%E8%84%9A%E6%9C%AC/">脚本</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/05/22/Series-Linux-command-echo/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Linux 运维实战系列——echo 打印</div></div></a></div><div class="next-post pull-right"><a href="/2020/05/11/Intermediate-Python-pythonic-code-snippets/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">如何写出 Pythonic 的代码？</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/05/24/Series-Linux-command-cut/" title="Linux 运维实战系列——cut 剪切"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-24</div><div class="title">Linux 运维实战系列——cut 剪切</div></div></a></div><div><a href="/2020/05/22/Series-Linux-command-echo/" title="Linux 运维实战系列——echo 打印"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-22</div><div class="title">Linux 运维实战系列——echo 打印</div></div></a></div><div><a href="/2020/05/23/Series-Linux-command-grep-egrep-fgrep/" title="Linux 运维实战系列——文本处理三剑客之一 grep"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-23</div><div class="title">Linux 运维实战系列——文本处理三剑客之一 grep</div></div></a></div><div><a href="/2020/05/24/Series-Linux-command-paste/" title="Linux 运维实战系列——paste 粘贴"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-24</div><div class="title">Linux 运维实战系列——paste 粘贴</div></div></a></div><div><a href="/2020/05/27/Series-Linux-command-sed/" title="Linux 运维实战系列——文本处理三剑客之一 sed"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-27</div><div class="title">Linux 运维实战系列——文本处理三剑客之一 sed</div></div></a></div><div><a href="/2020/05/23/Series-Linux-command-sort/" title="Linux 运维实战系列——sort 排序"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-23</div><div class="title">Linux 运维实战系列——sort 排序</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">小白同学</div><div class="author-info__description">轻风碎月 静夜凝思</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">57</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/baiyongan"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/baiyongan" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:bya@mail.ustc.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E5%89%8D%E7%9A%84%E7%93%B6%E9%A2%88%E4%B8%8E%E7%A0%B4%E5%B1%80"><span class="toc-number">1.</span> <span class="toc-text">目前的瓶颈与破局</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E7%BB%8F%E9%AA%8C%E7%9A%84%E6%80%BB%E7%BB%93-amp-%E5%BD%92%E7%BA%B3"><span class="toc-number">2.</span> <span class="toc-text">实战经验的总结&amp;归纳</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B4%E6%98%8E"><span class="toc-number">2.1.</span> <span class="toc-text">说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E7%89%88%E6%9C%AC"><span class="toc-number">2.1.1.</span> <span class="toc-text">测试版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%A1%8C%E6%96%87%E7%BB%93%E6%9E%84"><span class="toc-number">2.1.2.</span> <span class="toc-text">基本行文结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E7%AF%87"><span class="toc-number">2.2.</span> <span class="toc-text">工具篇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A-%C2%B7-%E6%96%87%E4%BB%B6%E5%92%8C%E6%96%87%E6%9C%AC"><span class="toc-number">2.3.</span> <span class="toc-text">上 · 文件和文本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#shell-%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%B7%A5%E5%85%B7%E7%AF%87"><span class="toc-number">2.3.1.</span> <span class="toc-text">shell 基础及工具篇</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E7%A3%81%E7%9B%98%E7%AF%87"><span class="toc-number">2.3.2.</span> <span class="toc-text">文件和磁盘篇</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E7%AF%87"><span class="toc-number">2.3.3.</span> <span class="toc-text">文本处理篇</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B-%C2%B7-%E7%BD%91%E7%BB%9C%E5%92%8C%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.4.</span> <span class="toc-text">下 · 网络和系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%AF%87"><span class="toc-number">2.4.1.</span> <span class="toc-text">网络篇</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E5%92%8C%E6%80%A7%E8%83%BD%E7%AF%87"><span class="toc-number">2.4.2.</span> <span class="toc-text">进程和性能篇</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E7%AF%87"><span class="toc-number">2.4.3.</span> <span class="toc-text">系统管理篇</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E8%A1%A5-%E5%85%B6%E4%BB%96%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7%E7%AF%87"><span class="toc-number">2.4.4.</span> <span class="toc-text">增补-其他实用工具篇</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shell%E8%84%9A%E6%9C%AC%E7%AF%87"><span class="toc-number">2.4.5.</span> <span class="toc-text">shell脚本篇</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%93%E5%B1%95%E9%98%85%E8%AF%BB"><span class="toc-number">3.</span> <span class="toc-text">拓展阅读</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%87%E6%B3%A8"><span class="toc-number">4.</span> <span class="toc-text">备注</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2020/06/01/Series-linux-theme-file-operation/" title="命令速查系列——文件基本操作"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="命令速查系列——文件基本操作"/></a><div class="content"><a class="title" href="/2020/06/01/Series-linux-theme-file-operation/" title="命令速查系列——文件基本操作">命令速查系列——文件基本操作</a><time datetime="2020-06-01T06:17:18.000Z" title="发表于 2020-06-01 14:17:18">2020-06-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/05/30/Series-Linux-command-awk/" title="Linux 运维实战系列——文本处理三剑客之一 awk"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux 运维实战系列——文本处理三剑客之一 awk"/></a><div class="content"><a class="title" href="/2020/05/30/Series-Linux-command-awk/" title="Linux 运维实战系列——文本处理三剑客之一 awk">Linux 运维实战系列——文本处理三剑客之一 awk</a><time datetime="2020-05-30T06:30:02.000Z" title="发表于 2020-05-30 14:30:02">2020-05-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/05/27/Series-Linux-command-sed/" title="Linux 运维实战系列——文本处理三剑客之一 sed"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux 运维实战系列——文本处理三剑客之一 sed"/></a><div class="content"><a class="title" href="/2020/05/27/Series-Linux-command-sed/" title="Linux 运维实战系列——文本处理三剑客之一 sed">Linux 运维实战系列——文本处理三剑客之一 sed</a><time datetime="2020-05-27T06:39:37.000Z" title="发表于 2020-05-27 14:39:37">2020-05-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/05/24/Resource-Roadmap-data-structures-and-algorithms/" title="程序员的编程内功与外功(转载自知乎)"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="程序员的编程内功与外功(转载自知乎)"/></a><div class="content"><a class="title" href="/2020/05/24/Resource-Roadmap-data-structures-and-algorithms/" title="程序员的编程内功与外功(转载自知乎)">程序员的编程内功与外功(转载自知乎)</a><time datetime="2020-05-24T04:23:42.000Z" title="发表于 2020-05-24 12:23:42">2020-05-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/05/24/Series-Linux-command-paste/" title="Linux 运维实战系列——paste 粘贴"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux 运维实战系列——paste 粘贴"/></a><div class="content"><a class="title" href="/2020/05/24/Series-Linux-command-paste/" title="Linux 运维实战系列——paste 粘贴">Linux 运维实战系列——paste 粘贴</a><time datetime="2020-05-24T02:51:40.000Z" title="发表于 2020-05-24 10:51:40">2020-05-24</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 小白同学</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'WjBhD9l9A6J5mrWl9wkgQxFu-gzGzoHsz',
+      appKey: '1FL3ULSfrjaAYYiisMlYysHk',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
   }
-</script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
 
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目前的瓶颈与破局"><span class="nav-number">1.</span> <span class="nav-text">目前的瓶颈与破局</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实战经验的总结-amp-归纳"><span class="nav-number">2.</span> <span class="nav-text">实战经验的总结&amp;归纳</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">2.1.</span> <span class="nav-text">说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#测试版本"><span class="nav-number">2.1.1.</span> <span class="nav-text">测试版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本行文结构"><span class="nav-number">2.1.2.</span> <span class="nav-text">基本行文结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具篇"><span class="nav-number">2.2.</span> <span class="nav-text">工具篇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上-·-文件和文本"><span class="nav-number">2.3.</span> <span class="nav-text">上 · 文件和文本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#shell-基础及工具篇"><span class="nav-number">2.3.1.</span> <span class="nav-text">shell 基础及工具篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件和磁盘篇"><span class="nav-number">2.3.2.</span> <span class="nav-text">文件和磁盘篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本处理篇"><span class="nav-number">2.3.3.</span> <span class="nav-text">文本处理篇</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下-·-网络和系统"><span class="nav-number">2.4.</span> <span class="nav-text">下 · 网络和系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络篇"><span class="nav-number">2.4.1.</span> <span class="nav-text">网络篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程和性能篇"><span class="nav-number">2.4.2.</span> <span class="nav-text">进程和性能篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统管理篇"><span class="nav-number">2.4.3.</span> <span class="nav-text">系统管理篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增补-其他实用工具篇"><span class="nav-number">2.4.4.</span> <span class="nav-text">增补-其他实用工具篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shell脚本篇"><span class="nav-number">2.4.5.</span> <span class="nav-text">shell脚本篇</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拓展阅读"><span class="nav-number">3.</span> <span class="nav-text">拓展阅读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#备注"><span class="nav-number">4.</span> <span class="nav-text">备注</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="小白大侠"
-      src="/images/avatar.jpg">
-  <p class="site-author-name" itemprop="name">小白大侠</p>
-  <div class="site-description" itemprop="description">轻风碎月 静夜凝思</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">48</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">18</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">57</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/baiyongan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;baiyongan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://www.jianshu.com/u/7be33dc73f81" title="简书 → https:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;7be33dc73f81" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>简书</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:bya@mail.ustc.edu.com" title="E-Mail → mailto:bya@mail.ustc.edu.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-  </div>
-
-
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
-      独学而无友 则孤陋而寡闻
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://www.book110.com/" title="http:&#x2F;&#x2F;www.book110.com" rel="noopener" target="_blank">荐书堂</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://leetcode-cn.com/" title="https:&#x2F;&#x2F;leetcode-cn.com" rel="noopener" target="_blank">LeetCode-cn</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://cspiration.com/leetcodeClassification#1" title="https:&#x2F;&#x2F;cspiration.com&#x2F;leetcodeClassification#1" rel="noopener" target="_blank">LeetCode</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn" rel="noopener" target="_blank">CoolShell</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://zhangwenli.com/blog/" title="http:&#x2F;&#x2F;zhangwenli.com&#x2F;blog&#x2F;" rel="noopener" target="_blank">羡辙</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://wdxtub.com/" title="https:&#x2F;&#x2F;wdxtub.com" rel="noopener" target="_blank">小土刀</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://www.cxyxiaowu.com/" title="https:&#x2F;&#x2F;www.cxyxiaowu.com" rel="noopener" target="_blank">程序员小吴(算法)</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://python-web-guide.readthedocs.io/" title="https:&#x2F;&#x2F;python-web-guide.readthedocs.io&#x2F;" rel="noopener" target="_blank">python-web-guide</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://python.iswbm.com/en/latest/" title="http:&#x2F;&#x2F;python.iswbm.com&#x2F;en&#x2F;latest&#x2F;" rel="noopener" target="_blank">python-编程时光</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://redstonewill.com/" title="https:&#x2F;&#x2F;redstonewill.com" rel="noopener" target="_blank">红色石头</a>
-        </li>
-    </ul>
-  </div>
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-
-<div class="beian-meng">
-<a href="https://icp.gov.moe" target="_blank">萌 ICP备 </a>
-<a href="https://icp.gov.moe/?keyword=20209207" target="_blank"> 20209207号</a>
-</div>
-
-
-<div class="copyright">
-  
-  &copy; 2018 – 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-crown"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">小白大侠</span>
-  <span class="post-meta-divider">|</span>
-    <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
-    </div>
-
-</div>
-
-
-    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-
-<script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : false,
-      notify     : true,
-      appId      : 'WjBhD9l9A6J5mrWl9wkgQxFu-gzGzoHsz',
-      appKey     : '1FL3ULSfrjaAYYiisMlYysHk',
-      placeholder: "你好呀，陌生人，有什么话想说嘛？",
-      avatar     : 'robohash',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : false,
-      lang       : '' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : true,
-      serverURLs : ''
-    });
-  }, window.Valine);
-});
-</script>
-
-</body>
-</html>
-<!-- 页面点击特效 -->
-<script type="text/javascript" src="/js/click.js"></script>
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
