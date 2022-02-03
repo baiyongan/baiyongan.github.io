@@ -1,6 +1,7 @@
 ---
 title: Python 序列化模块——json
 date: 2020-04-23 21:44:10
+cover: https://s2.loli.net/2022/02/03/7sXCgO2wYznbSMe.png
 categories:
 	- Python
 	- Fundation

@@ -2,6 +2,7 @@
 title: Linux 命令的应用场景及常用选项速查系列
 date: 2020-05-23 13:48:09
 top: 10 
+cover: https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png
 categories:
 	- Linux
 	- cheatsheet

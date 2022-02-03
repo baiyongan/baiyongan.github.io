@@ -2,6 +2,7 @@
 title: 命令速查系列——文件基本操作
 date: 2020-06-01 14:17:18
 top:
+cover: https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png
 categories:
 	- Linux
 	- cheatsheet

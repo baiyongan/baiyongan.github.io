@@ -2,6 +2,7 @@
 title: Linux 运维实战系列——sort 排序
 date: 2020-05-23 20:19:38
 top:
+cover: https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png
 categories:
 	- Linux
 	- Fundation

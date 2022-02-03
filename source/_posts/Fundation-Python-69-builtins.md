@@ -1,6 +1,7 @@
 ---
 title: Python 内置函数
 date: 2020-05-02 07:34:11
+cover: https://s2.loli.net/2022/02/03/7sXCgO2wYznbSMe.png
 categories:
 	- Python
 	- Fundation

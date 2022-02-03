@@ -2,6 +2,7 @@
 title: Python 中的可变参数 *args 和 **kwargs
 date: 2020-05-10 23:06:35
 top:
+cover: https://s2.loli.net/2022/02/03/7sXCgO2wYznbSMe.png
 categories:
 	- Python
 	- Intermediate

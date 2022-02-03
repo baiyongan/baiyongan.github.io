@@ -2,6 +2,7 @@
 title: 私人阅读史之两年时间读书分析
 date: 2018-11-24 15:30:45
 top: 10
+cover: https://s2.loli.net/2022/02/03/rsS5NHX6iTLmOYR.jpg
 categories:
 	- Thoughts
 tags:
@@ -24,6 +25,7 @@ tags:
 <script type="text/javascript" src="/Echarts_js/echarts.js"></script>
 <script type="text/javascript" src="/Echarts_js/jquery.js"></script>
 <script type="text/javascript" src="/Echarts_js/reading_analysis.js"></script>
+
 ## 前言
 
 读书原为自己受用，且是非常个性化的体验，阅读不过一种自己选择的生活方式，已从刻意为之变为习以为常之事，故而，本不该拿出来标榜。不过，我对数据可视化&设计，向来偏爱有加，爱鼓捣一些视频，图像等作品出来，并常常有想要炫耀的天然冲动。之前的可视化创作呢，更多的是一时灵感而已，但该阅读数据的记录，则是两年时间，锱铢积累而成的。一开始也并非意图明确，只是从最简单的时间记录开始，到后来，则渐渐区分功用类别，并不断完善、优化，最终，偶然接触 Echarts，甚爱之，折腾一番，将读书记录得以可视化出来，更爱之。所以呢，勉强可称为铺陈了两年的局，故而，还是有别于一般可视化的cheap fancy tricks的。既然图都摆出来了，要没些文字相互映衬，还是显得有些华而不实。也只好搜索枯肠，挤上几句，可阅读量着实一般，阅读技能也亟待提升，愿为人师又自忖不够格，还是做做反思吧。

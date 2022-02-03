@@ -2,6 +2,7 @@
 title: 《Intermediate Python》 总结与拓展系列
 date: 2020-04-27 16:00:10
 top: 15
+cover: https://s2.loli.net/2022/02/03/7sXCgO2wYznbSMe.png
 categories:
 	- Python
 	- Intermediate

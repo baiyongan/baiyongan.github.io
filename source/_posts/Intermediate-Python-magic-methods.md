@@ -1,6 +1,7 @@
 ---
 title: Python 中的魔术方法(magic methods)
 date: 2020-05-02 07:36:50
+cover: https://s2.loli.net/2022/02/03/7sXCgO2wYznbSMe.png
 categories:
 	- Python
 	- Intermediate

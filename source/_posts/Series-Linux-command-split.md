@@ -2,6 +2,7 @@
 title: Linux 运维实战系列—— split 拆分
 date: 2020-05-24 10:51:33
 top:
+cover: https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png
 categories:
 	- Linux	
 	- Fundation

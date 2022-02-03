@@ -91,7 +91,7 @@ deploy:
     github: git@github.com:baiyongan/baiyongan.github.io.git
     # gitee: git@gitee.com:baiyongan/baiyongan.git
     # coding: git@e.coding.net:baiyongan/baiyongan.git
-  branch: main
+  branch: master
 
 
 #referenced by https://github.com/cczeng/BlogBackup/blob/master 

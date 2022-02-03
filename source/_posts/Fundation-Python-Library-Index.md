@@ -1,6 +1,7 @@
 ---
 title: Python 标准库学习路线梳理
 date: 2019-09-11 23:29:13
+cover: https://s2.loli.net/2022/02/03/7sXCgO2wYznbSMe.png
 categories:
 	- Python
 	- Fundation
