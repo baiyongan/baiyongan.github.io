@@ -16,10 +16,11 @@ tags:
 
 ### 国学最低限度之必读书目   梁启超
 
-<div id="guoxue" style="width: 1000px; height: 800px;"></div>
+<div id="guoxue" style="width: 850px; height: 800px;"></div>
 <script type="text/javascript" src="/Echarts_js/echarts.js"></script>
 <script type="text/javascript" src="/Echarts_js/guoxue_list.js"></script>
-1923年梁启超应《清华周刊》记者之约，拟就**[《国学入门书要目及其读法》](http://www.guoxue.com/?p=1739)**，约160种。后来他又为"校课既繁、所治专门"的青年学生精简此书目，开列出《最低限度之必读书目》：
+
+1923年梁启超应《清华周刊》记者之约，拟就 [《国学入门书要目及其读法》](http://www.guoxue.com/?p=1739)，约160种。后来他又为"校课既繁、所治专门"的青年学生精简此书目，开列出《最低限度之必读书目》：
 
 <!--more-->
 
