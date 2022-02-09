@@ -1,8 +1,10 @@
 ---
-title: 《强势》读书笔记
+title: 《强势》书摘
 date: 2020-04-27 12:05:47
+cover: https://s2.loli.net/2022/02/09/KaAs1iuQIfxR95J.jpg
 categories:
 	- Booknote
+	- 人际交往
 tags:
 	- 人际交往
 

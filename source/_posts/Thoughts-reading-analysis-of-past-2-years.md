@@ -15,8 +15,6 @@ tags:
 
 
 
-
-
 <div id="myreading" style="width: 100% ;height: 600px;"></div>
 <script type="text/javascript" src="/Echarts_js/echarts.js"></script>
 <script type="text/javascript" src="/Echarts_js/jquery.js"></script>
