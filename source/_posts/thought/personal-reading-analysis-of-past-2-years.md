@@ -1,7 +1,7 @@
 ---
 title: 私人阅读史之两年时间读书分析
 date: 2018-11-24 15:30:45
-top: 10
+sticky: 10
 cover: https://s2.loli.net/2022/02/03/rsS5NHX6iTLmOYR.jpg
 categories:
 	- Thoughts

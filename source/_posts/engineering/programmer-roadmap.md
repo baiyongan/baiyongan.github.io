@@ -1,7 +1,6 @@
 ---
 title: 程序员的编程内功与外功(转载自知乎)
 date: 2020-05-24 12:23:42
-top:
 categories:
 	- Resource
 	- Roadmap

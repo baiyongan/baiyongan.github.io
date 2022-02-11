@@ -1,7 +1,7 @@
 ---
 title: Linux 命令掌握的阶段性总结
 date: 2019-03-28 21:35:24
-top: 10
+sticky: 10
 cover: https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png
 categories:
 	- Linux

@@ -1,7 +1,6 @@
 ---
 title: Linux 运维实战系列——cut 剪切
 date: 2020-05-24 08:55:10
-top:
 cover: https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png
 categories:
 	- Linux

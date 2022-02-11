@@ -1,7 +1,6 @@
 ---
 title:  《学习之道》 书摘
 date: 2019-08-29 22:24:42
-top: 
 cover: https://s2.loli.net/2022/02/09/KaAs1iuQIfxR95J.jpg
 categories:
 	- Booknote

@@ -1,7 +1,6 @@
 ---
 title: Linux 运维实战系列——文本处理三剑客之一 grep
 date: 2020-05-23 10:12:16
-top:
 cover: https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png
 categories:
 	- Linux

@@ -1,7 +1,6 @@
 ---
 title: Linux 运维实战系列—— wc 字数统计
 date: 2020-05-24 10:51:26
-top:
 cover: https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png
 categories:
 	- Linux
