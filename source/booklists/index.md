@@ -6,6 +6,20 @@ type: "booklists"
 comments: false
 ---
 
+{% note no-icon %} 
+## <center>主题导航</center>
+{% endnote %}
+
+{% btn 'http://bya.cool/booklists/#通识',通识,fa-solid fa-fish,blue larger %}
+{% btn 'http://bya.cool/booklists/#专业技能',专业技能,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#类别',类别,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#类别',类别,fa-solid fa-paperclip,blue larger %}
+
+{% btn 'http://bya.cool/booklists/#类别',类别,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#类别',类别,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#类别',类别,fa-solid fa-paperclip,blue larger %}
+
+
 {% note success no-icon %} 
 ## <center>通识</center>
 {% endnote %}
