@@ -7,8 +7,9 @@ categories:
 	- 人际交往
 tags:
 	- 人际交往
-
 ---
+
+{% douban book 25925226 %}
 
 ## 《强势》摘录
 
