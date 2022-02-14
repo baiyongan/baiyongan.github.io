@@ -1,12 +1,13 @@
 ---
 title: Python 命名空间、作用域及LEGB规则
-date: 2020-04-28 17:05:50
-cover: https://s2.loli.net/2022/02/03/7sXCgO2wYznbSMe.png
+cover: 'https://s2.loli.net/2022/02/03/7sXCgO2wYznbSMe.png'
 categories:
-	- Python
-	- Intermediate
+  - Python
+  - Intermediate
 tags:
-	- LEGB
+  - LEGB
+abbrlink: 62708
+date: 2020-04-28 17:05:50
 ---
 
 ## 定义

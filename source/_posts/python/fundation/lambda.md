@@ -1,12 +1,13 @@
 ---
 title: Python lambda 表达式
-date: 2019-09-02 23:05:31
-cover: https://s2.loli.net/2022/02/03/7sXCgO2wYznbSMe.png
+cover: 'https://s2.loli.net/2022/02/03/7sXCgO2wYznbSMe.png'
 categories:
-	- Python
-	- Fundation
+  - Python
+  - Fundation
 tags:
-	- lambda
+  - lambda
+abbrlink: 26294
+date: 2019-09-02 23:05:31
 ---
 
 

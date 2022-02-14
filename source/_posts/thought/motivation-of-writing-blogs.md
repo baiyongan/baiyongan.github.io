@@ -1,11 +1,12 @@
 ---
 title: 我为什么要写博客？
-date: 2018-11-11 15:04:16
 categories:
-	- Thoughts
-tags: 
-- 感想
-- 规划
+  - Thoughts
+tags:
+  - 感想
+  - 规划
+abbrlink: 6166
+date: 2018-11-11 15:04:16
 ---
 
 

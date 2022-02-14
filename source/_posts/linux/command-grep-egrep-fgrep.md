@@ -1,13 +1,14 @@
 ---
 title: Linux 运维实战系列——文本处理三剑客之一 grep
-date: 2020-05-23 10:12:16
-cover: https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png
+cover: 'https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png'
 categories:
-	- Linux
-	- Fundation
+  - Linux
+  - Fundation
 tags:
-	- 运维
-	- 命令
+  - 运维
+  - 命令
+abbrlink: 9193
+date: 2020-05-23 10:12:16
 ---
 
 ## 命令小结

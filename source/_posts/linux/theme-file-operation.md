@@ -1,12 +1,13 @@
 ---
 title: 命令速查系列——文件基本操作
-date: 2020-06-01 14:17:18
-cover: https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png
+cover: 'https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png'
 categories:
-	- Linux
-	- cheatsheet
+  - Linux
+  - cheatsheet
 tags:
-	- 速查
+  - 速查
+abbrlink: 33287
+date: 2020-06-01 14:17:18
 ---
 
 ## 文件基本操作

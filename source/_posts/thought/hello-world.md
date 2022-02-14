@@ -1,11 +1,12 @@
 ---
 title: hello 个 world 庆祝一下
-date: 2018-11-03 22:00:21
 categories:
-	- Thoughts
-tags: 
-	- 感想
-	- 记录
+  - Thoughts
+tags:
+  - 感想
+  - 记录
+abbrlink: 60184
+date: 2018-11-03 22:00:21
 ---
 
 

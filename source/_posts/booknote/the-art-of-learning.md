@@ -1,12 +1,13 @@
 ---
-title:  《学习之道》 书摘
-date: 2019-08-29 22:24:42
-cover: https://s2.loli.net/2022/02/09/KaAs1iuQIfxR95J.jpg
+title: 《学习之道》 书摘
+cover: 'https://s2.loli.net/2022/02/09/KaAs1iuQIfxR95J.jpg'
 categories:
-	- Booknote
-	- 学习能力
+  - Booknote
+  - 学习能力
 tags:
-	- 学习能力
+  - 学习能力
+abbrlink: 61591
+date: 2019-08-29 22:24:42
 ---
 
 {% douban book 2345548 %}

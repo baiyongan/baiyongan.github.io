@@ -1,14 +1,13 @@
 ---
-
 title: Environment Modules 环境变量模块化管理工具的使用
+categories:
+  - Engineering
+tags:
+  - modules
+  - HPC
+  - 环境变量
+abbrlink: 54701
 date: 2019-02-23 14:13:54
-categories: 
-	- Engineering
-tags: 
- - modules
- - HPC
- - 环境变量
-
 ---
 
 ### 1. Modules 功能简介

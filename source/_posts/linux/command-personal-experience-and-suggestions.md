@@ -1,15 +1,16 @@
 ---
 title: Linux 命令掌握的阶段性总结
-date: 2019-03-28 21:35:24
 sticky: 10
-cover: https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png
+cover: 'https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png'
 categories:
-	- Linux
-	- Intermediate
+  - Linux
+  - Intermediate
 tags:
-	- Echarts
-	- commamds
-	- 反思
+  - Echarts
+  - commamds
+  - 反思
+abbrlink: 10184
+date: 2019-03-28 21:35:24
 ---
 
 ## 命令类型概览

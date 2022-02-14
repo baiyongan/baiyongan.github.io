@@ -1,14 +1,14 @@
 ---
 title: 如何写出更好的 Python 函数 （翻译-转载）
-date: 2020-05-07 15:59:47
-cover: https://s2.loli.net/2022/02/03/7sXCgO2wYznbSMe.png
+cover: 'https://s2.loli.net/2022/02/03/7sXCgO2wYznbSMe.png'
 categories:
-	- Python
-	- Intermediate
-	- Experience
+  - Python
+  - Intermediate
+  - Experience
 tags:
-	- 代码规范
-
+  - 代码规范
+abbrlink: 47458
+date: 2020-05-07 15:59:47
 ---
 
 

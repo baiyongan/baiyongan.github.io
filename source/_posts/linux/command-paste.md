@@ -1,14 +1,14 @@
 ---
 title: Linux 运维实战系列——paste 粘贴
-date: 2020-05-24 10:51:40
-cover: https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png
+cover: 'https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png'
 categories:
-	- Linux
-	- Fundation
+  - Linux
+  - Fundation
 tags:
-	- 运维
-	- 命令
-
+  - 运维
+  - 命令
+abbrlink: 32579
+date: 2020-05-24 10:51:40
 ---
 
 ## 命令小结

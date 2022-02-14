@@ -1,14 +1,15 @@
 ---
 title: 如何写出 Pythonic 的代码？
-date: 2020-05-11 01:30:32
-cover: https://s2.loli.net/2022/02/03/7sXCgO2wYznbSMe.png
+cover: 'https://s2.loli.net/2022/02/03/7sXCgO2wYznbSMe.png'
 categories:
-	- Python
-	- Intermediate
-	- Experience
+  - Python
+  - Intermediate
+  - Experience
 tags:
-	- code snippets
-	- pythonic
+  - code snippets
+  - pythonic
+abbrlink: 19554
+date: 2020-05-11 01:30:32
 ---
 
 ## 什么是Pythonic？

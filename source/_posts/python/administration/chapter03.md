@@ -1,11 +1,12 @@
 ---
 title: Chapter 3 命令行工具《Python Linux 系统管理与自动化运维》
-date: 2019-09-08 11:34:23
-categories: 
-	- Python
-	- DevOps
+categories:
+  - Python
+  - DevOps
 tags:
-	- 命令行工具
+  - 命令行工具
+abbrlink: 43681
+date: 2019-09-08 11:34:23
 ---
 
 ### 3 打造命令行工具

@@ -1,16 +1,17 @@
 ---
 title: 国学入门经典书目梳理
-date: 2018-11-24 11:17:52
 sticky: 10
-cover: https://s2.loli.net/2022/02/03/VYHKPxgNT6hW4iz.png
+cover: 'https://s2.loli.net/2022/02/03/VYHKPxgNT6hW4iz.png'
 categories:
-	- Resource
-	- 国学
+  - Resource
+  - 国学
 tags:
- - Echarts
- - 阅读
- - 书单
- - Roadmap
+  - Echarts
+  - 阅读
+  - 书单
+  - Roadmap
+abbrlink: 55186
+date: 2018-11-24 11:17:52
 ---
 
 

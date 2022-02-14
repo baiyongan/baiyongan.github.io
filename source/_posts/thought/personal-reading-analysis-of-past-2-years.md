@@ -1,16 +1,16 @@
 ---
 title: 私人阅读史之两年时间读书分析
-date: 2018-11-24 15:30:45
 sticky: 10
-cover: https://s2.loli.net/2022/02/03/rsS5NHX6iTLmOYR.jpg
+cover: 'https://s2.loli.net/2022/02/03/rsS5NHX6iTLmOYR.jpg'
 categories:
-	- Thoughts
+  - Thoughts
 tags:
- - Echarts
- - 可视化
- - 阅读
- - 反思
-
+  - Echarts
+  - 可视化
+  - 阅读
+  - 反思
+abbrlink: 44866
+date: 2018-11-24 15:30:45
 ---
 
 

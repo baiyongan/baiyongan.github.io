@@ -1,15 +1,16 @@
 ---
 title: Chapter 2 Python生态工具 《Python Linux系统管理与自动化运维》
-date: 2020-04-26 19:46:05
 categories:
-	- Python 
-	- DevOps
+  - Python
+  - DevOps
 tags:
-	- pip
-	- pdb
-	- pycodestyle
-	- pyenv
-	- virtualenv
+  - pip
+  - pdb
+  - pycodestyle
+  - pyenv
+  - virtualenv
+abbrlink: 58709
+date: 2020-04-26 19:46:05
 ---
 
 ## Python 生态工具

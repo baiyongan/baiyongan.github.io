@@ -1,11 +1,12 @@
 ---
 title: Chapter 1 Python语言与Linux系统管理 《Python Linux系统管理与自动化运维》
-date: 2019-09-30 22:21:58
 categories:
-	- Python 
-	- DevOps
+  - Python
+  - DevOps
 tags:
-	- Roadmap
+  - Roadmap
+abbrlink: 48527
+date: 2019-09-30 22:21:58
 ---
 
 ## 本书特色

@@ -1,12 +1,13 @@
 ---
 title: 《强势》书摘
-date: 2020-04-27 12:05:47
-cover: https://s2.loli.net/2022/02/09/KaAs1iuQIfxR95J.jpg
+cover: 'https://s2.loli.net/2022/02/09/KaAs1iuQIfxR95J.jpg'
 categories:
-	- Booknote
-	- 人际交往
+  - Booknote
+  - 人际交往
 tags:
-	- 人际交往
+  - 人际交往
+abbrlink: 47237
+date: 2020-04-27 12:05:47
 ---
 
 {% douban book 25925226 %}

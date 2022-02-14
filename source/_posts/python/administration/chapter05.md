@@ -1,11 +1,12 @@
 ---
 title: Chapter5 Linux 系统管理 《Python Linux 系统管理与自动化运维》
-date: 2019-09-10 22:01:34
 categories:
-	- Python 
-	- DevOps
+  - Python
+  - DevOps
 tags:
-	- 系统管理
+  - 系统管理
+abbrlink: 24271
+date: 2019-09-10 22:01:34
 ---
 
 ## 5 Linux 系统管理

@@ -1,13 +1,14 @@
 ---
 title: Python 中的 global、nonlocal 辨析
-date: 2020-04-28 14:49:37
-cover: https://s2.loli.net/2022/02/03/7sXCgO2wYznbSMe.png
+cover: 'https://s2.loli.net/2022/02/03/7sXCgO2wYznbSMe.png'
 categories:
-	- Python
-	- Fundation
+  - Python
+  - Fundation
 tags:
-	- global
-	- nonlocal
+  - global
+  - nonlocal
+abbrlink: 51216
+date: 2020-04-28 14:49:37
 ---
 
 ## global 语句

@@ -1,13 +1,14 @@
 ---
 title: Python 自省与反射
-date: 2020-04-29 11:11:08
-cover: https://s2.loli.net/2022/02/03/7sXCgO2wYznbSMe.png
+cover: 'https://s2.loli.net/2022/02/03/7sXCgO2wYznbSMe.png'
 categories:
-	- Python
-	- Fundation
+  - Python
+  - Fundation
 tags:
-	- 自省
-	- 反射
+  - 自省
+  - 反射
+abbrlink: 51598
+date: 2020-04-29 11:11:08
 ---
 
 ## **自省**

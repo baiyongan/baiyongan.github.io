@@ -1,12 +1,13 @@
 ---
 title: 程序员的编程内功与外功(转载自知乎)
-date: 2020-05-24 12:23:42
 categories:
-	- Resource
-	- Roadmap
+  - Resource
+  - Roadmap
 tags:
-	- 数据结构
-	- 算法
+  - 数据结构
+  - 算法
+abbrlink: 2566
+date: 2020-05-24 12:23:42
 ---
 
 ## 编程的内功

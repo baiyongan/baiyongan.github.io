@@ -1,12 +1,13 @@
 ---
 title: Chapter4 文本处理 《Python Linux 系统管理与自动化运维》
-date: 2019-09-07 00:36:01
-categories: 
-	- Python
-	- DevOps
+categories:
+  - Python
+  - DevOps
 tags:
-	- 文本处理
-	- 字符集编码
+  - 文本处理
+  - 字符集编码
+abbrlink: 31581
+date: 2019-09-07 00:36:01
 ---
 
 
