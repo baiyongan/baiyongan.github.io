@@ -1,0 +1,234 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Environment Modules 环境变量模块化管理工具的使用 | BYA's Blog</title><meta name="keywords" content="modules,HPC,环境变量"><meta name="author" content="小白大侠"><meta name="copyright" content="小白大侠"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1. Modules 功能简介​         超级计算机的硬件设施和应用软件，分别是整个超算系统的最底层和最顶层，在它们之间，还存在着我们称之为软件栈（software stack）的系统软件：包括编译器、并行运行环境、作业调度系统、性能分析和调试工具等等。一般较为成熟的超算平台，都必备多种版本、不同种类的编译器、MPI 库，以及数学库等；并在此基础之上，进行各类应用软件的编译与环境配置。于普">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Environment Modules 环境变量模块化管理工具的使用">
+<meta property="og:url" content="http://bya.cool/posts/54701/index.html">
+<meta property="og:site_name" content="BYA&#39;s Blog">
+<meta property="og:description" content="1. Modules 功能简介​         超级计算机的硬件设施和应用软件，分别是整个超算系统的最底层和最顶层，在它们之间，还存在着我们称之为软件栈（software stack）的系统软件：包括编译器、并行运行环境、作业调度系统、性能分析和调试工具等等。一般较为成熟的超算平台，都必备多种版本、不同种类的编译器、MPI 库，以及数学库等；并在此基础之上，进行各类应用软件的编译与环境配置。于普">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/02/02/cMzVJTPwZy87DdS.jpg">
+<meta property="article:published_time" content="2019-02-23T06:13:54.000Z">
+<meta property="article:modified_time" content="2022-02-14T14:49:09.000Z">
+<meta property="article:author" content="小白大侠">
+<meta property="article:tag" content="modules">
+<meta property="article:tag" content="HPC">
+<meta property="article:tag" content="环境变量">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/02/02/cMzVJTPwZy87DdS.jpg"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="http://bya.cool/posts/54701/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?50ee4c4119ca03830c1b5bde8308daae";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Environment Modules 环境变量模块化管理工具的使用',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-02-14 22:49:09'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "/img/loading.gif" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa-solid fa-house"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-paper-plane"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa-solid fa-folder-tree"></i><span> 分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-book-open-reader"></i><span> 阅读</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/booklists/"><i class="fa-fw fa-solid fa-map"></i><span> 书单</span></a></li><li><a class="site-page child" href="/booknotes/"><i class="fa-fw fa-solid fa-feather-pointed"></i><span> 书摘</span></a></li><li><a class="site-page child" href="/bookreviews/"><i class="fa-fw fa-solid fa-file-signature"></i><span> 书评</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2022/02/02/cMzVJTPwZy87DdS.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">BYA's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa-solid fa-house"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-paper-plane"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa-solid fa-folder-tree"></i><span> 分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-book-open-reader"></i><span> 阅读</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/booklists/"><i class="fa-fw fa-solid fa-map"></i><span> 书单</span></a></li><li><a class="site-page child" href="/booknotes/"><i class="fa-fw fa-solid fa-feather-pointed"></i><span> 书摘</span></a></li><li><a class="site-page child" href="/bookreviews/"><i class="fa-fw fa-solid fa-file-signature"></i><span> 书评</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Environment Modules 环境变量模块化管理工具的使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-02-23T06:13:54.000Z" title="发表于 2019-02-23 14:13:54">2019-02-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-02-14T14:49:09.000Z" title="更新于 2022-02-14 22:49:09">2022-02-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Engineering/">Engineering</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Environment Modules 环境变量模块化管理工具的使用"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="1-Modules-功能简介"><a href="#1-Modules-功能简介" class="headerlink" title="1. Modules 功能简介"></a>1. Modules 功能简介</h3><p>​         超级计算机的硬件设施和应用软件，分别是整个超算系统的最底层和最顶层，在它们之间，还存在着我们称之为软件栈（software stack）的系统软件：包括编译器、并行运行环境、作业调度系统、性能分析和调试工具等等。一般较为成熟的超算平台，都必备多种版本、不同种类的编译器、MPI 库，以及数学库等；并在此基础之上，进行各类应用软件的编译与环境配置。于普通使用者而言，因使用需求的变化，其所需的使用场景也不尽相同。若用户自行配置，则可能因为对命令行操作生疏等原因，导致环境变量配置出错，学习成本高，影响使用效率。</p>
+<p>Environment module 工具，常用于高性能计算集群（即HPC ：High  Perfermance Computing ）的环境配置管理上。它可以将软件编译器，MPI库，数学库、应用软件（计算类软件、分析类软件等）等，以模块的方式，统一到一个框架下，使得用户可以动态切换环境变量，便捷高效。且由于很多资源调度软件，如LSF、PBS、MOAB等，可以通过脚本文件来提交作业。所以，module工具同样可以在shell scripts中使用。</p>
+<span id="more"></span>
+
+<p>若要充分发挥Environment  module 工具的功用，只需要记住两点即可:</p>
+<ul>
+<li><ol>
+<li>编写modulefiles，将应用软件所需的环境变量等写入其中，配置成模块。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>使用module command(s)，动态调用已经配置好的模块。</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-Modules-安装及配置"><a href="#2-Modules-安装及配置" class="headerlink" title="2. Modules 安装及配置"></a>2. Modules 安装及配置</h3><h4 id="2-0-测试环境"><a href="#2-0-测试环境" class="headerlink" title="2.0 测试环境"></a>2.0 测试环境</h4><p>CentOS 7.2系统，modules版本为4.2.1，源码安装方式，安装位置为/opt目录。</p>
+<h4 id="2-1-源码编译"><a href="#2-1-源码编译" class="headerlink" title="2.1  源码编译"></a>2.1  源码编译</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">上传module 压缩包至/opt目录</span><br><span class="line">cd /opt</span><br><span class="line">tar -xvf  modules-4.2.1.tar.gz</span><br><span class="line">./configure --help #查看帮助页面</span><br><span class="line">./configure --prefix=/opt/modules/modules421 #指定安装目录为/opt/modules/modules421</span><br><span class="line">make install</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">设置软链接，实现登录启动modules工具</span><br><span class="line">ln -s  /opt/modules/modules421/init/profile.sh /etc/profile.d/modules.sh</span><br><span class="line">ln -s  /opt/modules/modules421/init/profile.csh /etc/profile.d/modules.csh</span><br><span class="line">source /etc/profile #或重新登录命令行界面之后，则可以使用module 的一系列命令</span><br><span class="line"></span><br><span class="line">修改modulerc文件，自定义$MODULEPATH变量</span><br><span class="line">在/opt/modules/modules421/init文件夹下的modulerc文件，可以自定义多个modulefiles所在的文件夹</span><br><span class="line"></span><br><span class="line">[root@node02 init]#  echo $MODULEPATH   #查看默认的module path</span><br><span class="line">/opt/modules/modules421/modulefiles</span><br><span class="line">cd $MODULEPATH</span><br><span class="line">mkdir  &#123;application,compiler,cuda,mathlib,mpi,python,tool&#125;</span><br><span class="line">更新modulerc文件。</span><br><span class="line">vim /opt/modules/modules421/init/modulerc</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">%Module1.0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> This file defines  the initial setup <span class="keyword">for</span> the modulefiles search path</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> and modulefiles you  want to load by default <span class="keyword">for</span> all users. It should</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> contains a lines of  module <span class="built_in">command</span> like <span class="string">&#x27;module use path&#x27;</span> and</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="string">&#x27;module load mod&#x27;</span></span></span><br><span class="line"></span><br><span class="line">module use --append  &#123;/opt/modules/modules421/modulefiles/application&#125;</span><br><span class="line">module use --append  &#123;/opt/modules/modules421/modulefiles/compiler&#125;</span><br><span class="line">module use --append  &#123;/opt/modules/modules421/modulefiles/cuda&#125;</span><br><span class="line">module use --append  &#123;/opt/modules/modules421/modulefiles/mathlib&#125;</span><br><span class="line">module use --append  &#123;/opt/modules/modules421/modulefiles/mpi&#125;</span><br><span class="line">module use --append  &#123;/opt/modules/modules421/modulefiles/python&#125;</span><br><span class="line">module use --append  &#123;/opt/modules/modules421/modulefiles/tool&#125;</span><br><span class="line"></span><br><span class="line">重新登陆，查看自定义的MODULEPATH。</span><br><span class="line">[root@node02 init]#  source /etc/profile</span><br><span class="line">[root@node02 init]#  echo $MODULEPATH</span><br><span class="line">/opt/modules/modules421/modulefiles/application:/opt/modules/modules421/modulefiles/compiler:/opt/modules/modules421/modulefiles/cuda:/opt/modules/modules421/modulefiles/mathlib:/opt/modules/modules421/modulefiles/mpi:/opt/modules/modules421/modulefiles/python:/opt/modules/modules421/modulefiles/tool</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-编写配置modulefiles文件"><a href="#2-2-编写配置modulefiles文件" class="headerlink" title="2.2 编写配置modulefiles文件"></a>2.2 编写配置modulefiles文件</h4><h5 id="modulefile文件创建"><a href="#modulefile文件创建" class="headerlink" title="modulefile文件创建"></a>modulefile文件创建</h5><p>以gcc-4.8.5为例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@node02  modulefiles]# pwd</span><br><span class="line">/opt/modules/modules421/modulefiles</span><br><span class="line">[root@node02  modulefiles]# mkdir -p compiler/&#123;gcc,intel,pgi&#125;</span><br><span class="line">[root@node02  modulefiles]# tree compiler/</span><br><span class="line">compiler/</span><br><span class="line">├── gcc</span><br><span class="line">├── intel</span><br><span class="line">└── pgi</span><br><span class="line">3 directories, 0 files</span><br><span class="line"></span><br><span class="line">命名规则：一般&quot;foldername/modulefile&quot;  即 以&quot;软件名/版本号&quot;进行区分，gcc-4.8.5 编译器的modulefile文件，则命名为4.8.5。</span><br></pre></td></tr></table></figure>
+
+<h5 id="modulefile编写规范"><a href="#modulefile编写规范" class="headerlink" title="modulefile编写规范"></a>modulefile编写规范</h5><p>以一个典型的modulefile为例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">%Module 1.0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment">#Edited by BYA in  2018/3/6</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">Modified by BYA one  day <span class="keyword">in</span> the future</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment">#</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">conflict</span>               </span><br><span class="line">module-whatis   Intel Compiler version 2015.3.187  (icc,icpc,ifort)</span><br><span class="line"><span class="meta">#</span><span class="bash">module load</span></span><br><span class="line">prepend-path    PATH             /opt/intel/composer_xe_2015.3.187/bin/intel64</span><br><span class="line">prepend-path    LIBRARY_PATH     /opt/intel/composer_xe_2015.3.187/compiler/lib/intel64</span><br><span class="line">prepend-path    LD_LIBRARY_PATH  /opt/intel/composer_xe_2015.3.187/compiler/lib/intel64</span><br><span class="line">prepend-path    MANPATH          /opt/intel/composer_xe_2015.3.187/man</span><br><span class="line"></span><br><span class="line">setenv          CC              icc</span><br><span class="line">setenv          CXX             icpc</span><br><span class="line">setenv          FC              ifort</span><br><span class="line">setenv          F77             ifort</span><br><span class="line">setenv          F90             ifort</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">###</span></span> </span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<p><strong>#%Module 1.0</strong>    抬头须存在；</p>
+<p><strong>conflict</strong>   一行，代表与本模块冲突的软件模块，若没有，可#注释；</p>
+<p><strong>module-whatis</strong>     指明模块的简单介绍，使用”module whatis 模块名”命令的时候可以查看；</p>
+<p><strong>module load</strong>，代表该模块之前需要预先加载的其他模块；</p>
+<p><strong>prepend-path  环境变量名 具体路径</strong></p>
+<p>一般的环境变量有PATH、LIBRARY_PATH、LD_LIBRARY_PATH、MANPATH等，prepend-path 会把指定路径，<strong>追加</strong>到对应的环境变量中 ；</p>
+<p><strong>setenv</strong>    <strong>环境变量名 具体值</strong>   </p>
+<p>setenv 会设定环境变量的具体值。 </p>
+<h4 id="2-3-整体规划与实施"><a href="#2-3-整体规划与实施" class="headerlink" title="2.3 整体规划与实施"></a>2.3 整体规划与实施</h4><p>若要配置比较大规模的超算环境，需要将软件需求，协调规范到一个整体框架之下，如果不清楚如何配置，可以调研参考下各大超算平台的配置：如<strong>中科大超算中心</strong>，<strong>中科院超算中心</strong>等。</p>
+<p>如下为针对某项目需求，所制定的设计初稿：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/images/plan_on_hpc.png" alt="plan_on_hpc"></p>
+<p>最终的实现结果如下：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/images/hpc_module.png" alt="hpc_module"></p>
+<h3 id="3-Modules-使用方式"><a href="#3-Modules-使用方式" class="headerlink" title="3. Modules 使用方式"></a>3. Modules 使用方式</h3><h4 id="3-1-modules-常用指令"><a href="#3-1-modules-常用指令" class="headerlink" title="3.1 modules 常用指令"></a>3.1 modules 常用指令</h4><p>显示manual ：module  或 module –h，man module </p>
+<p>查看可用模块：module  avail  </p>
+<p>查看已加载模块：module  list   </p>
+<p>加载模块：module load/add  MODULE_NAME  </p>
+<p>卸载模块：module unload/rm  MODULE_NAME  </p>
+<p>切换模块：module  switch/swap OLD_MODULE NEW_MODULE</p>
+<p>卸载所有已加载的模块：module  purge</p>
+<p>显示模块说明：module whatis  MODULE_NAME</p>
+<p>显示该模块内容：module  display/show MODULE_NAME</p>
+<h4 id="3-2-modules-使用示例"><a href="#3-2-modules-使用示例" class="headerlink" title="3.2 modules 使用示例"></a>3.2 modules 使用示例</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">示例使用：</span><br><span class="line">[root@hpc-material02  ~]# module purge</span><br><span class="line">[root@hpc-material02  ~]# module list</span><br><span class="line">No Modulefiles  Currently Loaded.</span><br><span class="line">[root@hpc-material02  ~]# module load openmpi/1.6.5/gcc/4.8.5</span><br><span class="line">[root@hpc-material02  ~]# module list</span><br><span class="line">Currently Loaded  Modulefiles:</span><br><span class="line">1) openmpi/1.6.5/gcc/4.8.5  </span><br><span class="line">[root@hpc-material02  ~]# module whatis openmpi/1.6.5/gcc/4.8.5</span><br><span class="line">----------------------------------------  /opt/modules/ModuleFiles/mpi -----------------------------------------</span><br><span class="line">openmpi/1.6.5/gcc/4.8.5:  Openmpi-1.6.5 compiled by gcc-4.8.5</span><br><span class="line">[root@hpc-material02  ~]# module display openmpi/1.6.5/gcc/4.8.5</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">/opt/modules/ModuleFiles/mpi/openmpi/1.6.5/gcc/4.8.5:</span><br><span class="line">module-whatis       Openmpi-1.6.5  compiled by gcc-4.8.5</span><br><span class="line">prepend-path        PATH        /opt/openmpi/openmpi-1.6.5_gcc-4.8.5/bin</span><br><span class="line">prepend-path        LD_LIBRARY_PATH        /opt/openmpi/openmpi-1.6.5_gcc-4.8.5/lib</span><br><span class="line">prepend-path        MANPATH        /opt/openmpi/openmpi-1.6.5_gcc-4.8.5/share/man</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">[root@hpc-material02  ~]# echo $PATH | sed &#x27;s/:/\n/g&#x27;</span><br><span class="line">/opt/openmpi/openmpi-1.6.5_gcc-4.8.5/bin</span><br><span class="line">/usr/local/sbin</span><br><span class="line">/usr/local/bin</span><br><span class="line">/usr/sbin</span><br><span class="line">/usr/bin</span><br><span class="line">/root/bin</span><br><span class="line">[root@hpc-material02  ~]# echo $LD_LIBRARY_PATH | sed &#x27;s/:/\n/g&#x27;</span><br><span class="line">/opt/openmpi/openmpi-1.6.5_gcc-4.8.5/lib</span><br><span class="line">[root@hpc-material02  ~]# module rm openmpi/1.6.5/gcc/4.8.5 </span><br><span class="line">[root@hpc-material02  ~]# echo $PATH | sed &#x27;s/:/\n/g&#x27;</span><br><span class="line">/usr/local/sbin</span><br><span class="line">/usr/local/bin</span><br><span class="line">/usr/sbin</span><br><span class="line">/usr/bin</span><br><span class="line">/root/bin</span><br><span class="line">[root@hpc-material02  ~]# echo $LD_LIBRARY_PATH | sed &#x27;s/:/\n/g&#x27;</span><br><span class="line"> </span><br><span class="line">[root@hpc-material02  ~]# </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-使用建议"><a href="#4-使用建议" class="headerlink" title="4. 使用建议"></a>4. 使用建议</h3><p>作业调度的时候，module可以写入提交脚本之中，需要先将<strong>MODULEPATH</strong>变量export 一下，然后使用module 相关的命令即可；</p>
+<p>编译与配置的时候，可参考下INSTALL.txt文件。</p>
+<h3 id="5-参考文献"><a href="#5-参考文献" class="headerlink" title="5. 参考文献"></a>5. 参考文献</h3><p>[1] <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Environment_Modules_(software)">Environment Modules (software) wikipedia</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://www.cnblogs.com/li12242/p/9994633.html">Environment Modules 简明教程</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css"></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">小白大侠</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://bya.cool/posts/54701/">http://bya.cool/posts/54701/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://bya.cool" target="_blank">BYA's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/modules/">modules</a><a class="post-meta__tags" href="/tags/HPC/">HPC</a><a class="post-meta__tags" href="/tags/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/">环境变量</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2022/02/02/cMzVJTPwZy87DdS.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/10184/"><img class="prev-cover" src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Linux 命令掌握的阶段性总结</div></div></a></div><div class="next-post pull-right"><a href="/posts/44866/"><img class="next-cover" src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/03/rsS5NHX6iTLmOYR.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">私人阅读史之两年时间读书分析</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/img/loading.gif" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">小白大侠</div><div class="author-info__description">轻风碎月 静夜凝思</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/baiyongan"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="http://106.14.160.45/" target="_blank" title="Linux"><i class="fab fa-linux"></i></a><a class="social-icon" href="http://106.14.160.45:8080/" target="_blank" title="Python"><i class="fab fa-python"></i></a><a class="social-icon" href="http://106.14.160.45:8081/" target="_blank" title="Wiki"><i class="fab fa-wikipedia-w"></i></a><a class="social-icon" href="http://baiyongan.gitbook.io/lsf/" target="_blank" title="LSF"><i class="fas fa-network-wired"></i></a><a class="social-icon" href="mailto:bya@mail.ustc.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Modules-%E5%8A%9F%E8%83%BD%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">1. Modules 功能简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Modules-%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">2. Modules 安装及配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-0-%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83"><span class="toc-number">2.1.</span> <span class="toc-text">2.0 测试环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91"><span class="toc-number">2.2.</span> <span class="toc-text">2.1  源码编译</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E7%BC%96%E5%86%99%E9%85%8D%E7%BD%AEmodulefiles%E6%96%87%E4%BB%B6"><span class="toc-number">2.3.</span> <span class="toc-text">2.2 编写配置modulefiles文件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#modulefile%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA"><span class="toc-number">2.3.1.</span> <span class="toc-text">modulefile文件创建</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#modulefile%E7%BC%96%E5%86%99%E8%A7%84%E8%8C%83"><span class="toc-number">2.3.2.</span> <span class="toc-text">modulefile编写规范</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-%E6%95%B4%E4%BD%93%E8%A7%84%E5%88%92%E4%B8%8E%E5%AE%9E%E6%96%BD"><span class="toc-number">2.4.</span> <span class="toc-text">2.3 整体规划与实施</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Modules-%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">3. Modules 使用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-modules-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 modules 常用指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-modules-%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 modules 使用示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE"><span class="toc-number">4.</span> <span class="toc-text">4. 使用建议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">5.</span> <span class="toc-text">5. 参考文献</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/45261/" title="《软技能2 —— 软件开发者职业生涯指南》 书摘"><img src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/09/KaAs1iuQIfxR95J.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="《软技能2 —— 软件开发者职业生涯指南》 书摘"/></a><div class="content"><a class="title" href="/posts/45261/" title="《软技能2 —— 软件开发者职业生涯指南》 书摘">《软技能2 —— 软件开发者职业生涯指南》 书摘</a><time datetime="2022-02-09T14:37:44.000Z" title="发表于 2022-02-09 22:37:44">2022-02-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/33287/" title="命令速查系列——文件基本操作"><img src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="命令速查系列——文件基本操作"/></a><div class="content"><a class="title" href="/posts/33287/" title="命令速查系列——文件基本操作">命令速查系列——文件基本操作</a><time datetime="2020-06-01T06:17:18.000Z" title="发表于 2020-06-01 14:17:18">2020-06-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/15465/" title="Linux 运维实战系列——文本处理三剑客之一 awk"><img src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux 运维实战系列——文本处理三剑客之一 awk"/></a><div class="content"><a class="title" href="/posts/15465/" title="Linux 运维实战系列——文本处理三剑客之一 awk">Linux 运维实战系列——文本处理三剑客之一 awk</a><time datetime="2020-05-30T06:30:02.000Z" title="发表于 2020-05-30 14:30:02">2020-05-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/40325/" title="Linux 运维实战系列——文本处理三剑客之一 sed"><img src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux 运维实战系列——文本处理三剑客之一 sed"/></a><div class="content"><a class="title" href="/posts/40325/" title="Linux 运维实战系列——文本处理三剑客之一 sed">Linux 运维实战系列——文本处理三剑客之一 sed</a><time datetime="2020-05-27T06:39:37.000Z" title="发表于 2020-05-27 14:39:37">2020-05-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2566/" title="程序员的编程内功与外功(转载自知乎)"><img src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/02/cMzVJTPwZy87DdS.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="程序员的编程内功与外功(转载自知乎)"/></a><div class="content"><a class="title" href="/posts/2566/" title="程序员的编程内功与外功(转载自知乎)">程序员的编程内功与外功(转载自知乎)</a><time datetime="2020-05-24T04:23:42.000Z" title="发表于 2020-05-24 12:23:42">2020-05-24</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 小白大侠</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'WjBhD9l9A6J5mrWl9wkgQxFu-gzGzoHsz',
+      appKey: '1FL3ULSfrjaAYYiisMlYysHk',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

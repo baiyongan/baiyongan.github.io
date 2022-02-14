@@ -1,0 +1,300 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Linux 运维实战系列——sort 排序 | BYA's Blog</title><meta name="keywords" content="命令,运维"><meta name="author" content="小白大侠"><meta name="copyright" content="小白大侠"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="命令小结Linux中，sort 是非常常用的命令之一，它可以帮助我们进行各种文件和内容的排序，又快又准。 默认情况下，sort是将文件的每一行作为一个单元，进行排序的，其规则是从每行首字符向后，依此按ASCII码值前后顺序进行比较，最后将它们按照升序输出。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 运维实战系列——sort 排序">
+<meta property="og:url" content="http://bya.cool/posts/8899/index.html">
+<meta property="og:site_name" content="BYA&#39;s Blog">
+<meta property="og:description" content="命令小结Linux中，sort 是非常常用的命令之一，它可以帮助我们进行各种文件和内容的排序，又快又准。 默认情况下，sort是将文件的每一行作为一个单元，进行排序的，其规则是从每行首字符向后，依此按ASCII码值前后顺序进行比较，最后将它们按照升序输出。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png">
+<meta property="article:published_time" content="2020-05-23T12:19:38.000Z">
+<meta property="article:modified_time" content="2022-02-14T14:49:09.000Z">
+<meta property="article:author" content="小白大侠">
+<meta property="article:tag" content="命令">
+<meta property="article:tag" content="运维">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="http://bya.cool/posts/8899/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?50ee4c4119ca03830c1b5bde8308daae";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Linux 运维实战系列——sort 排序',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-02-14 22:49:09'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "/img/loading.gif" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa-solid fa-house"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-paper-plane"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa-solid fa-folder-tree"></i><span> 分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-book-open-reader"></i><span> 阅读</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/booklists/"><i class="fa-fw fa-solid fa-map"></i><span> 书单</span></a></li><li><a class="site-page child" href="/booknotes/"><i class="fa-fw fa-solid fa-feather-pointed"></i><span> 书摘</span></a></li><li><a class="site-page child" href="/bookreviews/"><i class="fa-fw fa-solid fa-file-signature"></i><span> 书评</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">BYA's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa-solid fa-house"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-paper-plane"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa-solid fa-folder-tree"></i><span> 分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-book-open-reader"></i><span> 阅读</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/booklists/"><i class="fa-fw fa-solid fa-map"></i><span> 书单</span></a></li><li><a class="site-page child" href="/booknotes/"><i class="fa-fw fa-solid fa-feather-pointed"></i><span> 书摘</span></a></li><li><a class="site-page child" href="/bookreviews/"><i class="fa-fw fa-solid fa-file-signature"></i><span> 书评</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux 运维实战系列——sort 排序</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-05-23T12:19:38.000Z" title="发表于 2020-05-23 20:19:38">2020-05-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-02-14T14:49:09.000Z" title="更新于 2022-02-14 22:49:09">2022-02-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/Fundation/">Fundation</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Linux 运维实战系列——sort 排序"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="命令小结"><a href="#命令小结" class="headerlink" title="命令小结"></a>命令小结</h2><p>Linux中，sort 是非常常用的命令之一，它可以帮助我们进行各种文件和内容的排序，又快又准。</p>
+<p>默认情况下，sort是将文件的每一行作为一个单元，进行排序的，其规则是从每行首字符向后，依此按ASCII码值前后顺序进行比较，最后将它们按照升序输出。</p>
+<span id="more"></span>
+
+<h2 id="实战经验"><a href="#实战经验" class="headerlink" title="实战经验"></a>实战经验</h2><h3 id="u-选项消除重复行"><a href="#u-选项消除重复行" class="headerlink" title="-u 选项消除重复行"></a>-u 选项消除重复行</h3><blockquote>
+<p> -u, –unique<br>              with -c, check for strict ordering; without -c, output only  the<br>              first of an equal run</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya sort_test]$ cat seq.txt </span><br><span class="line">banana</span><br><span class="line">apple</span><br><span class="line">pear</span><br><span class="line">orange</span><br><span class="line">pear</span><br><span class="line">[baiyongan@bya sort_test]$ sort seq.txt </span><br><span class="line">apple</span><br><span class="line">banana</span><br><span class="line">orange</span><br><span class="line">pear</span><br><span class="line">pear</span><br><span class="line">[baiyongan@bya sort_test]$ sort -u seq.txt  # 重复的pear只显示一次</span><br><span class="line">apple</span><br><span class="line">banana</span><br><span class="line">orange</span><br><span class="line">pear</span><br><span class="line">[baiyongan@bya sort_test]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="r-选项降序排列"><a href="#r-选项降序排列" class="headerlink" title="-r 选项降序排列"></a>-r 选项降序排列</h3><p>sort的默认是升序，如果要降序排列，可用 -r</p>
+<blockquote>
+<p>   -r, –reverse<br>          reverse the result of comparisons</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya sort_test]$ cat seq.txt </span><br><span class="line">banana</span><br><span class="line">apple</span><br><span class="line">pear</span><br><span class="line">orange</span><br><span class="line">pear</span><br><span class="line">[baiyongan@bya sort_test]$ sort  seq.txt </span><br><span class="line">apple</span><br><span class="line">banana</span><br><span class="line">orange</span><br><span class="line">pear</span><br><span class="line">pear</span><br><span class="line">[baiyongan@bya sort_test]$ sort -r seq.txt </span><br><span class="line">pear</span><br><span class="line">pear</span><br><span class="line">orange</span><br><span class="line">banana</span><br><span class="line">apple</span><br><span class="line">[baiyongan@bya sort_test]$</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="o-选项保存排序结果"><a href="#o-选项保存排序结果" class="headerlink" title="-o 选项保存排序结果"></a>-o 选项保存排序结果</h3><p>sort默认将结果输出到标准输出 ，如果想存储排序结果，需要借助重定向，将结果写入文件，</p>
+<p>即sort filename &gt; newfile，但是，如果要写回原文件，重定向就不行了。</p>
+<blockquote>
+<p>   -o, –output=FILE<br>          write result to FILE instead of standard output</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya sort_test]$ cat number.txt </span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">[baiyongan@bya sort_test]$ sort -r number.txt &gt; number.txt </span><br><span class="line">[baiyongan@bya sort_test]$ cat number.txt </span><br><span class="line">[baiyongan@bya sort_test]$ </span><br><span class="line"></span><br><span class="line">[baiyongan@bya sort_test]$ cat number.txt </span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">[baiyongan@bya sort_test]$ sort -r number.txt -o number.txt #使用-o选项，可以将结果写回原文件</span><br><span class="line">[baiyongan@bya sort_test]$ cat number.txt </span><br><span class="line">5</span><br><span class="line">4</span><br><span class="line">3</span><br><span class="line">2</span><br><span class="line">1</span><br><span class="line">[baiyongan@bya sort_test]$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="n-进行数字排序"><a href="#n-进行数字排序" class="headerlink" title="-n 进行数字排序"></a>-n 进行数字排序</h3><p>sort默认按照字符来进行排序，它会把诸如 10，2 这些看作普通字符，而非数字，sort会先比较1 和2 两个字符，在ASCII码中，字符1 排在字符2 之前，所以10 被排在2 前面，要想按照数字方式排列，需要 -n 选项</p>
+<blockquote>
+<p>   -n, –numeric-sort<br>          compare according to string numerical val</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya sort_test]$ cat number.txt </span><br><span class="line">1</span><br><span class="line">10</span><br><span class="line">19</span><br><span class="line">11</span><br><span class="line">2</span><br><span class="line">5</span><br><span class="line">[baiyongan@bya sort_test]$ sort number.txt </span><br><span class="line">1</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">19</span><br><span class="line">2</span><br><span class="line">5</span><br><span class="line">[baiyongan@bya sort_test]$ sort -n number.txt </span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">5</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">19</span><br><span class="line">[baiyongan@bya sort_test]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="tk-选项组合使用"><a href="#tk-选项组合使用" class="headerlink" title="tk 选项组合使用"></a>tk 选项组合使用</h3><p>-t 选项指定间隔符；-k 选项指定根据第几列进行排序</p>
+<blockquote>
+<p>   -t, –field-separator=SEP<br>          use SEP instead of non-blank to blank transition</p>
+<p>   -k, –key=KEYDEF<br>          sort via a key; KEYDEF gives location and type</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya sort_test]$ cat fruits.txt  #以：间隔，每行格式为  水果：数量：价格</span><br><span class="line">banana:30:5.5</span><br><span class="line">apple:10:2.5</span><br><span class="line">pear:90:2.3</span><br><span class="line">orange:20:3.4</span><br><span class="line">[baiyongan@bya sort_test]$ sort -n -k 2 -t : fruits.txt  # 表示按照数量进行排序</span><br><span class="line">apple:10:2.5</span><br><span class="line">orange:20:3.4</span><br><span class="line">banana:30:5.5</span><br><span class="line">pear:90:2.3</span><br><span class="line">[baiyongan@bya sort_test]$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="其他的好用的sort选项"><a href="#其他的好用的sort选项" class="headerlink" title="其他的好用的sort选项"></a>其他的好用的sort选项</h3><ul>
+<li>-f 选项，将小写字母转化为大写字母来比较，效果相当于排序时忽略大小写</li>
+</ul>
+<blockquote>
+<p>   -f, –ignore-case<br>          fold lower case to upper case characters</p>
+</blockquote>
+<ul>
+<li>-c 选项， 会检查文件是否已经排好序，如果乱序，则输出第一个乱序的行的相关信息</li>
+</ul>
+<blockquote>
+<p>   -c, –check, –check=diagnose-first<br>          check for sorted input; do not sort</p>
+</blockquote>
+<ul>
+<li>-C 选项，会检查文件是否已经排好序，如果乱序，则不输出内容，而命令的返回值为 1 </li>
+</ul>
+<blockquote>
+<p>   -C, –check=quiet, –check=silent<br>          like -c, but do not report first bad line</p>
+</blockquote>
+<ul>
+<li>-M 选项，按照月份（英文名称）进行排序</li>
+</ul>
+<blockquote>
+<p>   -M, –month-sort<br>          compare (unknown) &lt; ‘JAN’ &lt; … &lt; ‘DEC’</p>
+</blockquote>
+<ul>
+<li>-b 选项，忽略每一行前面所有的空白部分，从第一个可见字符开始比较</li>
+</ul>
+<blockquote>
+<p>   -b, –ignore-leading-blanks<br>          ignore leading blanks</p>
+</blockquote>
+<h3 id="k-选项详解"><a href="#k-选项详解" class="headerlink" title="-k 选项详解"></a>-k 选项详解</h3><p>设计一个文件 facebook.txt 每行结构为公司名：公司人数：员工工资，如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya sort_test]$ cat facebook.txt </span><br><span class="line">google 110 5000</span><br><span class="line">baidu 100 5000</span><br><span class="line">guge 50 300</span><br><span class="line">sohu 100 4500</span><br></pre></td></tr></table></figure>
+
+<h4 id="复合条件排序"><a href="#复合条件排序" class="headerlink" title="复合条件排序"></a>复合条件排序</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 按照公司人数排序，人数相同时，默认按照第一个字段升序</span></span><br><span class="line">[baiyongan@bya sort_test]$ sort -n -t &#x27; &#x27; -k 2 facebook.txt </span><br><span class="line">guge 50 300</span><br><span class="line">baidu 100 5000</span><br><span class="line">sohu 100 4500</span><br><span class="line">google 110 5000</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 按照公司人数排序，人数相同时，按照员工平均工资升序排序</span></span><br><span class="line">[baiyongan@bya sort_test]$ sort -n -t &#x27; &#x27; -k 2 -k 3 facebook.txt </span><br><span class="line">guge 50 300</span><br><span class="line">sohu 100 4500</span><br><span class="line">baidu 100 5000</span><br><span class="line">google 110 5000</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">按照员工工资降序，工资相同时，按照公司人数升序</span></span><br><span class="line">[baiyongan@bya sort_test]$ sort -n -t &#x27; &#x27; -k 3r -k 2 facebook.txt </span><br><span class="line">baidu 100 5000</span><br><span class="line">google 110 5000</span><br><span class="line">sohu 100 4500</span><br><span class="line">guge 50 300</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">同上需求，前面去掉 -n，后面包含 n</span></span><br><span class="line">[baiyongan@bya sort_test]$ sort -t &#x27; &#x27; -k 3nr -k 2n facebook.txt </span><br><span class="line">baidu 100 5000</span><br><span class="line">google 110 5000</span><br><span class="line">sohu 100 4500</span><br><span class="line">guge 50 300</span><br><span class="line">[baiyongan@bya sort_test]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="k-选项的具体语法格式"><a href="#k-选项的具体语法格式" class="headerlink" title="-k 选项的具体语法格式"></a>-k 选项的具体语法格式</h4><blockquote>
+<h4 id="FStart-CStart-Modifier-FEnd-CEnd-Modifier"><a href="#FStart-CStart-Modifier-FEnd-CEnd-Modifier" class="headerlink" title="[ FStart [ .CStart ] ]   [ Modifier ]  [ , [  FEnd [  .CEnd  ]   ]  [  Modifier  ]  ]"></a><strong>[ FStart [ .CStart ] ]   [ Modifier ]  [ , [  FEnd [  .CEnd  ]   ]  [  Modifier  ]  ]</strong></h4></blockquote>
+<p>以其中的 “,” 为分隔，分前后两大部分，Start和End部分。</p>
+<p>Start部分由三个元素组成，即FStart、CStart、Modifier</p>
+<ul>
+<li>FStart 表示我们要排序的列</li>
+<li>CStart 表示在FStart列中，从第几个字符开始算”排序首字符“。CStart可省略，即默认从FStart的开头部分开始。</li>
+<li>Modifier 是之前的类似 n 和 r 的选项部分，可以对排序的需求做补充说明，例如 -k 3nr。</li>
+</ul>
+<p>同理， End部分，也可以设定 FEnd.CEnd。如果省略CEnd，则表示从FEnd列的开头到”列尾“， 即FEnd列的最后一个字符。如果将CEnd设为0，效果和省略CEnd一样。整个的End部分也可被省略，即认为End被设定为行尾了。</p>
+<h4 id="字母级的排序需求"><a href="#字母级的排序需求" class="headerlink" title="字母级的排序需求"></a>字母级的排序需求</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 从公司名称的第二个字母开始排序</span></span><br><span class="line">[baiyongan@bya sort_test]$ sort -t &#x27; &#x27; -k 1.2 facebook.txt </span><br><span class="line">baidu 100 5000</span><br><span class="line">sohu 100 4500</span><br><span class="line">google 110 5000</span><br><span class="line">guge 50 300</span><br><span class="line">[baiyongan@bya sort_test]$ </span><br><span class="line"><span class="meta">#</span><span class="bash"> 如上，1.2 表示 对第一列的第二个字符开始到本行最后一个字符进行排序。baidu因a排在首位，sohu和google都是</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> o，但sohu后的h，比google后的o靠前，所以sohu在google前</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ”只“ 针对公司名的第二个英文字母进行排序，如果内容相同，则按照员工工资进行降序排列</span></span><br><span class="line">[baiyongan@bya sort_test]$ sort -t &#x27; &#x27; -k 1.2,1.2 -k 3,3nr facebook.txt </span><br><span class="line">baidu 100 5000</span><br><span class="line">google 110 5000</span><br><span class="line">sohu 100 4500</span><br><span class="line">guge 50 300</span><br><span class="line">[baiyongan@bya sort_test]$ </span><br><span class="line"><span class="meta">#</span><span class="bash"> 其中，-k 1.2，1.2 保证 ”只“ 对第二个字母进行排序，-k 3，3nr保证了 ”只“ 对第三列进行排序</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="k-和-n-参数配合的一些注意点"><a href="#k-和-n-参数配合的一些注意点" class="headerlink" title="-k 和 -n 参数配合的一些注意点"></a>-k 和 -n 参数配合的一些注意点</h4><ul>
+<li>没有使用 -n 选项，同时 -k选项没有指定 End部分时， 则会比较从所指定的列到行尾的所有内容，与此同时，并不支持使用多个 -k 选项。</li>
+<li>当使用 -n 选项， 同时 -k 选项没有指定End部分时，则当比较的列出现内容相同的情况时，则会从第一列开始进行比较。</li>
+</ul>
+<h4 id="modifier-部分"><a href="#modifier-部分" class="headerlink" title="modifier 部分"></a>modifier 部分</h4><p>modifier部分，可用到的修饰词，大体上包括 b、d、f、i、n、r。</p>
+<ul>
+<li>r  逆序</li>
+<li>n  按数字排序</li>
+<li>b  忽略本域前面的空白符号</li>
+<li>d   表示对本域按照字典顺序排序（即 只考虑空白和字母）</li>
+<li>f   表示对本域忽略大小写进行排序</li>
+<li>i   忽略”不可打印字符“，只针对可打印字符进行排序</li>
+</ul>
+<h4 id="k-和-u-选项的联合效果"><a href="#k-和-u-选项的联合效果" class="headerlink" title="-k 和 -u 选项的联合效果"></a>-k 和 -u 选项的联合效果</h4><p>-u 只识别用 -k 设定的域，一旦发现内容相同，就会将后续相同的行都删除掉</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya sort_test]$ cat facebook.txt </span><br><span class="line">google 110 5000</span><br><span class="line">baidu 100 5000</span><br><span class="line">guge 50 300</span><br><span class="line">sohu 100 4500</span><br><span class="line">[baiyongan@bya sort_test]$ sort -n -k 2 facebook.txt  # 按照第二列进行排序</span><br><span class="line">guge 50 300</span><br><span class="line">baidu 100 5000</span><br><span class="line">sohu 100 4500</span><br><span class="line">google 110 5000</span><br><span class="line">[baiyongan@bya sort_test]$ sort -n -k 2 -u facebook.txt  # 加上 -u 选项</span><br><span class="line">guge 50 300</span><br><span class="line">baidu 100 5000</span><br><span class="line">google 110 5000</span><br><span class="line">[baiyongan@bya sort_test]$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>同时，-u 也会权衡所有的 -k 选项，存在多层排序时，只有都相同时，才会删除。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya sort_test]$ sort -n -k 2 -k 3 -u facebook.txt </span><br><span class="line">guge 50 300</span><br><span class="line">sohu 100 4500</span><br><span class="line">baidu 100 5000</span><br><span class="line">google 110 5000</span><br><span class="line">[baiyongan@bya sort_test]$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="诡异的跨列排序"><a href="#诡异的跨列排序" class="headerlink" title="诡异的跨列排序"></a>诡异的跨列排序</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya sort_test]$ cat facebook.txt </span><br><span class="line">google 110 5000</span><br><span class="line">baidu 100 5000</span><br><span class="line">guge 50 300</span><br><span class="line">sohu 100 4500</span><br><span class="line">[baiyongan@bya sort_test]$ sort -n -k 2.2,3.1 facebook.txt </span><br><span class="line">guge 50 300</span><br><span class="line">baidu 100 5000</span><br><span class="line">sohu 100 4500</span><br><span class="line">google 110 5000</span><br><span class="line">[baiyongan@bya sort_test]$ </span><br></pre></td></tr></table></figure>
+
+<p>如上，对从第二列的第二个字符，到第三列的第一个字符部分，进行排序</p>
+<p>第一行 提取 0 3， 第二行 提取 00 5， 第三行 提取 00 4， 第四行 提取 10  5。为什么 00  5 排在 00 4 前面呢？</p>
+<p>其实”跨列排序只是个骗局“， sort指挥比较第二列的第二个字符到第二列的最后一个字符的部分，而不会把第三列的开头字符纳入比较范围。发现00 和00 相同，就会去自动比较第一列了，结果baidu在sohu前面了。可用案例佐证</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[baiyongan@bya sort_test]$ sort -n -k 2.2,3.1 -k 1,1r facebook.txt </span><br><span class="line">guge 50 300</span><br><span class="line">sohu 100 4500</span><br><span class="line">baidu 100 5000</span><br><span class="line">google 110 5000</span><br><span class="line">[baiyongan@bya sort_test]$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="拓展阅读"><a href="#拓展阅读" class="headerlink" title="拓展阅读"></a>拓展阅读</h2><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css"></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">小白大侠</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://bya.cool/posts/8899/">http://bya.cool/posts/8899/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://bya.cool" target="_blank">BYA's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%91%BD%E4%BB%A4/">命令</a><a class="post-meta__tags" href="/tags/%E8%BF%90%E7%BB%B4/">运维</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/11842/"><img class="prev-cover" src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Linux 运维实战系列——cut 剪切</div></div></a></div><div class="next-post pull-right"><a href="/posts/52967/"><img class="next-cover" src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">命令速查系列——文件的正文处理</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/11842/" title="Linux 运维实战系列——cut 剪切"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-24</div><div class="title">Linux 运维实战系列——cut 剪切</div></div></a></div><div><a href="/posts/38488/" title="Linux 运维实战系列——echo 打印"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-22</div><div class="title">Linux 运维实战系列——echo 打印</div></div></a></div><div><a href="/posts/9193/" title="Linux 运维实战系列——文本处理三剑客之一 grep"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-23</div><div class="title">Linux 运维实战系列——文本处理三剑客之一 grep</div></div></a></div><div><a href="/posts/32579/" title="Linux 运维实战系列——paste 粘贴"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-24</div><div class="title">Linux 运维实战系列——paste 粘贴</div></div></a></div><div><a href="/posts/40325/" title="Linux 运维实战系列——文本处理三剑客之一 sed"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-27</div><div class="title">Linux 运维实战系列——文本处理三剑客之一 sed</div></div></a></div><div><a href="/posts/11771/" title="Linux 运维实战系列—— split 拆分"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-24</div><div class="title">Linux 运维实战系列—— split 拆分</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/img/loading.gif" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">小白大侠</div><div class="author-info__description">轻风碎月 静夜凝思</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/baiyongan"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="http://106.14.160.45/" target="_blank" title="Linux"><i class="fab fa-linux"></i></a><a class="social-icon" href="http://106.14.160.45:8080/" target="_blank" title="Python"><i class="fab fa-python"></i></a><a class="social-icon" href="http://106.14.160.45:8081/" target="_blank" title="Wiki"><i class="fab fa-wikipedia-w"></i></a><a class="social-icon" href="http://baiyongan.gitbook.io/lsf/" target="_blank" title="LSF"><i class="fas fa-network-wired"></i></a><a class="social-icon" href="mailto:bya@mail.ustc.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">命令小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E7%BB%8F%E9%AA%8C"><span class="toc-number">2.</span> <span class="toc-text">实战经验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u-%E9%80%89%E9%A1%B9%E6%B6%88%E9%99%A4%E9%87%8D%E5%A4%8D%E8%A1%8C"><span class="toc-number">2.1.</span> <span class="toc-text">-u 选项消除重复行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#r-%E9%80%89%E9%A1%B9%E9%99%8D%E5%BA%8F%E6%8E%92%E5%88%97"><span class="toc-number">2.2.</span> <span class="toc-text">-r 选项降序排列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#o-%E9%80%89%E9%A1%B9%E4%BF%9D%E5%AD%98%E6%8E%92%E5%BA%8F%E7%BB%93%E6%9E%9C"><span class="toc-number">2.3.</span> <span class="toc-text">-o 选项保存排序结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#n-%E8%BF%9B%E8%A1%8C%E6%95%B0%E5%AD%97%E6%8E%92%E5%BA%8F"><span class="toc-number">2.4.</span> <span class="toc-text">-n 进行数字排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tk-%E9%80%89%E9%A1%B9%E7%BB%84%E5%90%88%E4%BD%BF%E7%94%A8"><span class="toc-number">2.5.</span> <span class="toc-text">tk 选项组合使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%9A%84%E5%A5%BD%E7%94%A8%E7%9A%84sort%E9%80%89%E9%A1%B9"><span class="toc-number">2.6.</span> <span class="toc-text">其他的好用的sort选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#k-%E9%80%89%E9%A1%B9%E8%AF%A6%E8%A7%A3"><span class="toc-number">2.7.</span> <span class="toc-text">-k 选项详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E5%90%88%E6%9D%A1%E4%BB%B6%E6%8E%92%E5%BA%8F"><span class="toc-number">2.7.1.</span> <span class="toc-text">复合条件排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#k-%E9%80%89%E9%A1%B9%E7%9A%84%E5%85%B7%E4%BD%93%E8%AF%AD%E6%B3%95%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.7.2.</span> <span class="toc-text">-k 选项的具体语法格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FStart-CStart-Modifier-FEnd-CEnd-Modifier"><span class="toc-number">2.7.3.</span> <span class="toc-text">[ FStart [ .CStart ] ]   [ Modifier ]  [ , [  FEnd [  .CEnd  ]   ]  [  Modifier  ]  ]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E6%AF%8D%E7%BA%A7%E7%9A%84%E6%8E%92%E5%BA%8F%E9%9C%80%E6%B1%82"><span class="toc-number">2.7.4.</span> <span class="toc-text">字母级的排序需求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#k-%E5%92%8C-n-%E5%8F%82%E6%95%B0%E9%85%8D%E5%90%88%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-number">2.7.5.</span> <span class="toc-text">-k 和 -n 参数配合的一些注意点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#modifier-%E9%83%A8%E5%88%86"><span class="toc-number">2.7.6.</span> <span class="toc-text">modifier 部分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#k-%E5%92%8C-u-%E9%80%89%E9%A1%B9%E7%9A%84%E8%81%94%E5%90%88%E6%95%88%E6%9E%9C"><span class="toc-number">2.7.7.</span> <span class="toc-text">-k 和 -u 选项的联合效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%A1%E5%BC%82%E7%9A%84%E8%B7%A8%E5%88%97%E6%8E%92%E5%BA%8F"><span class="toc-number">2.7.8.</span> <span class="toc-text">诡异的跨列排序</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%93%E5%B1%95%E9%98%85%E8%AF%BB"><span class="toc-number">3.</span> <span class="toc-text">拓展阅读</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/45261/" title="《软技能2 —— 软件开发者职业生涯指南》 书摘"><img src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/09/KaAs1iuQIfxR95J.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="《软技能2 —— 软件开发者职业生涯指南》 书摘"/></a><div class="content"><a class="title" href="/posts/45261/" title="《软技能2 —— 软件开发者职业生涯指南》 书摘">《软技能2 —— 软件开发者职业生涯指南》 书摘</a><time datetime="2022-02-09T14:37:44.000Z" title="发表于 2022-02-09 22:37:44">2022-02-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/33287/" title="命令速查系列——文件基本操作"><img src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="命令速查系列——文件基本操作"/></a><div class="content"><a class="title" href="/posts/33287/" title="命令速查系列——文件基本操作">命令速查系列——文件基本操作</a><time datetime="2020-06-01T06:17:18.000Z" title="发表于 2020-06-01 14:17:18">2020-06-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/15465/" title="Linux 运维实战系列——文本处理三剑客之一 awk"><img src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux 运维实战系列——文本处理三剑客之一 awk"/></a><div class="content"><a class="title" href="/posts/15465/" title="Linux 运维实战系列——文本处理三剑客之一 awk">Linux 运维实战系列——文本处理三剑客之一 awk</a><time datetime="2020-05-30T06:30:02.000Z" title="发表于 2020-05-30 14:30:02">2020-05-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/40325/" title="Linux 运维实战系列——文本处理三剑客之一 sed"><img src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/03/4UVYz1jmQLP9hAs.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux 运维实战系列——文本处理三剑客之一 sed"/></a><div class="content"><a class="title" href="/posts/40325/" title="Linux 运维实战系列——文本处理三剑客之一 sed">Linux 运维实战系列——文本处理三剑客之一 sed</a><time datetime="2020-05-27T06:39:37.000Z" title="发表于 2020-05-27 14:39:37">2020-05-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2566/" title="程序员的编程内功与外功(转载自知乎)"><img src= "/img/loading.gif" data-lazy-src="https://s2.loli.net/2022/02/02/cMzVJTPwZy87DdS.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="程序员的编程内功与外功(转载自知乎)"/></a><div class="content"><a class="title" href="/posts/2566/" title="程序员的编程内功与外功(转载自知乎)">程序员的编程内功与外功(转载自知乎)</a><time datetime="2020-05-24T04:23:42.000Z" title="发表于 2020-05-24 12:23:42">2020-05-24</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 小白大侠</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'WjBhD9l9A6J5mrWl9wkgQxFu-gzGzoHsz',
+      appKey: '1FL3ULSfrjaAYYiisMlYysHk',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
