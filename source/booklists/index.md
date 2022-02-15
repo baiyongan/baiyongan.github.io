@@ -10,22 +10,28 @@ comments: false
 ## <center>主题导航</center>
 {% endnote %}
 
-{% btn 'http://bya.cool/booklists/#通识',通识,fa-solid fa-fish,blue larger %}
-{% btn 'http://bya.cool/booklists/#专业技能',专业技能,fa-solid fa-paperclip,blue larger %}
-{% btn 'http://bya.cool/booklists/#类别',类别,fa-solid fa-paperclip,blue larger %}
-{% btn 'http://bya.cool/booklists/#类别',类别,fa-solid fa-paperclip,blue larger %}
-
-{% btn 'http://bya.cool/booklists/#类别',类别,fa-solid fa-paperclip,blue larger %}
-{% btn 'http://bya.cool/booklists/#类别',类别,fa-solid fa-paperclip,blue larger %}
-{% btn 'http://bya.cool/booklists/#类别',类别,fa-solid fa-paperclip,blue larger %}
-
+{% btn 'http://bya.cool/booklists/#底层逻辑',底层逻辑,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#思维',思维,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#国学',国学,fa-solid fa-paperclip,blue larger %}
+---
+{% btn 'http://bya.cool/booklists/#职业发展',职业发展,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#理财',理财,fa-solid fa-paperclip,blue larger %}
+---
+{% btn 'http://bya.cool/booklists/#通识',通识,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#科普',科普,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#传记',传记,fa-solid fa-paperclip,blue larger %}
+---
+{% btn 'http://bya.cool/booklists/#心理学',心理学,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#历史',历史,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#哲学',哲学,fa-solid fa-paperclip,blue larger %}
+---
 
 {% note success no-icon %} 
 ## <center>通识</center>
 {% endnote %}
 
 {% markmap 600px %}
-- 类别
+- 通识
   - 子类1
     - 子类11
   - 子类2
@@ -34,11 +40,11 @@ comments: false
 {% endmarkmap %}
 
 {% note warning no-icon %} 
-## <center>专业技能</center>
+## <center>科普</center>
 {% endnote %}
 
 {% markmap 600px %}
-- 类别
+- 科普
   - 子类1
     - 子类11
   - 子类2
@@ -47,11 +53,11 @@ comments: false
 {% endmarkmap %}
 
 {% note success no-icon %} 
-## <center>类别</center>
+## <center>职业发展</center>
 {% endnote %}
 
 {% markmap 600px %}
-- 类别
+- 职业发展
   - 子类1
     - 子类11
   - 子类2
@@ -60,11 +66,11 @@ comments: false
 {% endmarkmap %}
 
 {% note warning no-icon %} 
-## <center>类别</center>
+## <center>底层逻辑</center>
 {% endnote %}
 
 {% markmap 600px %}
-- 类别
+- 底层逻辑
   - 子类1
     - 子类11
   - 子类2
@@ -73,11 +79,11 @@ comments: false
 {% endmarkmap %}
 
 {% note success no-icon %} 
-## <center>类别</center>
+## <center>思维</center>
 {% endnote %}
 
 {% markmap 600px %}
-- 类别
+- 思维
   - 子类1
     - 子类11
   - 子类2
@@ -86,11 +92,11 @@ comments: false
 {% endmarkmap %}
 
 {% note warning no-icon %} 
-## <center>类别</center>
+## <center>心理学</center>
 {% endnote %}
 
 {% markmap 600px %}
-- 类别
+- 心理学
   - 子类1
     - 子类11
   - 子类2
@@ -99,11 +105,11 @@ comments: false
 {% endmarkmap %}
 
 {% note success no-icon %} 
-## <center>类别</center>
+## <center>国学</center>
 {% endnote %}
 
 {% markmap 600px %}
-- 类别
+- 国学
   - 子类1
     - 子类11
   - 子类2
@@ -112,11 +118,11 @@ comments: false
 {% endmarkmap %}
 
 {% note warning no-icon %} 
-## <center>类别</center>
+## <center>传记</center>
 {% endnote %}
 
 {% markmap 600px %}
-- 类别
+- 传记
   - 子类1
     - 子类11
   - 子类2
@@ -125,11 +131,11 @@ comments: false
 {% endmarkmap %}
 
 {% note success no-icon %} 
-## <center>类别</center>
+## <center>历史</center>
 {% endnote %}
 
 {% markmap 600px %}
-- 类别
+- 历史
   - 子类1
     - 子类11
   - 子类2
@@ -138,11 +144,11 @@ comments: false
 {% endmarkmap %}
 
 {% note warning no-icon %} 
-## <center>类别</center>
+## <center>政治</center>
 {% endnote %}
 
 {% markmap 600px %}
-- 类别
+- 政治
   - 子类1
     - 子类11
   - 子类2
@@ -151,11 +157,11 @@ comments: false
 {% endmarkmap %}
 
 {% note success no-icon %} 
-## <center>类别</center>
+## <center>社会学</center>
 {% endnote %}
 
 {% markmap 600px %}
-- 类别
+- 社会学
   - 子类1
     - 子类11
   - 子类2
@@ -164,11 +170,11 @@ comments: false
 {% endmarkmap %}
 
 {% note warning no-icon %} 
-## <center>类别</center>
+## <center>宏观经济学</center>
 {% endnote %}
 
 {% markmap 600px %}
-- 类别
+- 宏观经济学
   - 子类1
     - 子类11
   - 子类2
@@ -177,11 +183,11 @@ comments: false
 {% endmarkmap %}
 
 {% note success no-icon %} 
-## <center>类别</center>
+## <center>微观经济学</center>
 {% endnote %}
 
 {% markmap 600px %}
-- 类别
+- 微观经济学
   - 子类1
     - 子类11
   - 子类2
@@ -190,11 +196,11 @@ comments: false
 {% endmarkmap %}
 
 {% note warning no-icon %} 
-## <center>类别</center>
+## <center>博弈论</center>
 {% endnote %}
 
 {% markmap 600px %}
-- 类别
+- 博弈论
   - 子类1
     - 子类11
   - 子类2
@@ -202,3 +208,185 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
+{% note warning no-icon %} 
+## <center>脑神经科学</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 脑神经科学
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>遗传学</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 遗传学
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>进化生物学</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 进化生物学
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>心理学</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 心理学
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>科技创新</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 科技创新
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>工程学</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 工程学
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>逻辑学</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 逻辑学
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>统计学</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 统计学
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>数学</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 数学
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>物理学</center>
+
+{% endnote %}
+
+{% markmap 600px %}
+- 物理学
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>复杂科学</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 复杂科学
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>科学哲学</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 科学哲学
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>哲学</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 哲学
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>文学</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 文学
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
