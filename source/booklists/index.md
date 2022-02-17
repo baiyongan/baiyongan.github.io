@@ -13,6 +13,8 @@ comments: false
 {% btn 'http://bya.cool/booklists/#底层逻辑',底层逻辑,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#思维',思维,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#国学',国学,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#学习能力',学习能力,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#积极心理学',积极心理学,fa-solid fa-paperclip,blue larger %}
 ---
 {% btn 'http://bya.cool/booklists/#职业发展',职业发展,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#理财',理财,fa-solid fa-paperclip,blue larger %}
@@ -21,9 +23,9 @@ comments: false
 {% btn 'http://bya.cool/booklists/#科普',科普,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#传记',传记,fa-solid fa-paperclip,blue larger %}
 ---
-{% btn 'http://bya.cool/booklists/#心理学',心理学,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#历史',历史,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#哲学',哲学,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#文学',文学,fa-solid fa-paperclip,blue larger %}
 ---
 
 {% note success no-icon %} 
