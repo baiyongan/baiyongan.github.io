@@ -18,6 +18,8 @@ comments: false
 ---
 {% btn 'http://bya.cool/booklists/#职业发展',职业发展,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#理财',理财,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#阅读',阅读,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#写作',写作,fa-solid fa-paperclip,blue larger %}
 ---
 {% btn 'http://bya.cool/booklists/#通识',通识,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#科普',科普,fa-solid fa-paperclip,blue larger %}
@@ -60,11 +62,8 @@ comments: false
 
 {% markmap 600px %}
 - 职业发展
-  - 子类1
-    - 子类11
-  - 子类2
-    - 子类21
-    - 子类22
+  - 《软技能：代码之外的生存指南》
+  - 《软技能2：软件开发者职业生涯指南》
 {% endmarkmap %}
 
 {% note warning no-icon %} 
