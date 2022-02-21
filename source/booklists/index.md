@@ -10,61 +10,31 @@ comments: false
 ## <center>主题导航</center>
 {% endnote %}
 
+<!-- 元技能、文化底蕴 -->
 {% btn 'http://bya.cool/booklists/#底层逻辑',底层逻辑,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#思维',思维,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#国学',国学,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#学习能力',学习能力,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#积极心理学',积极心理学,fa-solid fa-paperclip,blue larger %}
 ---
+<!-- 专业技能、必备技能 -->
 {% btn 'http://bya.cool/booklists/#职业发展',职业发展,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#专业技能',专业技能,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#理财',理财,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#阅读',阅读,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#写作',写作,fa-solid fa-paperclip,blue larger %}
 ---
+<!--  拓展眼界 -->
 {% btn 'http://bya.cool/booklists/#通识',通识,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#科普',科普,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#传记',传记,fa-solid fa-paperclip,blue larger %}
 ---
+<!-- 人文素养 -->
 {% btn 'http://bya.cool/booklists/#历史',历史,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#哲学',哲学,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#文学',文学,fa-solid fa-paperclip,blue larger %}
 ---
 
-{% note success no-icon %} 
-## <center>通识</center>
-{% endnote %}
-
-{% markmap 600px %}
-- 通识
-  - 子类1
-    - 子类11
-  - 子类2
-    - 子类21
-    - 子类22
-{% endmarkmap %}
-
-{% note warning no-icon %} 
-## <center>科普</center>
-{% endnote %}
-
-{% markmap 600px %}
-- 科普
-  - 子类1
-    - 子类11
-  - 子类2
-    - 子类21
-    - 子类22
-{% endmarkmap %}
-
-{% note success no-icon %} 
-## <center>职业发展</center>
-{% endnote %}
-
-{% markmap 600px %}
-- 职业发展
-  - 《软技能：代码之外的生存指南》
-  - 《软技能2：软件开发者职业生涯指南》
-{% endmarkmap %}
 
 {% note warning no-icon %} 
 ## <center>底层逻辑</center>
@@ -92,12 +62,39 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note warning no-icon %} 
-## <center>心理学</center>
+{% note success no-icon %} 
+## <center>国学</center>
 {% endnote %}
 
 {% markmap 600px %}
-- 心理学
+- 国学
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>学习能力</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 学习能力
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+
+{% note warning no-icon %} 
+## <center>积极心理学</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 积极心理学
   - 子类1
     - 子类11
   - 子类2
@@ -106,11 +103,86 @@ comments: false
 {% endmarkmap %}
 
 {% note success no-icon %} 
-## <center>国学</center>
+## <center>职业发展</center>
 {% endnote %}
 
 {% markmap 600px %}
-- 国学
+- 职业发展
+  - 《软技能：代码之外的生存指南》
+  - 《软技能2：软件开发者职业生涯指南》
+{% endmarkmap %}
+
+{% note success no-icon %} 
+## <center>专业技能</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 专业技能
+  - 软件工程
+    - 《构建之法（第三版）》
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note success no-icon %} 
+## <center>理财</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 理财
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>阅读</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 阅读
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>写作</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 写作
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>通识</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 通识
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>科普</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 科普
   - 子类1
     - 子类11
   - 子类2
@@ -130,6 +202,7 @@ comments: false
     - 子类21
     - 子类22
 {% endmarkmap %}
+
 
 {% note success no-icon %} 
 ## <center>历史</center>
