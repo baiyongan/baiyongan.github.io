@@ -33,7 +33,14 @@ comments: false
 {% btn 'http://bya.cool/booklists/#历史',历史,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#哲学',哲学,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#文学',文学,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#经济学',经济学,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#政治',政治,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#社会学',社会学,fa-solid fa-paperclip,blue larger %}
+
 ---
+
+{% btn 'http://bya.cool/booklists/#认知构件',认知构建,fa-solid fa-paperclip,blue larger %}
+
 
 
 {% note warning no-icon %} 
