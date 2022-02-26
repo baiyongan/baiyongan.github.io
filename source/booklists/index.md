@@ -42,7 +42,6 @@ comments: false
 {% btn 'http://bya.cool/booklists/#认知构件',认知构建,fa-solid fa-paperclip,blue larger %}
 
 
-
 {% note warning no-icon %} 
 ## <center>底层逻辑</center>
 {% endnote %}
