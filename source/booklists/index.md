@@ -45,11 +45,10 @@ comments: false
 
 {% markmap 600px %}
 - 底层逻辑
-  - 子类1
-    - 子类11
-  - 子类2
-    - 子类21
-    - 子类22
+  - 《原则》
+  - 《心流：最优体验心理学》
+  - 《影响力》
+  - 《黑天鹅：如何应对不可预知的未来》
 {% endmarkmap %}
 
 {% note success no-icon %} 
