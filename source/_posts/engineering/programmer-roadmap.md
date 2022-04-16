@@ -1,5 +1,5 @@
 ---
-title: 程序员的编程内功与外功(转载自知乎)
+title: 程序员的编程内功与外功
 categories:
   - Resource
   - Roadmap

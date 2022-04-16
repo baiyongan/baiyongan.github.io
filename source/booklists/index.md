@@ -20,7 +20,7 @@ comments: false
 <!-- 专业技能、必备技能 -->
 {% btn 'http://bya.cool/booklists/#职业发展',职业发展,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#专业技能',专业技能,fa-solid fa-paperclip,blue larger %}
-{% btn 'http://bya.cool/booklists/#理财',理财,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#投资理财',投资理财,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#阅读',阅读,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#写作',写作,fa-solid fa-paperclip,blue larger %}
 ---
@@ -126,16 +126,14 @@ comments: false
 {% endmarkmap %}
 
 {% note success no-icon %} 
-## <center>理财</center>
+## <center>投资理财</center>
 {% endnote %}
 
 {% markmap 600px %}
-- 理财
-  - 子类1
-    - 子类11
-  - 子类2
-    - 子类21
-    - 子类22
+- 投资理财
+  - 《小狗钱钱》
+  - 《财富自由之路》
+  - 《躺着赚钱》
 {% endmarkmap %}
 
 {% note warning no-icon %} 
