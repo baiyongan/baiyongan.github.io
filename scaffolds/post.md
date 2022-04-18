@@ -6,7 +6,3 @@ categories:
 tags:
 date: {{ date }}
 ---
-
-{% douban book ddddddd %}
-
----
