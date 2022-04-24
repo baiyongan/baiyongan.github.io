@@ -1,5 +1,5 @@
 ---
-title: 《软技能2 —— 软件开发者职业生涯指南》书摘
+title: 《软技能2 —— 软件开发者职业生涯指南》摘录
 cover: 'https://s2.loli.net/2022/02/09/KaAs1iuQIfxR95J.jpg'
 categories:
   - Booknote

@@ -1,5 +1,5 @@
 ---
-title: 《置身事内》书摘
+title: 《置身事内》摘录
 cover: 'https://s2.loli.net/2022/02/09/KaAs1iuQIfxR95J.jpg'
 categories:
   - Booknote - 经济
