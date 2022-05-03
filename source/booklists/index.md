@@ -17,18 +17,23 @@ comments: false
 {% btn 'http://bya.cool/booklists/#学习能力',学习能力,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#积极心理学',积极心理学,fa-solid fa-paperclip,blue larger %}
 ---
+
 <!-- 专业技能、必备技能 -->
 {% btn 'http://bya.cool/booklists/#职业发展',职业发展,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#专业技能',专业技能,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#投资理财',投资理财,fa-solid fa-paperclip,blue larger %}
-{% btn 'http://bya.cool/booklists/#阅读',阅读,fa-solid fa-paperclip,blue larger %}
-{% btn 'http://bya.cool/booklists/#写作',写作,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#阅读写作',阅读写作,fa-solid fa-paperclip,blue larger %}
 ---
+
 <!--  拓展眼界 -->
 {% btn 'http://bya.cool/booklists/#通识',通识,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#科普',科普,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#传记',传记,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#商业金融',商业金融,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#法律',法律,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#医疗健康',医疗健康,fa-solid fa-paperclip,blue larger %}
 ---
+
 <!-- 人文素养 -->
 {% btn 'http://bya.cool/booklists/#历史',历史,fa-solid fa-paperclip,blue larger %}
 {% btn 'http://bya.cool/booklists/#哲学',哲学,fa-solid fa-paperclip,blue larger %}
@@ -38,8 +43,16 @@ comments: false
 {% btn 'http://bya.cool/booklists/#社会学',社会学,fa-solid fa-paperclip,blue larger %}
 ---
 
+<!-- 科学素养 -->
+<!-- {% btn 'http://bya.cool/booklists/#历史',历史,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#哲学',哲学,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#文学',文学,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#经济学',经济学,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#政治',政治,fa-solid fa-paperclip,blue larger %}
+{% btn 'http://bya.cool/booklists/#社会学',社会学,fa-solid fa-paperclip,blue larger %} -->
 
-{% note warning no-icon %} 
+
+{% note primary no-icon %} 
 ## <center>底层逻辑</center>
 {% endnote %}
 
@@ -50,7 +63,7 @@ comments: false
   - 《黑天鹅：如何应对不可预知的未来》
 {% endmarkmap %}
 
-{% note success no-icon %} 
+{% note primary no-icon %} 
 ## <center>思维</center>
 {% endnote %}
 
@@ -62,7 +75,7 @@ comments: false
   - 《金字塔原理》
 {% endmarkmap %}
 
-{% note success no-icon %} 
+{% note primary no-icon %} 
 ## <center>国学</center>
 {% endnote %}
 
@@ -75,7 +88,7 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note warning no-icon %} 
+{% note primary no-icon %} 
 ## <center>学习能力</center>
 {% endnote %}
 
@@ -88,8 +101,7 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-
-{% note warning no-icon %} 
+{% note primary no-icon %} 
 ## <center>积极心理学</center>
 {% endnote %}
 
@@ -101,6 +113,9 @@ comments: false
     - 子类21
     - 子类22
 {% endmarkmap %}
+
+
+
 
 {% note success no-icon %} 
 ## <center>职业发展</center>
@@ -136,8 +151,8 @@ comments: false
   - 《躺着赚钱》
 {% endmarkmap %}
 
-{% note warning no-icon %} 
-## <center>阅读</center>
+{% note success no-icon %} 
+## <center>阅读写作</center>
 {% endnote %}
 
 {% markmap 600px %}
@@ -149,18 +164,8 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note warning no-icon %} 
-## <center>写作</center>
-{% endnote %}
 
-{% markmap 600px %}
-- 写作
-  - 子类1
-    - 子类11
-  - 子类2
-    - 子类21
-    - 子类22
-{% endmarkmap %}
+
 
 {% note warning no-icon %} 
 ## <center>通识</center>
@@ -201,8 +206,47 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
+{% note warning no-icon %} 
+## <center>商业金融</center>
+{% endnote %}
 
-{% note success no-icon %} 
+{% markmap 600px %}
+- 商业金融
+  - 《拯救华尔街》
+  - 《大而不倒》
+  - 《巴菲特致股东的信》
+  - 《魔鬼经济学》
+  - 《原则》
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>法律</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 法律
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note warning no-icon %} 
+## <center>医疗健康</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 医疗健康
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+
+{% note danger no-icon %} 
 ## <center>历史</center>
 {% endnote %}
 
@@ -215,7 +259,45 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note warning no-icon %} 
+{% note danger no-icon %} 
+## <center>哲学</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 哲学
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note danger no-icon %} 
+## <center>文学</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 文学
+  - 子类1
+    - 子类11
+  - 子类2
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+
+{% note danger no-icon %} 
+## <center>经济学</center>
+{% endnote %}
+
+{% markmap 600px %}
+- 经济学
+  - 宏观经济学
+    - 子类11
+  - 微观经济学
+    - 子类21
+    - 子类22
+{% endmarkmap %}
+{% note danger no-icon %} 
 ## <center>政治</center>
 {% endnote %}
 
@@ -228,7 +310,7 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note success no-icon %} 
+{% note danger no-icon %} 
 ## <center>社会学</center>
 {% endnote %}
 
@@ -241,33 +323,8 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note warning no-icon %} 
-## <center>宏观经济学</center>
-{% endnote %}
 
-{% markmap 600px %}
-- 宏观经济学
-  - 子类1
-    - 子类11
-  - 子类2
-    - 子类21
-    - 子类22
-{% endmarkmap %}
-
-{% note success no-icon %} 
-## <center>微观经济学</center>
-{% endnote %}
-
-{% markmap 600px %}
-- 微观经济学
-  - 子类1
-    - 子类11
-  - 子类2
-    - 子类21
-    - 子类22
-{% endmarkmap %}
-
-{% note warning no-icon %} 
+{% note danger no-icon %} 
 ## <center>博弈论</center>
 {% endnote %}
 
@@ -280,7 +337,7 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note warning no-icon %} 
+{% note danger no-icon %} 
 ## <center>脑神经科学</center>
 {% endnote %}
 
@@ -293,7 +350,7 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note warning no-icon %} 
+{% note danger no-icon %} 
 ## <center>遗传学</center>
 {% endnote %}
 
@@ -306,7 +363,7 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note warning no-icon %} 
+{% note danger no-icon %} 
 ## <center>进化生物学</center>
 {% endnote %}
 
@@ -319,7 +376,7 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note warning no-icon %} 
+{% note danger no-icon %} 
 ## <center>心理学</center>
 {% endnote %}
 
@@ -332,7 +389,7 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note warning no-icon %} 
+{% note danger no-icon %} 
 ## <center>科技创新</center>
 {% endnote %}
 
@@ -345,7 +402,7 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note warning no-icon %} 
+{% note danger no-icon %} 
 ## <center>工程学</center>
 {% endnote %}
 
@@ -358,7 +415,7 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note warning no-icon %} 
+{% note danger no-icon %} 
 ## <center>逻辑学</center>
 {% endnote %}
 
@@ -371,7 +428,7 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note warning no-icon %} 
+{% note danger no-icon %} 
 ## <center>统计学</center>
 {% endnote %}
 
@@ -384,7 +441,7 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note warning no-icon %} 
+{% note danger no-icon %} 
 ## <center>数学</center>
 {% endnote %}
 
@@ -397,7 +454,7 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note warning no-icon %} 
+{% note danger no-icon %} 
 ## <center>物理学</center>
 
 {% endnote %}
@@ -411,7 +468,7 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note warning no-icon %} 
+{% note danger no-icon %} 
 ## <center>复杂科学</center>
 {% endnote %}
 
@@ -424,7 +481,7 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note warning no-icon %} 
+{% note danger no-icon %} 
 ## <center>科学哲学</center>
 {% endnote %}
 
@@ -437,28 +494,25 @@ comments: false
     - 子类22
 {% endmarkmap %}
 
-{% note warning no-icon %} 
-## <center>哲学</center>
-{% endnote %}
 
-{% markmap 600px %}
-- 哲学
-  - 子类1
-    - 子类11
-  - 子类2
-    - 子类21
-    - 子类22
-{% endmarkmap %}
 
-{% note warning no-icon %} 
-## <center>文学</center>
-{% endnote %}
 
-{% markmap 600px %}
-- 文学
-  - 子类1
-    - 子类11
-  - 子类2
-    - 子类21
-    - 子类22
-{% endmarkmap %}
+<!-- 
+
+<div class="note info">这里是 info 标签样式</div>
+
+<div class="note info no-icon">这里是不带符号的 info 标签样式</div>
+
+<div class="note primary">这里是 primary 标签样式</div>
+
+<div class="note primary no-icon">这里是不带符号的 primary 标签样式</div>
+
+<div class="note warning">这里是 warning 标签样式</div>
+
+<div class="note warning no-icon">这里是不带符号的 warning 标签样式</div>
+
+<div class="note danger">这里是 danger 标签样式</div>
+
+<div class="note danger no-icon">这里是不带符号的 danger 标签样式</div> 
+
+-->
