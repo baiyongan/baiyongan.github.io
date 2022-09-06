@@ -30,7 +30,6 @@ That's all,  go with it.
 
 ——2019/8/30 夜
 
-<!--more-->
 
 ## 笔记摘录
 
